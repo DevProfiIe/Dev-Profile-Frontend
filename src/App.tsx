@@ -1,26 +1,15 @@
-import { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+
+/* Pages */
+import Search from './pages/search/Search';
+import Login from './pages/user/Login';
+import Join from './pages/user/Join';
 
 function App() {
-  const [count, setCount] = useState<number>(0);
-
-  const plusState = (): void => {
-    setCount(count + 1);
-
-    return;
-  };
-
-  const minusState = (): void => {
-    setCount(count - 1);
-
-    return;
-  };
-
   return (
-    <div>
-      <div>this is count {count}</div>
-      <button onClick={plusState}>+</button>
-      <button onClick={minusState}>-</button>
-    </div>
+    <Routes>
+      <Route element={<Search />} path='/search' />
+    </Routes>
   );
 }
 
