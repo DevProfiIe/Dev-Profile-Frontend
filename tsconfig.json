@@ -24,7 +24,8 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"]
-    }
+    },
+    "jsxImportSource": "@emotion/react"
   },
   "include": ["vite.config.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
