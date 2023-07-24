@@ -22,6 +22,7 @@ export const HomeBox = styled.div`
   padding: 0 7rem;
   position: absolute;
   z-index: 3;
+  letter-spacing: -0.04em;
 `;
 
 export const BackgroundImage = styled.div<{ zIndex: number; img: string }>`
