@@ -31,7 +31,9 @@
     ],
 
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/exhaustive-deps": "off",
+
+    "react/no-unknown-property": ["error", { "ignore": ["css"] }],
 
     "prettier/prettier": [
       "warn",
