@@ -16,10 +16,9 @@ import resetStyle from './styles/reset';
 import Layout from './pages/layout/Layout';
 import AuthCallback from './components/utils/AuthCallback';
 import Modal from './components/modal/Modal';
-import { useAppDispatch, useAppSelector } from './redux/store';
+import { useAppSelector } from './redux/store';
 
 const App: React.FC = (): JSX.Element => {
-  const dispatch = useAppDispatch();
   const isOpen = useAppSelector((state) => state.modal.isOpen);
 
   return (

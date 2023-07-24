@@ -16,7 +16,7 @@ const Message: React.FC<MessageBoxProps> = ({ msg }: MessageBoxProps): JSX.Eleme
     <Wrapper>
       <MessageBoxWrapper>
         <MessageBoxHeader>
-          <p>DevProfile</p>
+          <p>DevProfile Error Message</p>
           <button onClick={onClickHandler}>X</button>
         </MessageBoxHeader>
         <MessageBoxContent>{msg}</MessageBoxContent>
