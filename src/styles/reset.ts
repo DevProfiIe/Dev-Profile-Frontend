@@ -9,6 +9,7 @@ const resetStyle = css`
     margin: 0;
     padding: 0;
     font: inherit;
+    font-display: swap;
     color: inherit;
   }
   *,
@@ -51,6 +52,14 @@ const resetStyle = css`
   table {
     border-collapse: collapse;
     border-spacing: 0;
+  }
+  input {
+    border: none;
+    background: none;
+  }
+
+  input: focus {
+    outline: none;
   }
 `;
 
