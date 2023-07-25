@@ -1,0 +1,102 @@
+.ContentWrap {
+    margin-top: 500px;
+  }
+  
+  .SearchWrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    width: fit-content;
+    margin: auto;
+    margin-bottom: 10px;
+  }
+
+  .afterSearchWrap {
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
+  
+  .SearchTitle {
+    font-size: 100;
+    font-weight: bold;
+  }
+  
+  .SearchInput {
+    margin-left: 30px;
+    border-radius: 30px;
+    width: 450px;
+    height: 30px;
+    border: none;
+    box-shadow: 3px 3px 15px rgb(230, 193, 190);
+    padding-left: 10px;
+  }
+  
+  /* .SearchInput ::after {
+    content: 'after';
+  } */
+  
+  .SearchInput::placeholder {
+    text-align: center;
+  }
+  
+  .commit {
+    margin: auto;
+  }
+
+  .SearchCodeModal {
+    /* display: flex; */
+    margin-top: 10px;
+    margin-left: 170px;
+    width: 650px;
+    height: 300px;
+    border-radius: 10px;
+    align-items: center;
+    /* justify-content: center; */
+    color: rgb(166, 166, 166);
+    background-color: rgb(243, 241, 241);
+  }
+
+  .CommitWrap {
+    display: flex;
+    margin-top: 10px;
+    margin-left: 170px;
+    width: 650px;
+    height: 100px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    color: rgb(166, 166, 166);
+    background-color: rgb(146, 175, 248);
+  }
+
+  .SearchResults {
+    margin: auto;
+    width: fit-content;
+    font-weight: bold;
+  }
+
+  .SearchResultsWrap {
+    width: 650px;
+    height: fit-content;
+    border-radius: 10px;
+    background-color: rgb(185, 205, 254);
+    opacity: 0.8;
+    cursor: pointer;
+    margin: auto;
+    
+  }
+
+  .SearchResultsWrap:focus {
+    background-color: rgb(185, 205, 254);
+    opacity: 1;
+  }
+
+  .CodeTitle {
+    font-family: "Arial Black", sans-serif;
+    padding-top: 25px;
+    font-size: 40px;
+    font-weight: bold;
+    color: rgb(10, 29, 239);
+    text-shadow: 3px 3px 2px rgb(246, 255, 77);
+  }
