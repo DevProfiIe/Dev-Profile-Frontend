@@ -19,8 +19,6 @@ const resetStyle = css`
     flex-shrink: 0;
   }
   :root {
-    -webkit-tap-highlight-color: transparent;
-    -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
     cursor: default;
     line-height: 1.5;
