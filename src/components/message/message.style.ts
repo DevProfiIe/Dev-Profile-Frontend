@@ -57,5 +57,6 @@ export const MessageBoxContent = styled.div`
   overflow: hidden;
   background-color: beige;
   padding: 1.3rem;
-  ${BorderRadius}
+  border-bottom-left-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
 `;
