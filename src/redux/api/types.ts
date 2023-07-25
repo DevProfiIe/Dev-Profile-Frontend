@@ -3,14 +3,25 @@ export interface DefaultApi<T> {
   result: boolean;
   /* API 결과 데이터 */
   data?: T;
-  /* API JWT 인증 토큰 */
-  token?: string;
   /* API 실패 이유 등이 담긴 메세지 */
   message?: string;
-  /* API 오류 메시지 */
-  error?: string;
 }
 
 export interface AuthUser {
   code: string;
 }
+
+export interface UserGithubData {
+  id: number;
+  repoName: string;
+  startDate: string;
+  endDate: string;
+  totalCommitCnt: number;
+  myCommitCnt: number;
+  totalContributors: number;
+  repoLanguages: string[];
+  featured: string[];
+  langFramework: string[];
+}
+
+export interface UserGithubSkills {}

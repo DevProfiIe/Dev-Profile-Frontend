@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { DefaultApi } from './types';
-
-const BASE_URL = 'http://43.201.251.133:8080/';
+import { DefaultApi, UserGithubData } from './types';
+import { getCookie } from '~/utils/cookie';
 
 /**
  * api 슬라이스
@@ -9,7 +8,16 @@ const BASE_URL = 'http://43.201.251.133:8080/';
 export const mainApi = createApi({
   reducerPath: 'mainApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${BASE_URL}`,
+    baseUrl: `${import.meta.env.VITE_SERVER}`,
+    prepareHeaders(headers) {
+      const token = getCookie('token');
+
+      if (token) {
+        headers.set('Authorization', token);
+      }
+
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
     authUser: builder.query<DefaultApi<any>, any>({
@@ -21,7 +29,15 @@ export const mainApi = createApi({
         };
       },
     }),
+    getUserGithubInfo: builder.query<DefaultApi<UserGithubData>, any>({
+      query() {
+        return {
+          url: 'response_test',
+          method: 'GET',
+        };
+      },
+    }),
   }),
 });
 
-export const { useAuthUserQuery } = mainApi;
+export const { useAuthUserQuery, useGetUserGithubInfoQuery } = mainApi;
