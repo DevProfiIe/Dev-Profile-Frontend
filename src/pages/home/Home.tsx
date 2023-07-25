@@ -3,14 +3,14 @@
 /* Libraries & Hooks */
 import { css } from '@emotion/react';
 import background from '~/assets/images/background2.png';
+import { useEffect, useRef, useState } from 'react';
 
 /* Components */
+import Search from '~/components/search/Search';
 
 /* ETC */
 import line from '~/assets/images/line.png';
-import Search from '~/components/search/Search';
 import { BackgroundImage, HeightBox, HomeBox, HomeWrapper } from './home.styles';
-import { useEffect, useRef, useState } from 'react';
 
 const MAIN_TEXT = 'nd discover underlying insights from github.'.split('');
 
@@ -116,7 +116,7 @@ const Home: React.FC = (): JSX.Element => {
                 <div
                   css={css`
                     position: absolute;
-                    transform: translateY(-190%);
+                    transform: translateY(-150%);
                     top: 0;
                     left: ${distance + 'px'};
                   `}
@@ -124,8 +124,8 @@ const Home: React.FC = (): JSX.Element => {
                   <div
                     css={css`
                       background: hsla(231, 100%, 53%, 1);
-                      width: 3px;
-                      height: 25px;
+                      width: 4px;
+                      height: 38px;
                       border-bottom-left-radius: 8px;
                       border-bottom-right-radius: 8px;
                     `}
@@ -133,9 +133,9 @@ const Home: React.FC = (): JSX.Element => {
                     <div
                       css={css`
                         position: absolute;
-                        top: 0px;
+                        top: 0;
                         right: unset;
-                        left: 0px;
+                        left: 0;
                         transform: translateY(calc(-100% + 2px));
                         user-select: none;
                         color: #ffffff;
@@ -149,9 +149,31 @@ const Home: React.FC = (): JSX.Element => {
                         display: flex;
                         width: max-content;
                         gap: 12px;
+
+                        &: before {
+                          content: '';
+                          position: absolute;
+                          z-index: 1;
+                          background-color: transparent;
+                          bottom: 0px;
+                          left: 4px;
+                          transform: translateY(100%);
+                          height: 50px;
+                          width: 16px;
+                          border-top-left-radius: 16px;
+                          box-shadow: 0 -16px 0 0 hsla(231, 100%, 53%, 1);
+                        }
                       `}
                     >
-                      <div>DEV-PROFILE</div>
+                      <div
+                        css={css`
+                          flex-shrink: 0;
+                          position: relative;
+                          z-index: 2;
+                        `}
+                      >
+                        DEV-PROFILE
+                      </div>
                       <div
                         css={css`
                           transform: none;
