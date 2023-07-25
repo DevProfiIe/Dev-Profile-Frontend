@@ -31,7 +31,7 @@ const Header: React.FC = (): JSX.Element => {
       >
         TEAM 5
       </h1>
-      <div>{token ? '로그아웃 ' : <Link to='/auth/sign-in'>로그인</Link>}</div>
+      <div>{token ? '로그아웃 ' : <Link to='/auth/sign-in'>Sign in</Link>}</div>
     </HeaderWrapper>
   );
 };
