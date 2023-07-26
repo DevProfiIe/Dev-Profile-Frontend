@@ -44,7 +44,8 @@ export const ResumeWrapper = styled.div`
   padding: 2rem 0;
   background-color: #fbf8f4;
   background-image: url(${backgroundImage});
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
 `;
 
 export const ResumeContent = styled.div`
@@ -66,7 +67,7 @@ export const ResumeSection = styled.div<{ height: string; direction: string; wid
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   justify-content: space-between;
-  gap: 2rem 0;
+  gap: 3rem 0;
 `;
 
 export const ResumeChart = styled.div`
@@ -75,7 +76,7 @@ export const ResumeChart = styled.div`
 
 export const ResumeTags = styled.div`
   ${DisplayFlexRowWrap}
-  padding: 5rem 0;
+  padding: 2rem 0;
   width: 48%;
 `;
 
@@ -142,34 +143,4 @@ export const ResumeSearchInput = styled.div`
     width: 10%;
     border-radius: 999px;
   }
-`;
-
-export const RepasitoryWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-`;
-
-export const RepasitoryContent = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  gap: 2rem 0;
-  width: 45%;
-`;
-
-export const RepasitoryDetails = styled.div`
-  ${DisplayFlexColumn}
-  align-items: start;
-  gap: 2rem 0;
-`;
-
-export const SkillsBox = styled.div`
-  ${DisplayFlexRow}
-  gap: 0 2rem;
-`;
-
-export const ChartWrapper = styled.div<{ width: string; height: string }>`
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
 `;
