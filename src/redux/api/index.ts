@@ -30,10 +30,11 @@ export const mainApi = createApi({
       },
     }),
     getUserGithubInfo: builder.query<DefaultApi<UserGithubData>, any>({
-      query() {
+      query(data) {
         return {
           url: 'response_test',
           method: 'GET',
+          params: data,
         };
       },
     }),
