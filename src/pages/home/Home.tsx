@@ -181,7 +181,7 @@ const Home: React.FC = (): JSX.Element => {
             </HomeParagragh>
             <HeightBox height={'2.875rem'} />
             <Search outputBox={false} redirectTo='/resume' />
-            <HeightBox height={'5rem'} />
+            <HeightBox height='5rem' />
             <HomeContentsBox />
           </HomeSearchBox>
         </div>

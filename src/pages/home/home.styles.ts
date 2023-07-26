@@ -8,19 +8,11 @@ const DisplayFlexColumn = css`
   align-items: center;
 `;
 
-const HomeFontStyles = css`
-  font-weight: 500;
-  font-size: 1.25rem;
-  line-height: 134%;
-`;
-
 const BoxShadow = css`
   box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.14), 0px 41.7776px 33.4221px rgba(0, 0, 0, 0.10064),
     0px 22.3363px 17.869px rgba(0, 0, 0, 0.083455), 0px 12.5216px 10.0172px rgba(0, 0, 0, 0.07),
     0px 6.6501px 5.32008px rgba(0, 0, 0, 0.056545), 0px 2.76726px 2.21381px rgba(0, 0, 0, 0.0393604);
 `;
-
-const BordarRadius = css``;
 
 export const HomeWrapper = styled.div`
   width: 100%;
@@ -87,7 +79,7 @@ export const HomeText = styled.div`
 
 export const HomeContentsBox = styled.div`
   width: 840px;
-  height: 400px;
+  height: 20rem;
   background-color: ${color.blueCharcoal};
   border-radius: 40px;
   ${BoxShadow};
