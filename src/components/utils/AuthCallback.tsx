@@ -25,7 +25,7 @@ const AuthCallback: React.FC = () => {
 
   if (token) {
     alert('이미 로그인 상태입니다.');
-    return <Navigate to='/search' />;
+    return <Navigate to='/' />;
   }
 
   /**
@@ -37,7 +37,7 @@ const AuthCallback: React.FC = () => {
 
   if (isLoading) return <Loader />;
   if (isSuccess) {
-    setCookie('token', `JWT ${data.data.token}`, {
+    setCookie('token', `JWT ${data.token}`, {
       path: '/',
       sameSite: 'strict',
     });
