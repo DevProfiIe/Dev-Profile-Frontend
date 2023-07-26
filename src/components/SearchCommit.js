@@ -32,8 +32,29 @@ function SearchCommit (props) {
   const [countries, setCountries] = useState(null);
 
   const debounceValue = useDebounce(search);
-
   const [showPopup, setShowPopup] = useState(false);
+
+  const [data, setData] = useState([]);
+
+
+  const FetchSearchInfo = async() => {
+    try {
+      const response = await axios.get('http://43.201.251.133:8080/response_test?userName=dbscks97'); // 여기에 실제 주소
+
+      // API에서 반환한 데이터를 상태 변수에 설정
+      setData(response.data.data.userInfo.keywordSet);
+      console.log(data)
+
+
+    } catch(error) {
+      console.log(error);
+    }
+  };
+
+    // 컴포넌트가 마운트되면 API를 호출합니다.
+    useEffect(()=> {
+      FetchSearchInfo();
+    }, []);   // 빈 배열을 전달하여 마운트 시에만 FetchSearchInfo 함수가 실행되도록 한다.
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
@@ -65,18 +86,27 @@ function SearchCommit (props) {
 
     return(
         <>
-        <div className="SearchWrap afterSearchWrap">
+        <div className="SearchWrap">
             <div className="SearchTitle">키워드 기반 커밋 검색</div>
             <input className="SearchInput" placeholder='검색 키워드를 입력하세요'
             type="search"
             onChange={(e) => setSearch(e.target.value)}
             ></input>
         </div>
-            <div className="SearchResultsWrap">
+        <div className="SearchResultsWrap">
             <div className="SearchResults"
             onClick={togglePopup}>
             {search ? <CountryList countries={countries} /> : ""}
             </div>
+        </div>
+        <div className="KeyWordsWrap">
+        {data.map((a, i) => (
+          <div key={i}>{a.value}
+            <div className="KeyWords">
+            #{ data[i] }
+            </div>
+          </div>
+        ))}
         </div>
 
       {showPopup && (

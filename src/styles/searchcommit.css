@@ -1,22 +1,17 @@
-.ContentWrap {
+/* .ContentWrap {
     margin-top: 500px;
-  }
+  } */
   
   .SearchWrap {
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0;
     width: fit-content;
     margin: auto;
+    margin-top: 30px;
     margin-bottom: 10px;
   }
 
-  .afterSearchWrap {
-    opacity: 1;
-    transition: opacity 0.5s;
-  }
-  
   .SearchTitle {
     font-size: 100;
     font-weight: bold;
@@ -84,7 +79,25 @@
     opacity: 0.8;
     cursor: pointer;
     margin: auto;
-    
+  }
+
+  .KeyWordsWrap {
+    width: 500px;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 800px;
+    margin-top: 20px;
+    overflow-wrap:auto;
+  }
+
+  .KeyWords {
+    width: fit-content;
+    height: fit-content;
+    padding: 8px;
+    margin: 5px;
+    background-color: rgb(250, 208, 205);
+    border-radius: 15px;
   }
 
   .SearchResultsWrap:focus {
