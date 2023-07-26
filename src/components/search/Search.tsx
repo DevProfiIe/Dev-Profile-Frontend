@@ -2,9 +2,8 @@ import { css } from '@emotion/react';
 import { SearchAlt } from 'emotion-icons/boxicons-regular';
 import { SearchBox, SearchOutput, SearchWrapper } from './search.styles';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '~/redux/store';
-import { change } from '~/redux/features/searchSlice';
 import { useNavigate } from 'react-router-dom';
+import Message from '../message/Message';
 
 type SearchProps = {
   outputBox: boolean;
@@ -12,29 +11,43 @@ type SearchProps = {
 };
 
 const Search: React.FC<SearchProps> = ({ outputBox, redirectTo }: SearchProps): JSX.Element => {
-  const dispatch = useAppDispatch();
-  const keyword = useAppSelector((state) => state.search.keyword);
+  const [keyword, setKeyword] = useState<string | null>(null);
   const navigate = useNavigate();
-  const [changeFlag, setChangeFlag] = useState(false);
+  const [changeFlag, setChangeFlag] = useState<boolean>(false);
 
   /**
    *
+   * @param e
    */
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newKeyword = e.target.value;
-    dispatch(change(newKeyword));
+    setKeyword(newKeyword);
 
-    setChangeFlag(() => {
-      if (newKeyword.length <= 0) {
-        return false;
-      }
+    if (outputBox) {
+      setChangeFlag(() => {
+        if (newKeyword.length <= 0) {
+          return false;
+        }
 
-      return true;
-    });
+        return true;
+      });
+    }
   };
 
-  const onNaviHandler = () => {
-    return redirectTo ? navigate(redirectTo) : null;
+  /**
+   *
+   * @returns
+   */
+  const onSearchHandler = () => {
+    if (keyword === null) {
+      return <Message msg={'입력해주세요.'} />;
+    }
+
+    return redirectTo
+      ? navigate(`${redirectTo}/${keyword}`, {
+          state: { keyword: keyword },
+        })
+      : null;
   };
 
   return (
@@ -46,7 +59,7 @@ const Search: React.FC<SearchProps> = ({ outputBox, redirectTo }: SearchProps): 
           `}
           placeholder='Enter Github Email...'
           type='text'
-          onChange={outputBox ? onChangeHandler : undefined}
+          onChange={onChangeHandler}
         />
         <button
           css={css`
@@ -55,7 +68,7 @@ const Search: React.FC<SearchProps> = ({ outputBox, redirectTo }: SearchProps): 
             justify-content: center;
             align-items: center;
           `}
-          onClick={onNaviHandler}
+          onClick={onSearchHandler}
         >
           <SearchAlt height='2rem' />
         </button>
