@@ -22,9 +22,12 @@ const BoxShadow = css`
 `;
 
 export const Wrapper = styled.div`
+  position: absolute;
   width: 100%;
   height: 100vh;
-  position: relative;
+  left: 0;
+  top: 0;
+  z-index: 99;
 `;
 
 export const MessageBoxWrapper = styled.div`
@@ -34,6 +37,7 @@ export const MessageBoxWrapper = styled.div`
   transform: translate(-50%, -50%);
   width: 25rem;
   min-height: 25rem;
+  z-index: 100;
   ${DisplayFlexColumn}
   ${BoxShadow}
   ${BorderRadius}
