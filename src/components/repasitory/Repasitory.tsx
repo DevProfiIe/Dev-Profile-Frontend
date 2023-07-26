@@ -1,4 +1,4 @@
-import { ResponsiveBar } from '@nivo/bar';
+import { BarDatum, ResponsiveBar } from '@nivo/bar';
 import {
   ChartWrapper,
   RepasitoryBox,
@@ -8,19 +8,32 @@ import {
   SkillsBox,
 } from './repasitory.styles';
 import { UserGithubRepositoryInfo } from '~/redux/api/types';
-
-const barData = [
-  {
-    country: 'hong',
-    'hot dog': 145,
-    'hot dogColor': 'hsl(211, 70%, 50%)',
-  },
-];
+import { useEffect } from 'react';
 
 const Repasitory: React.FC<UserGithubRepositoryInfo> = (
   props: UserGithubRepositoryInfo,
 ): JSX.Element => {
-  const { id, repoName, repoLanguages, startDate, endDate, featured } = props;
+  const { id, repoName, repoLanguages, startDate, endDate, featured, totalCommitCnt, myCommitCnt } =
+    props;
+
+  const barData: BarDatum[] = [];
+
+  /**
+   *
+   */
+  const calculateRepositoryContribution = () => {
+    const newBarData = {
+      'total commits': (totalCommitCnt / totalCommitCnt) * 100,
+      'user commits': Math.round((myCommitCnt / totalCommitCnt) * 100),
+      contribution: 'User',
+    };
+
+    barData.push(newBarData);
+  };
+
+  useEffect(() => {
+    calculateRepositoryContribution();
+  }, []);
 
   return (
     <RepasitoryBox>
@@ -49,75 +62,24 @@ const Repasitory: React.FC<UserGithubRepositoryInfo> = (
           </RepasitoryDetails>
           <RepasitoryDetails>
             <p style={{ fontSize: '1.3rem' }}>3️⃣ 기여도</p>
-            <ChartWrapper width='100%' height='5rem'>
+            <ChartWrapper width='100%' height='10rem'>
               <ResponsiveBar
                 data={barData}
-                keys={['hot dog']}
-                indexBy='country'
-                margin={{ top: 0, right: 130, bottom: 50, left: 60 }}
+                keys={['user commits', 'total commits']}
+                indexBy='contribution'
+                margin={{ top: 10, right: 130, bottom: 50, left: 50 }}
                 padding={0.6}
                 layout='horizontal'
                 valueScale={{ type: 'linear' }}
                 indexScale={{ type: 'band', round: true }}
                 colors={{ scheme: 'nivo' }}
-                defs={[
-                  {
-                    id: 'dots',
-                    type: 'patternDots',
-                    background: 'inherit',
-                    color: '#38bcb2',
-                    size: 4,
-                    padding: 1,
-                    stagger: true,
-                  },
-                  {
-                    id: 'lines',
-                    type: 'patternLines',
-                    background: 'inherit',
-                    color: '#eed312',
-                    rotation: -45,
-                    lineWidth: 6,
-                    spacing: 10,
-                  },
-                ]}
-                fill={[
-                  {
-                    match: {
-                      id: 'fries',
-                    },
-                    id: 'dots',
-                  },
-                  {
-                    match: {
-                      id: 'sandwich',
-                    },
-                    id: 'lines',
-                  },
-                ]}
+                groupMode='grouped'
                 borderColor={{
                   from: 'color',
                   modifiers: [['darker', 1.6]],
                 }}
-                axisTop={null}
-                axisRight={null}
-                axisBottom={{
-                  tickSize: 5,
-                  tickPadding: 5,
-                  tickRotation: 0,
-                  legend: 'country',
-                  legendPosition: 'middle',
-                  legendOffset: 32,
-                }}
-                axisLeft={{
-                  tickSize: 5,
-                  tickPadding: 5,
-                  tickRotation: 0,
-                  legend: '기여도',
-                  legendPosition: 'middle',
-                  legendOffset: -40,
-                }}
-                labelSkipWidth={12}
-                labelSkipHeight={12}
+                labelSkipWidth={5}
+                labelSkipHeight={5}
                 labelTextColor={{
                   from: 'color',
                   modifiers: [['darker', 1.6]],
@@ -146,11 +108,6 @@ const Repasitory: React.FC<UserGithubRepositoryInfo> = (
                     ],
                   },
                 ]}
-                role='application'
-                ariaLabel='Nivo bar chart demo'
-                barAriaLabel={(e) =>
-                  e.id + ': ' + e.formattedValue + ' in country: ' + e.indexValue
-                }
               />
             </ChartWrapper>
           </RepasitoryDetails>
