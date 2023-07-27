@@ -2,13 +2,13 @@ import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { mainApi } from './api';
 import searchSlice from './features/searchSlice';
-import modalSlice from './features/modalSlice';
+import popupSlice from './features/popupSlice';
 
 export const store = configureStore({
   reducer: {
     [mainApi.reducerPath]: mainApi.reducer,
     search: searchSlice.reducer,
-    modal: modalSlice.reducer,
+    popup: popupSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({}).concat(mainApi.middleware),
 });
