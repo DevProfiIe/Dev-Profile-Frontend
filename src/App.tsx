@@ -14,12 +14,8 @@ import PrivateRoute from '~/components/utils/PrivateRoute';
 import resetStyle from '~/styles/reset';
 import Layout from '~/pages/layout/Layout';
 import AuthCallback from '~/components/utils/AuthCallback';
-import Modal from '~/components/modal/Modal';
-import { useAppSelector } from './redux/store';
 
 const App: React.FC = (): JSX.Element => {
-  const isOpen = useAppSelector((state) => state.modal.isOpen);
-
   return (
     <>
       <Global styles={resetStyle} />
@@ -37,7 +33,6 @@ const App: React.FC = (): JSX.Element => {
         <Route path='auth/sign-in' element={<SignIn />} />
         <Route path='auth/callback' element={<AuthCallback />} />
       </Routes>
-      {isOpen && <Modal width='25rem' height='25rem' />}
     </>
   );
 };
