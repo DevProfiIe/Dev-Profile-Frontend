@@ -3,13 +3,15 @@
 /* Libraries & Hooks */
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { getCookie } from '~/utils/cookie';
 import { HeaderWrapper, HerderFont } from './header.styles';
+import Commit from '../commit/Commit';
 
 const Header: React.FC = (): JSX.Element => {
   const token = getCookie('token');
   const [scrollPosition, setScrollPosition] = useState(0);
+  const location = useLocation();
 
   /**
    *
@@ -31,7 +33,17 @@ const Header: React.FC = (): JSX.Element => {
       >
         TEAM 5
       </h1>
-      <div>{token ? 'Logout' : <Link to='/auth/sign-in'>Sign in</Link>}</div>
+      <div
+        css={css`
+          display: flex;
+          flex-flow: row nowrap;
+          align-items: center;
+          gap: 0 2rem;
+        `}
+      >
+        {location.pathname.includes('resume') ? <Commit /> : ''}
+        {token ? 'Logout' : <Link to='/auth/sign-in'>Sign in</Link>}
+      </div>
     </HeaderWrapper>
   );
 };
