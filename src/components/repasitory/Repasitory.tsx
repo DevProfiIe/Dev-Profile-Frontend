@@ -8,7 +8,6 @@ import {
   SkillsBox,
 } from './repasitory.styles';
 import { UserGithubRepositoryInfo } from '~/redux/api/types';
-import { useEffect } from 'react';
 
 const Repasitory: React.FC<UserGithubRepositoryInfo> = (
   props: UserGithubRepositoryInfo,
@@ -16,24 +15,13 @@ const Repasitory: React.FC<UserGithubRepositoryInfo> = (
   const { id, repoName, repoLanguages, startDate, endDate, featured, totalCommitCnt, myCommitCnt } =
     props;
 
-  const barData: BarDatum[] = [];
-
-  /**
-   *
-   */
-  const calculateRepositoryContribution = () => {
-    const newBarData = {
+  const barData: BarDatum[] = [
+    {
       'total commits': (totalCommitCnt / totalCommitCnt) * 100,
       'user commits': Math.round((myCommitCnt / totalCommitCnt) * 100),
       contribution: 'User',
-    };
-
-    barData.push(newBarData);
-  };
-
-  useEffect(() => {
-    calculateRepositoryContribution();
-  }, []);
+    },
+  ];
 
   return (
     <RepasitoryBox>
@@ -62,7 +50,7 @@ const Repasitory: React.FC<UserGithubRepositoryInfo> = (
           </RepasitoryDetails>
           <RepasitoryDetails>
             <p style={{ fontSize: '1.3rem' }}>3️⃣ 기여도</p>
-            <ChartWrapper width='100%' height='10rem'>
+            <ChartWrapper width='100%' height='7rem'>
               <ResponsiveBar
                 data={barData}
                 keys={['user commits', 'total commits']}
