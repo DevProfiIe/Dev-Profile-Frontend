@@ -50,7 +50,7 @@ const radarData = [
   },
 ];
 
-const MAIN_TEXT = '이터로 말하는 개발자 Park Yun Chan 입니다.'.split('');
+const MAIN_TEXT = '이터의 속삭임: 코드로 이야기하는 개발자 Park Yun Chan 입니다.'.split('');
 
 const Resume: React.FC = (): JSX.Element => {
   const [distance, setDistance] = useState<number | undefined>(10);
@@ -124,7 +124,7 @@ const Resume: React.FC = (): JSX.Element => {
                   letter-spacing: -0.01em;
                 `}
               >
-                데이터로 말하는 개발자 {data?.data?.userInfo.name} 입니다.
+                데이터의 속삭임: 코드로 이야기하는 개발자 {data?.data?.userInfo.name} 입니다.
               </div>
               <div
                 css={css`
