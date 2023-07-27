@@ -4,12 +4,17 @@ import { Outlet } from 'react-router-dom';
 
 /* Components */
 import Header from '~/components/header/Header';
+import Popup from '~/components/popup/Popup';
+import { useAppSelector } from '~/redux/store';
 
 const Layout: React.FC = (): JSX.Element => {
+  const isOpen = useAppSelector((state) => state.popup.isOpen);
+
   return (
     <>
       <Wrapper>
         <Header />
+        {isOpen && <Popup />}
         <Outlet />
       </Wrapper>
     </>
@@ -24,7 +29,7 @@ const Wrapper = styled.div`
   justify-content: baseline;
   align-items: start;
   background-color: #fbf8f4;
-  padding-top: 9.375rem;
+  padding-top: 5.5rem;
   position: relative;
 `;
 
