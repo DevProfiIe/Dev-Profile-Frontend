@@ -13,7 +13,6 @@ import line from '~/assets/images/line.png';
 import {
   BackgroundImage,
   HeightBox,
-  HomeContentsBox,
   HomeParagragh,
   HomeSearchBox,
   HomeSection,
@@ -56,6 +55,7 @@ const Home: React.FC = (): JSX.Element => {
     <HomeWrapper>
       <BackgroundImage zIndex={2} img={background} />
       <BackgroundImage zIndex={1} img={line} />
+      <HeightBox height='4rem' />
       <HomeSection>
         <div
           css={css`
@@ -181,8 +181,6 @@ const Home: React.FC = (): JSX.Element => {
             </HomeParagragh>
             <HeightBox height={'2.875rem'} />
             <Search outputBox={false} redirectTo='/resume' />
-            <HeightBox height='5rem' />
-            <HomeContentsBox />
           </HomeSearchBox>
         </div>
       </HomeSection>
