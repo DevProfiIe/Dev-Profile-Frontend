@@ -16,7 +16,7 @@ const BoxShadow = css`
 
 export const HomeWrapper = styled.div`
   width: 100%;
-  height: calc(100vh - 9.375rem);
+  height: 100%;
   display: flex;
   flex-flow: column nowrap;
   font-family: ${font.fontFamily};
