@@ -42,8 +42,7 @@ export const RepasitoryBox = styled.div`
   padding: 2rem 5rem;
   gap: 3rem 0;
   ${BorderRadius}
-
-  background-color: #fbf8f4;
+  background-color: #ffffff;
   ${BoxShadow}
 `;
 
