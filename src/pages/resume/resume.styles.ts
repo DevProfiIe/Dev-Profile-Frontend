@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import backgroundImage from '~/assets/images/background3.png';
+import backgroundImage2 from '~/assets/images/twirl.7dde194b.png';
 import { color } from '~/styles/theme/primary';
 
 /* CSS */
@@ -14,13 +15,11 @@ const DisplayFlexRow = css`
 const DisplayFlexRowWrap = css`
   display: flex;
   flex-flow: row wrap;
-  align-content: flex-start;
 `;
 
 const DisplayFlexColumn = css`
   display: flex;
   flex-flow: column nowrap;
-  justify-content: space-between;
   align-items: center;
 `;
 
@@ -37,110 +36,119 @@ const BorderRadius = css`
 
 /* Components */
 
-export const ResumeWrapper = styled.div`
-  ${DisplayFlexRow}
-  width: 100%;
-  height: auto;
-  padding: 2rem 0;
-  background-color: #fbf8f4;
-  background-image: url(${backgroundImage});
-  background-size: contain;
-  background-repeat: no-repeat;
-`;
-
-export const ResumeContent = styled.div`
-  max-width: 80%;
-  height: inherit;
-  background: #fff;
-  padding: 2rem 0;
-  ${DisplayFlexColumn}
-  ${BoxShadow}
-  ${BorderRadius}
-`;
-
-export const ResumeHeader = styled.p`
-  font-size: 2.5rem;
-`;
-
-export const ResumeSection = styled.div<{ height: string; direction: string; width: string }>`
-  ${({ direction }) => (direction === 'row' ? DisplayFlexRow : DisplayFlexColumn)}
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
-  justify-content: space-between;
-  gap: 3rem 0;
-`;
-
-export const ResumeChart = styled.div`
-  width: 48%;
-`;
-
-export const ResumeTags = styled.div`
-  ${DisplayFlexRowWrap}
-  padding: 2rem 0;
-  width: 48%;
-`;
-
-export const TagKeyword = styled.div`
-  width: auto;
-  height: 2rem;
-  line-height: 2rem;
-  padding: 0 0.625rem;
-  border-radius: 999px;
-  background-color: beige;
-  margin: 0 0.625rem 0.625rem 0;
-  ${BoxShadow}
-`;
-
 export const HeightBox = styled.div<{ height: string }>`
   width: 100%;
   height: ${({ height }) => height};
 `;
 
-export const Repasitory = styled.div`
-  ${DisplayFlexColumn}
-  align-items: flex-start;
-  width: 90%;
+export const ResumeWrapper = styled.div`
+  width: 100%;
   height: auto;
-  padding: 2rem 5rem;
-  gap: 3rem 0;
-  ${BorderRadius}
-
-  background-color: #fbf8f4;
-  ${BoxShadow}
 `;
 
-export const ResumeSearchWrapper = styled.div`
+export const ResumeSection = styled.div<{ background?: boolean; height?: string }>`
   ${DisplayFlexColumn}
-  width: auto;
-  gap: 2rem 0;
-  position: relative;
+  width: 100%;
+  height: ${({ height }) => (height ? height : 'auto')};
+  background-image: ${({ background }) => (background ? `url(${backgroundImage});` : '')};
+  background-size: cover;
+  background-repeat: no-repeat;
 `;
 
-export const ResumeSearchBox = styled.div`
-  ${DisplayFlexRow}
-  width: 100%;
-  gap: 0 3rem;
-  align-items: center;
-  height: 3rem;
+export const ResumeTagBox = styled.div`
+  ${DisplayFlexRowWrap}
+  justify-content: center;
+  gap: 0.5rem 1rem;
+  width: 30rem;
+  height: auto;
 `;
 
-export const ResumeSearchInput = styled.div`
-  ${DisplayFlexRow}
-  justify-content:space-between;
-  background: ${color.aquaMarine};
-  width: 100%;
-  height: 100%;
-  border-radius: 999px;
+export const ResumeTag = styled.div<{ color: string; border?: string }>`
   ${BoxShadow}
+  ${BorderRadius}
+  ${DisplayFlexRow}
+  align-items: center;
+  min-width: 3.438rem;
+  height: 2rem;
+  background-color: ${({ color }) => color};
+  padding: 0 0.7rem;
+  border: ${({ border }) => (border === 'none' ? '' : `1px solid ${color.aquaMarine}`)};
+  transition: 0.2s;
 
-  input {
-    width: 90%;
-    border-radius: 999px;
-    text-indent: 1.5rem;
+  &: hover {
+    transform: translateY(-10%);
+  }
+`;
+
+export const ResumeChartBox = styled.div`
+  ${DisplayFlexRowWrap}
+  ${BorderRadius}
+  justify-content: center;
+  width: 80%;
+  height: auto;
+  gap: 0 5rem;
+`;
+
+export const ResumeLeftContents = styled.div`
+  ${DisplayFlexColumn}
+  ${BorderRadius}
+  ${BoxShadow}
+  justify-content: center;
+  width: 45%;
+  background-color: ${color.white};
+`;
+
+export const ResumeLeftTextBox = styled.div`
+  ${DisplayFlexColumn}
+  width: 100%;
+  padding: 2rem 1.5rem;
+  align-items: flex-start;
+  gap: 2rem;
+`;
+
+export const ResumeLeftTextDetail = styled.div`
+  ${DisplayFlexRow}
+  width: 100%;
+
+  p: nth-of-type(1) {
+    width: 30%;
+    font-weight: 700;
   }
 
-  button {
-    width: 10%;
-    border-radius: 999px;
+  p: nth-of-type(2) {
+    width: 70%;
   }
+`;
+
+export const ResumeRightContents = styled.div`
+  ${DisplayFlexColumn}
+  width: 45%;
+  height: 100%;
+  justify-content: space-between;
+`;
+
+export const ResumeHashTagWrapper = styled.div`
+  ${BoxShadow}
+  ${BorderRadius}
+  ${DisplayFlexRowWrap}
+  width: 100%;
+  height: 48%;
+  padding: 1.2rem;
+  background-color: #fff;
+  background-image: url(${backgroundImage2});
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+export const ResumeTimeLineWrapper = styled.div`
+  ${BoxShadow}
+  ${BorderRadius}
+  width: 100%;
+  height: 48%;
+  background-color: #fff;
+  position: relative;
 `;
