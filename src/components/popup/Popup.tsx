@@ -13,30 +13,29 @@ import Editor, { DiffEditor, useMonaco, loader } from '@monaco-editor/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { getCookie } from '~/utils/cookie';
+import { Auto } from 'emotion-icons/crypto';
 
-const code = `
-import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
-import { mainApi } from './api';
-import searchSlice from './features/searchSlice';
-import popupSlice from './features/popupSlice';
+// const code = `
+// import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
+// import { configureStore } from '@reduxjs/toolkit';
+// import { mainApi } from './api';
+// import searchSlice from './features/searchSlice';
+// import popupSlice from './features/popupSlice';
 
-export const store = configureStore({
-  reducer: {
-    [mainApi.reducerPath]: mainApi.reducer,
-    search: searchSlice.reducer,
-    popup: popupSlice.reducer,
-  },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({}).concat(mainApi.middleware),
-});
+// export const store = configureStore({
+//   reducer: {
+//     [mainApi.reducerPath]: mainApi.reducer,
+//     search: searchSlice.reducer,
+//     popup: popupSlice.reducer,
+//   },
+//   middleware: (getDefaultMiddleware) => getDefaultMiddleware({}).concat(mainApi.middleware),
+// });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-`;
-
-// const code =
+// export type RootState = ReturnType<typeof store.getState>;
+// export type AppDispatch = typeof store.dispatch;
+// export const useAppDispatch = () => useDispatch<AppDispatch>();
+// export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+// `;
 
 const httpRequest = axios.create({
   baseURL: `${import.meta.env.VITE_SERVER}`,
@@ -75,6 +74,27 @@ const Popup = () => {
     FetchPatch();
   }, []); // 빈 배열을 전달하여 마운트 시에만 FetchRepo 함수가 실행되도록 한다.
 
+  // const dataArray = Object.entries(data).map(([key, value]) => `${key}: ${value}`);
+  // return <div>{dataArray.map((item) => <p key={item}>{item}</p>)}</div>
+
+  function Code() {
+    return (
+      <div
+        style={{
+          background: 'lightgrey',
+          width: '90%',
+          height: '90%',
+          overflow: 'Auto',
+          lineHeight: '1.5',
+        }}
+      >
+        {data.map((item) => (
+          <p key={item.id}>{item.content}</p>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <>
       <PopupBackground onClick={onToggleHandler} />
@@ -86,13 +106,14 @@ const Popup = () => {
           </button>
         </PopupHeader>
         <PopupContent>
-          <Editor
+          {/* <Editor
             height='90%'
             width='90%'
             defaultLanguage='typescript'
             defaultValue={code}
             theme='vs-dark'
-          />
+          /> */}
+          <Code />
           {/* <PopupContentLeft></PopupContentLeft>
           <PopupContentRight></PopupContentRight> */}
         </PopupContent>

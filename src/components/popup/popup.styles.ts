@@ -52,6 +52,7 @@ export const PopupHeader = styled.div`
 export const PopupContent = styled.div`
   width: 100%;
   height: 100%;
+  overflowy: 'scroll';
   ${DisplayFlexRow}
   justify-content: center;
 `;
