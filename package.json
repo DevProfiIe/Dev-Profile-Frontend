@@ -23,6 +23,7 @@
     "@nivo/radar": "^0.83.0",
     "@reduxjs/toolkit": "^1.9.5",
     "add": "^2.0.6",
+    "axios": "^1.4.0",
     "emotion-icons": "^3.27.0",
     "emotion-reset": "^3.0.1",
     "query-string": "^8.1.0",

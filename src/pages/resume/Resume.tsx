@@ -92,6 +92,10 @@ const Resume: React.FC = (): JSX.Element => {
     return <Message msg={JSON.stringify(error)} />;
   }
 
+  const handleTagClick = () => {
+    console.log('Clicked:');
+  };
+
   return (
     <>
       <ResumeWrapper>
@@ -315,8 +319,13 @@ const Resume: React.FC = (): JSX.Element => {
                     align-self: flex-start;
                   `}
                 >
-                  {data?.data.userInfo.keywordSet.map((item, i) => (
-                    <ResumeTag color='#F7F1E9' border='none' key={i}>
+                  {data?.data.userInfo.keywordSet?.map((item, i) => (
+                    <ResumeTag
+                      color='#F7F1E9'
+                      border='none'
+                      key={i}
+                      onClick={() => handleTagClick(item)}
+                    >
                       #{item}
                     </ResumeTag>
                   ))}

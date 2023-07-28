@@ -37,7 +37,7 @@ const AuthCallback: React.FC = () => {
 
   if (isLoading) return <Loader />;
   if (isSuccess) {
-    setCookie('token', `JWT ${data.token}`, {
+    setCookie('token', `${data.token}`, {
       path: '/',
       sameSite: 'strict',
     });

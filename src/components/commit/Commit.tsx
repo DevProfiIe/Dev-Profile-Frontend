@@ -22,6 +22,7 @@ const Commit = () => {
     <>
       <div>
         <input
+          className='SearchInput'
           css={css`
             width: ${isShow ? '10rem' : '0'};
             border-bottom: 1px solid #000;
