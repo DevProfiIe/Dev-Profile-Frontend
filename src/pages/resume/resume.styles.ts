@@ -41,9 +41,9 @@ export const HeightBox = styled.div<{ height: string }>`
   height: ${({ height }) => height};
 `;
 
-export const ResumeWrapper = styled.div`
+export const ResumeWrapper = styled.div<{ height?: string }>`
   width: 100%;
-  height: auto;
+  height: ${({ height }) => (height ? height : 'auto')};
 `;
 
 export const ResumeSection = styled.div<{ background?: boolean; height?: string }>`
@@ -53,6 +53,7 @@ export const ResumeSection = styled.div<{ background?: boolean; height?: string 
   background-image: ${({ background }) => (background ? `url(${backgroundImage});` : '')};
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: 90%;
 `;
 
 export const ResumeTagBox = styled.div`
@@ -151,4 +152,44 @@ export const ResumeTimeLineWrapper = styled.div`
   height: 48%;
   background-color: #fff;
   position: relative;
+`;
+
+export const ResumeRepoWrapper = styled.div`
+  ${DisplayFlexColumn}
+  width: 100%;
+  height: 100vh;
+  background: ${color.blueCharcoal};
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  overflow: hidden;
+`;
+
+export const ResumeRepoText = styled.div`
+  width: 80%;
+  margin-top: 7.5rem;
+  user-select: none;
+  color: hsla(146, 100%, 74%, 1);
+  font-size: 95px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  font-variant: tabular-nums;
+`;
+
+export const ResumeRepoSvgbox = styled.div`
+  width: 100%;
+  height: 5rem;
+`;
+
+export const ResumeRepoContainer = styled.div<{ position: number; length: number }>`
+  ${DisplayFlexRow}
+  width: fit-content;
+  height: auto;
+  gap: 0 2rem;
+  overflow: auto;
+  position: absolute;
+  left: 0;
+  top: 30%;
+  transform: translateX(-${({ position }) => position + 'px'});
+  transition: 0.09s;
 `;

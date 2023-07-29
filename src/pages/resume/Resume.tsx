@@ -20,12 +20,17 @@ import {
   ResumeLeftTextBox,
   ResumeLeftTextDetail,
   ResumeTimeLineWrapper,
+  ResumeRepoWrapper,
+  ResumeRepoText,
+  ResumeRepoSvgbox,
+  ResumeRepoContainer,
 } from './resume.styles';
 import Repasitory from '~/components/repasitory/Repasitory';
 import Loader from '~/components/loader/Loader';
 import Message from '~/components/message/Message';
 import { useLocation } from 'react-router-dom';
 import { useRef, useState, useEffect } from 'react';
+import useScroll from '~/hooks/useScroll';
 
 const radarData = [
   {
@@ -55,11 +60,14 @@ const MAIN_TEXT = '이터의 속삭임: 코드로 이야기하는 개발자 Park
 const Resume: React.FC = (): JSX.Element => {
   const [distance, setDistance] = useState<number | undefined>(10);
   const location = useLocation();
+  const { scrollY } = useScroll();
   const textArea = useRef<HTMLDivElement>(null);
+  const fixedElem = useRef<HTMLDivElement>(null);
   const textArr = MAIN_TEXT;
   let animeInterval: number;
   let textIndex = 0;
 
+  const [len, setLen] = useState(0);
   const keyword = location.state.keyword;
   const { isError, isLoading, data, error } = useGetUserGithubInfoQuery({
     userName: keyword,
@@ -104,7 +112,7 @@ const Resume: React.FC = (): JSX.Element => {
               line-height: 100%;
             `}
           >
-            {data?.data?.userInfo.name}
+            {data?.data?.userInfo?.name}
           </h1>
           <HeightBox height='1.25rem' />
           <div>
@@ -124,7 +132,7 @@ const Resume: React.FC = (): JSX.Element => {
                   letter-spacing: -0.01em;
                 `}
               >
-                데이터의 속삭임: 코드로 이야기하는 개발자 {data?.data?.userInfo.name} 입니다.
+                데이터의 속삭임: 코드로 이야기하는 개발자 {data?.data?.userInfo?.name} 입니다.
               </div>
               <div
                 css={css`
@@ -315,7 +323,7 @@ const Resume: React.FC = (): JSX.Element => {
                     align-self: flex-start;
                   `}
                 >
-                  {data?.data.userInfo.keywordSet.map((item, i) => (
+                  {data?.data.userInfo.keywordSet?.map((item, i) => (
                     <ResumeTag color='#F7F1E9' border='none' key={i}>
                       #{item}
                     </ResumeTag>
@@ -411,7 +419,7 @@ const Resume: React.FC = (): JSX.Element => {
             </ResumeRightContents>
           </ResumeChartBox>
         </ResumeSection>
-        <ResumeSection>
+        {/* <ResumeSection height='100vh'>
           <div
             css={css`
               width: 90%;
@@ -423,11 +431,50 @@ const Resume: React.FC = (): JSX.Element => {
               gap: 2rem 0;
             `}
           >
-            {data?.data.repositoryInfo.map((item, i) => (
+            {data?.data.repositoryInfo?.map((item, i) => (
               <Repasitory key={item.id + i} {...item} />
             ))}
           </div>
+        </ResumeSection> */}
+        <ResumeSection height={data?.data.repositoryInfo.length * 700 + 'px'} ref={fixedElem}>
+          <ResumeRepoWrapper>
+            <ResumeRepoText>
+              <span
+                css={css`
+                  display: inline-block;
+                  margin-right: 2rem;
+                `}
+              >
+                Commits
+              </span>
+              <span>{scrollY > 1657 ? Math.round((scrollY - 1657) * 0.1) : 0}</span>
+            </ResumeRepoText>
+            <HeightBox height='0.875rem' />
+            <ResumeRepoSvgbox></ResumeRepoSvgbox>
+            <HeightBox height='2rem' />
+            <ResumeRepoContainer
+              position={scrollY > 1657 ? Math.round(scrollY - 1657) : 0}
+              length={data?.data.repositoryInfo.length}
+            >
+              <div
+                css={css`
+                  width: 200px;
+                `}
+              ></div>
+              {data?.data.repositoryInfo?.map((item, i) => (
+                <Repasitory key={item.id + i} {...item} />
+              ))}
+            </ResumeRepoContainer>
+          </ResumeRepoWrapper>
         </ResumeSection>
+        <div
+          css={css`
+            width: 100%;
+            height: 100vh;
+            background: blue;
+            position: relative;
+          `}
+        ></div>
       </ResumeWrapper>
     </>
   );

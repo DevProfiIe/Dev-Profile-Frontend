@@ -37,7 +37,7 @@ export const HeightBox = styled.div<{ height: string }>`
 export const RepasitoryBox = styled.div`
   ${DisplayFlexColumn}
   align-items: flex-start;
-  width: 90%;
+  width: 700px;
   height: auto;
   padding: 2rem 5rem;
   gap: 3rem 0;

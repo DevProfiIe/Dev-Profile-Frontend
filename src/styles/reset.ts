@@ -11,6 +11,7 @@ const resetStyle = css`
     font: inherit;
     font-display: swap;
     color: inherit;
+    scroll-behavior: smooth;
   }
   *,
   :after,

@@ -51,7 +51,7 @@ const Repasitory: React.FC<UserGithubRepositoryInfo> = (
           <RepasitoryDetails>
             <p style={{ fontSize: '1.3rem' }}>3️⃣ 기여도</p>
             <ChartWrapper width='100%' height='7rem'>
-              <ResponsiveBar
+              {/* <ResponsiveBar
                 data={barData}
                 keys={['user commits', 'total commits']}
                 indexBy='contribution'
@@ -96,7 +96,7 @@ const Repasitory: React.FC<UserGithubRepositoryInfo> = (
                     ],
                   },
                 ]}
-              />
+              /> */}
             </ChartWrapper>
           </RepasitoryDetails>
         </RepasitoryContent>
