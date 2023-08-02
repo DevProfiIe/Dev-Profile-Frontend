@@ -13,7 +13,7 @@ export const CommitWrapper = styled.div``;
 export const CommitSearchBox = styled.div`
   position: fixed;
   top: 4.5rem;
-  width: 25rem;
+  width: 30rem;
   max-height: 25rem;
   background-color: white;
   overflow: auto;
@@ -21,9 +21,9 @@ export const CommitSearchBox = styled.div`
   ${BoxShadow}
 `;
 
-export const CommitContent = styled.div`
+export const CommitContents = styled.div`
   width: 100%;
-  height: 5rem;
+  height: 6rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,7 +31,8 @@ export const CommitContent = styled.div`
   border-bottom: 1px solid #eee;
 `;
 
-export const CommitContentTop = styled.div`
+export const CommitContentsTop = styled.div`
+  width: 80%;
   display: flex;
   flex-flow: column nowrap;
   gap: 1rem 0;

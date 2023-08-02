@@ -1,246 +1,129 @@
 import { css } from '@emotion/react';
 import { SearchAlt } from 'emotion-icons/boxicons-regular';
 import { useState } from 'react';
-import { CommitContent, CommitContentTop, CommitSearchBox } from './commit.styles';
+import { CommitContents, CommitContentsTop, CommitSearchBox } from './commit.styles';
 import { Popup } from 'emotion-icons/entypo';
 import { useAppDispatch } from '~/redux/store';
 import { open } from '~/redux/features/popupSlice';
+import { useGetSearchOutputQuery } from '~/redux/api';
+import Loader from '../loader/Loader';
+import useDebounce from '~/hooks/useDebounce';
 
-const Commit = () => {
-  const [isShow, setIsShow] = useState(false);
+const Commit: React.FC = () => {
+  const [isShow, setIsShow] = useState<boolean>(false);
+  const [isShowSearchResult, setIsShowSearchResult] = useState<boolean>(false);
+  const [searchKeyword, setSearchKeyword] = useState<string>('');
+  const debouncedTerm = useDebounce(searchKeyword, 500);
   const dispatch = useAppDispatch();
 
+  /**
+   * 검색 input visible 핸들러
+   */
   const showSearchInputHandler = () => {
+    if (isShow && searchKeyword !== '') {
+      setSearchKeyword('');
+      setIsShowSearchResult(false);
+    }
+
     setIsShow((state) => !state);
   };
 
+  /**
+   * 검색 input focus 핸들러
+   * @param e
+   */
+  const searchInputFocusHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchKeyword(() => {
+      if (e.target.value !== '') {
+        setIsShowSearchResult(true);
+      } else {
+        setIsShowSearchResult(false);
+      }
+
+      return e.target.value;
+    });
+  };
+
+  /**
+   * 팝업 visible 핸들러
+   */
   const popupToggleHandler = () => {
     dispatch(open());
   };
+
+  const { data, isLoading, isSuccess } = useGetSearchOutputQuery(
+    {
+      query: searchKeyword,
+    },
+    {
+      skip: debouncedTerm ? false : true,
+    },
+  );
+
+  const results = data?.data ?? [];
 
   return (
     <>
       <div>
         <input
           css={css`
-            width: ${isShow ? '10rem' : '0'};
+            width: ${isShow ? '15rem' : '0'};
             border-bottom: 1px solid #000;
             transition: 0.3s;
             text-indent: 0.5rem;
           `}
           placeholder='Search Commits'
-          onBlur={showSearchInputHandler}
+          onChange={searchInputFocusHandler}
+          value={searchKeyword}
         />
         <button>
           <SearchAlt height={30} onClick={showSearchInputHandler} />
         </button>
       </div>
-      {isShow && (
+      {isShowSearchResult && (
         <CommitSearchBox>
-          <CommitContent>
-            <CommitContentTop>
-              <p>커밋명</p>
-              <div
-                css={css`
-                  display: flex;
-                  flex-flow: row nowrap;
-                  gap: 0 0.7rem;
-                  font-size: 0.8rem;
-                `}
-              >
-                <p>관련키워드</p>
-                <p>날짜</p>
-              </div>
-            </CommitContentTop>
-            <div
-              onClick={popupToggleHandler}
-              css={css`
-                padding: 0.5rem;
-                border-radius: 999px;
-                border: 1px solid #eee;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-              `}
-            >
-              <Popup height={20} />
-            </div>
-          </CommitContent>
-          <CommitContent>
-            <CommitContentTop>
-              <p>커밋명</p>
-              <div
-                css={css`
-                  display: flex;
-                  flex-flow: row nowrap;
-                  gap: 0 0.7rem;
-                  font-size: 0.8rem;
-                `}
-              >
-                <p>관련키워드</p>
-                <p>날짜</p>
-              </div>
-            </CommitContentTop>
-            <div
-              css={css`
-                padding: 0.5rem;
-                border-radius: 999px;
-                border: 1px solid #eee;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-              `}
-            >
-              <Popup height={20} />
-            </div>
-          </CommitContent>
-          <CommitContent>
-            <CommitContentTop>
-              <p>커밋명</p>
-              <div
-                css={css`
-                  display: flex;
-                  flex-flow: row nowrap;
-                  gap: 0 0.7rem;
-                  font-size: 0.8rem;
-                `}
-              >
-                <p>관련키워드</p>
-                <p>날짜</p>
-              </div>
-            </CommitContentTop>
-            <div
-              css={css`
-                padding: 0.5rem;
-                border-radius: 999px;
-                border: 1px solid #eee;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-              `}
-            >
-              <Popup height={20} />
-            </div>
-          </CommitContent>
-          <CommitContent>
-            <CommitContentTop>
-              <p>커밋명</p>
-              <div
-                css={css`
-                  display: flex;
-                  flex-flow: row nowrap;
-                  gap: 0 0.7rem;
-                  font-size: 0.8rem;
-                `}
-              >
-                <p>관련키워드</p>
-                <p>날짜</p>
-              </div>
-            </CommitContentTop>
-            <div
-              css={css`
-                padding: 0.5rem;
-                border-radius: 999px;
-                border: 1px solid #eee;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-              `}
-            >
-              <Popup height={20} />
-            </div>
-          </CommitContent>
-          <CommitContent>
-            <CommitContentTop>
-              <p>커밋명</p>
-              <div
-                css={css`
-                  display: flex;
-                  flex-flow: row nowrap;
-                  gap: 0 0.7rem;
-                  font-size: 0.8rem;
-                `}
-              >
-                <p>관련키워드</p>
-                <p>날짜</p>
-              </div>
-            </CommitContentTop>
-            <div
-              css={css`
-                padding: 0.5rem;
-                border-radius: 999px;
-                border: 1px solid #eee;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-              `}
-            >
-              <Popup height={20} />
-            </div>
-          </CommitContent>
-          <CommitContent>
-            <CommitContentTop>
-              <p>커밋명</p>
-              <div
-                css={css`
-                  display: flex;
-                  flex-flow: row nowrap;
-                  gap: 0 0.7rem;
-                  font-size: 0.8rem;
-                `}
-              >
-                <p>관련키워드</p>
-                <p>날짜</p>
-              </div>
-            </CommitContentTop>
-            <div
-              css={css`
-                padding: 0.5rem;
-                border-radius: 999px;
-                border: 1px solid #eee;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-              `}
-            >
-              <Popup height={20} />
-            </div>
-          </CommitContent>
-          <CommitContent>
-            <CommitContentTop>
-              <p>커밋명</p>
-              <div
-                css={css`
-                  display: flex;
-                  flex-flow: row nowrap;
-                  gap: 0 0.7rem;
-                  font-size: 0.8rem;
-                `}
-              >
-                <p>관련키워드</p>
-                <p>날짜</p>
-              </div>
-            </CommitContentTop>
-            <div
-              css={css`
-                padding: 0.5rem;
-                border-radius: 999px;
-                border: 1px solid #eee;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-              `}
-            >
-              <Popup height={20} />
-            </div>
-          </CommitContent>
+          {isLoading ? (
+            <Loader />
+          ) : isSuccess && data.data ? (
+            results.map((item, i) => (
+              <CommitContents key={i}>
+                <CommitContentsTop>
+                  <p
+                    css={css`
+                      overflow: hidden;
+                    `}
+                  >
+                    {item.commitMessage}
+                  </p>
+                  <div
+                    css={css`
+                      display: flex;
+                      flex-flow: row nowrap;
+                      gap: 0 0.7rem;
+                      font-size: 0.8rem;
+                    `}
+                  >
+                    {/* <p>{}</p> */}
+                    <p>{item.commitDdate}</p>
+                  </div>
+                </CommitContentsTop>
+                <button
+                  onClick={popupToggleHandler}
+                  css={css`
+                    padding: 0.5rem;
+                    border-radius: 999px;
+                    border: 1px solid #eee;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                  `}
+                >
+                  <Popup height={20} />
+                </button>
+              </CommitContents>
+            ))
+          ) : null}
         </CommitSearchBox>
       )}
     </>
