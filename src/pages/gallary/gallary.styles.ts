@@ -3,7 +3,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { color } from '~/styles/theme/primary';
-import backgroundImage from '~/assets/images/사진자료1_크래프톤-정글-로고-002.jpg';
+import backgroundImage from '~/assets/images/Logo1.jpg';
 
 const DisplayFlexRow = css`
   display: flex;
