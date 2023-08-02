@@ -8,12 +8,15 @@ import { Global } from '@emotion/react';
 import Home from '~/pages/home/Home';
 import SignIn from '~/pages/signIn/SignIn';
 import Resume from '~/pages/resume/Resume';
+import Gallary from './pages/gallary/Gallary';
 
 /* Components */
-import PrivateRoute from '~/components/utils/PrivateRoute';
-import resetStyle from '~/styles/reset';
+// import PrivateRoute from '~/components/utils/PrivateRoute';
 import Layout from '~/pages/layout/Layout';
 import AuthCallback from '~/components/utils/AuthCallback';
+
+/* Styles */
+import resetStyle from '~/styles/reset';
 
 const App: React.FC = (): JSX.Element => {
   return (
@@ -27,6 +30,7 @@ const App: React.FC = (): JSX.Element => {
           {/* <Route element={<PrivateRoute />}>
             <Route path='board' element={<Board />} />
           </Route> */}
+          <Route path='gallary' element={<Gallary />} />
 
           <Route path='resume/:keyword' element={<Resume />} />
         </Route>

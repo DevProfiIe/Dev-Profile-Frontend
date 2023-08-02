@@ -56,7 +56,7 @@ export const MessageBoxHeader = styled.div`
   }
 `;
 
-export const MessageBoxContent = styled.div`
+export const MessageBoxContents = styled.div`
   height: 22rem;
   overflow: hidden;
   background-color: beige;

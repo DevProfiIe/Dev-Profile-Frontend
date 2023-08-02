@@ -95,6 +95,6 @@ export const SignInBox = styled.div`
   box-shadow: rgba(92, 40, 0, 0.004) 0px 109px 106px, rgba(92, 40, 0, 0.008) 0px 45.5376px 44.2843px,
     rgba(92, 40, 0, 0.01) 0px 24.3466px 23.6765px, rgba(92, 40, 0, 0.01) 0px 13.6485px 13.2728px,
     rgba(92, 40, 0, 0.016) 0px 7.24861px 7.04911px, rgba(92, 40, 0, 0.02) 0px 3.01631px 2.93329px;
-  align-self: stretch;
+  :stretch ;
   margin: 4rem 0 7rem 0;
 `;

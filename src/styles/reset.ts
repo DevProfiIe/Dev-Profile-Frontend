@@ -60,6 +60,20 @@ const resetStyle = css`
   input: focus {
     outline: none;
   }
+
+  textarea {
+    resize: none;
+    overflow: hidden;
+  }
+
+  textarea: focus {
+    outline: none;
+  }
+
+  select {
+    border: none;
+    background: none;
+  }
 `;
 
 export default resetStyle;

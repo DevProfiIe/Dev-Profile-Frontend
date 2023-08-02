@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { MessageBoxContent, MessageBoxHeader, MessageBoxWrapper, Wrapper } from './message.style';
+import { MessageBoxContents, MessageBoxHeader, MessageBoxWrapper, Wrapper } from './message.style';
 import { Close } from 'emotion-icons/evil';
 
 type MessageBoxProps = {
@@ -22,7 +22,7 @@ const Message: React.FC<MessageBoxProps> = ({ msg }: MessageBoxProps): JSX.Eleme
             <Close height={35} />
           </button>
         </MessageBoxHeader>
-        <MessageBoxContent>{msg}</MessageBoxContent>
+        <MessageBoxContents>{msg}</MessageBoxContents>
       </MessageBoxWrapper>
     </Wrapper>
   );

@@ -27,7 +27,7 @@ const SignIn: React.FC = (): JSX.Element => {
   useEffect(() => {
     if (token) {
       alert('이미 로그인 상태입니다.');
-      navigate('/search');
+      navigate('/');
     }
   }, []);
 
