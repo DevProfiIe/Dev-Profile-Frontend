@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { color } from '~/styles/theme/primary';
 
 /* CSS */
 
@@ -34,26 +35,26 @@ export const HeightBox = styled.div<{ height: string }>`
   height: ${({ height }) => height};
 `;
 
-export const RepasitoryBox = styled.div`
-  ${DisplayFlexColumn}
-  align-items: flex-start;
-  width: 700px;
-  height: auto;
-  padding: 2rem 5rem;
-  gap: 3rem 0;
-  ${BorderRadius}
-  background-color: #ffffff;
-  ${BoxShadow}
+export const RepasitoryBox = styled.div<{ index: number; nowRepo: boolean }>`
+  width: ${({ nowRepo }) => (nowRepo ? '1000px' : '35px')};
+  height: 35.5rem;
+  opacity: ${({ nowRepo }) => (nowRepo ? '1' : '0.5')};
+  background-color: ${color.myBiolet};
+  ${BorderRadius};
+  ${BoxShadow};
+  transition: 0.5s all ease;
+  // transform: translate(-50%, -30%);
 `;
 
-export const RepasitoryWrapper = styled.div`
+export const RepasitoryWrapper = styled.div<{ nowRepo: boolean }>`
   width: 100%;
+  height: 55rem;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
 `;
 
-export const RepasitoryContent = styled.div`
+export const RepasitoryContents = styled.div`
   display: flex;
   flex-flow: column nowrap;
   gap: 2rem 0;
