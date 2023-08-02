@@ -49,20 +49,20 @@ export const PopupHeader = styled.div`
   }
 `;
 
-export const PopupContent = styled.div`
+export const PopupContents = styled.div`
   width: 100%;
   height: 100%;
   ${DisplayFlexRow}
   justify-content: center;
 `;
 
-export const PopupContentLeft = styled.div`
+export const PopupContentsLeft = styled.div`
   width: 50%;
   background: blue;
   border-bottom-left-radius: 1.5rem;
 `;
 
-export const PopupContentRight = styled.div`
+export const PopupContentsRight = styled.div`
   width: 50%;
   background: green;
   border-bottom-right-radius: 1.5rem;

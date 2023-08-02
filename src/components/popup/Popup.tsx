@@ -1,15 +1,8 @@
 import { useAppDispatch } from '~/redux/store';
-import {
-  PopupBackground,
-  PopupContent,
-  PopupContentLeft,
-  PopupContentRight,
-  PopupHeader,
-  PopupWrapper,
-} from './popup.styles';
+import { PopupBackground, PopupContents, PopupHeader, PopupWrapper } from './popup.styles';
 import { Close } from 'emotion-icons/evil';
 import { open } from '~/redux/features/popupSlice';
-import Editor, { DiffEditor, useMonaco, loader } from '@monaco-editor/react';
+import Editor from '@monaco-editor/react';
 
 const code = `
 import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
@@ -50,7 +43,7 @@ const Popup = () => {
             <Close height={35} />
           </button>
         </PopupHeader>
-        <PopupContent>
+        <PopupContents>
           <Editor
             height='90%'
             width='90%'
@@ -58,9 +51,9 @@ const Popup = () => {
             defaultValue={code}
             theme='vs-dark'
           />
-          {/* <PopupContentLeft></PopupContentLeft>
-          <PopupContentRight></PopupContentRight> */}
-        </PopupContent>
+          {/* <PopupcontentsLeft></PopupcontentsLeft>
+          <PopupcontentsRight></PopupcontentsRight> */}
+        </PopupContents>
       </PopupWrapper>
     </>
   );
