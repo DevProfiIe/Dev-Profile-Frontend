@@ -1,5 +1,5 @@
 /* Libraries & Hooks */
-import { Box, CircularProgress, Container } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 import { Wrapper } from './loader.styles';
 
 const Loader: React.FC = (): JSX.Element => {
