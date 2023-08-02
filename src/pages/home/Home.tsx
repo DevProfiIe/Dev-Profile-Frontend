@@ -13,12 +13,15 @@ import line from '~/assets/images/line.png';
 import {
   BackgroundImage,
   HeightBox,
+  HomeContentsBox,
   HomeParagragh,
   HomeSearchBox,
   HomeSection,
   HomeText,
   HomeWrapper,
 } from './home.styles';
+import { color } from '~/styles/theme/primary';
+import { Link } from 'react-router-dom';
 
 const MAIN_TEXT = 'nd discover underlying insights from github.'.split('');
 
@@ -55,7 +58,7 @@ const Home: React.FC = (): JSX.Element => {
     <HomeWrapper>
       <BackgroundImage zIndex={2} img={background} />
       <BackgroundImage zIndex={1} img={line} />
-      <HeightBox height='4rem' />
+      <HeightBox height='8rem' />
       <HomeSection>
         <div
           css={css`
@@ -181,6 +184,61 @@ const Home: React.FC = (): JSX.Element => {
             </HomeParagragh>
             <HeightBox height={'2.875rem'} />
             <Search outputBox={false} redirectTo='/resume' />
+            <HeightBox height={'5rem'} />
+            <HomeContentsBox>
+              <div
+                css={css`
+                  width: 100%;
+                  display: flex;
+                  justify-content: flex-start;
+                  font-size: 28px;
+                  line-height: 116%;
+                  font-weight: 500;
+                  letter-spacing: -0.04em;
+                  // -webkit-text-fill-color: transparent;
+                  background: linear-gradient(
+                    279.27deg,
+                    rgb(14, 51, 255) -30.9%,
+                    rgb(122, 255, 180) 97.94%
+                  );
+                  background-clip: text;
+                  color: transparent;
+                `}
+              >
+                Here are the GitHub analysis resumes of new developers with various project
+                experiences.
+              </div>
+              <div
+                css={css`
+                  width: 100%;
+                  display: flex;
+                  justify-content: flex-end;
+                `}
+              >
+                <p
+                  css={css`
+                    padding: 16px 32px;
+                    line-height: 1.6;
+                    color: #01051b;
+                    background-color: ${color.aquaMarine};
+                    border: none;
+                    border-radius: 32px;
+                    text-decoration: none;
+                    overflow: auto;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    user-select: none;
+                    cursor: pointer;
+                    transition: all 0.25s ease 0s;
+                    text-align: center;
+                    display: block;
+                    letter-spacing: -0.1rem;
+                  `}
+                >
+                  <Link to='/gallary'>Go To Gallary</Link>
+                </p>
+              </div>
+            </HomeContentsBox>
           </HomeSearchBox>
         </div>
       </HomeSection>

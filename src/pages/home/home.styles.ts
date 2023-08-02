@@ -78,9 +78,13 @@ export const HomeText = styled.div`
 `;
 
 export const HomeContentsBox = styled.div`
-  width: 840px;
-  height: 20rem;
+  ${DisplayFlexColumn}
+  justify-content: space-between;
+  width: 500px;
+  height: 21rem;
+  padding: 2rem;
   background-color: ${color.blueCharcoal};
-  border-radius: 40px;
+  border-radius: 32px;
+  border: 1px solid rgba(1, 5, 27, 0.07);
   ${BoxShadow};
 `;
