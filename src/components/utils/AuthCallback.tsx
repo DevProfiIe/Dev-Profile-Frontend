@@ -23,27 +23,48 @@ const AuthCallback: React.FC = () => {
     return code;
   };
 
-  if (token) {
-    alert('이미 로그인 상태입니다.');
-    return <Navigate to='/' />;
-  }
-
   /**
    * Rtk Query 구조분해할당
    */
-  const { isError, isLoading, isSuccess, data, error } = useAuthUserQuery({
-    code: parseCode(),
-  });
+  const { isError, isLoading, isSuccess, data, error } = useAuthUserQuery(
+    {
+      code: parseCode(),
+    },
+    {
+      skip: token ? true : false,
+    },
+  );
 
-  if (isLoading) return <Loader />;
-  if (isSuccess) {
-    setCookie('token', `JWT ${data.token}`, {
+  const userData = data?.data ?? {};
+
+  const setUserData = () => {
+    setCookie('token', data?.token, {
       path: '/',
       sameSite: 'strict',
     });
-    return <Navigate to='/' />;
+
+    localStorage.setItem('userInfo', JSON.stringify(userData));
+  };
+
+  // if (isLoading) return;
+  if (isSuccess) {
+    setUserData();
   }
-  if (isError) return <Message msg={JSON.stringify(error)} />;
+  // if (isError) return <Message msg={JSON.stringify(error)} />;
+
+  return (
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : isSuccess ? (
+        <Navigate to='/' />
+      ) : isError ? (
+        <Message msg={JSON.stringify(error)} />
+      ) : (
+        <Loader />
+      )}
+    </>
+  );
 };
 
 export default AuthCallback;
