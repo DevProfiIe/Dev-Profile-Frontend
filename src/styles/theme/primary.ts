@@ -8,6 +8,7 @@ const primary = {
     blueCharcoal: '#01051B',
     myBlue: 'hsla(231, 100%, 53%, 1)',
     keep: '#F7F1E9',
+    myBiolet: '#0F1329;',
   },
 
   font: {

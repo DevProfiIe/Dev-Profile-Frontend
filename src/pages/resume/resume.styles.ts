@@ -76,9 +76,9 @@ export const ResumeTag = styled.div<{ color: string; border?: string }>`
   border: ${({ border }) => (border === 'none' ? '' : `1px solid ${color.aquaMarine}`)};
   transition: 0.2s;
 
-  &: hover {
-    transform: translateY(-10%);
-  }
+  // &: hover {
+  //   transform: translateY(-10%);
+  // }
 `;
 
 export const ResumeChartBox = styled.div`
@@ -86,7 +86,7 @@ export const ResumeChartBox = styled.div`
   ${BorderRadius}
   justify-content: center;
   width: 80%;
-  height: auto;
+  height: 90%;
   gap: 0 5rem;
 `;
 
@@ -94,7 +94,7 @@ export const ResumeLeftContents = styled.div`
   ${DisplayFlexColumn}
   ${BorderRadius}
   ${BoxShadow}
-  justify-content: center;
+  justify-content: space-between;
   width: 45%;
   background-color: ${color.white};
 `;
@@ -102,9 +102,11 @@ export const ResumeLeftContents = styled.div`
 export const ResumeLeftTextBox = styled.div`
   ${DisplayFlexColumn}
   width: 100%;
+  height: 50%;
   padding: 2rem 1.5rem;
-  align-items: flex-start;
-  gap: 2rem;
+  justify-content: center;
+  gap: 4rem 0;
+  overflow: hidden;
 `;
 
 export const ResumeLeftTextDetail = styled.div`
@@ -139,7 +141,7 @@ export const ResumeHashTagWrapper = styled.div`
   background-image: url(${backgroundImage2});
   background-size: cover;
   background-repeat: no-repeat;
-  overflow: auto;
+  overflow: scroll;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -176,20 +178,26 @@ export const ResumeRepoText = styled.div`
   font-variant: tabular-nums;
 `;
 
-export const ResumeRepoSvgbox = styled.div`
-  width: 100%;
-  height: 5rem;
-`;
-
-export const ResumeRepoContainer = styled.div<{ position: number; length: number }>`
+export const ResumeRepoSvgbox = styled.div<{ position: number }>`
   ${DisplayFlexRow}
-  width: fit-content;
+  width: max-content;
   height: auto;
-  gap: 0 2rem;
   overflow: auto;
   position: absolute;
   left: 0;
-  top: 30%;
-  transform: translateX(-${({ position }) => position + 'px'});
+  top: 25%;
+  transform: translateX(-${({ position }) => position * 0.01 + 'px'});
   transition: 0.09s;
+  overflow: hidden;
+`;
+
+export const ResumeRepoContainer = styled.div`
+  ${DisplayFlexRow}
+  padding: 5rem 2rem;
+  align-items: flex-end;
+  gap: 0 0.2rem;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  color: white;
 `;
