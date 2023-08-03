@@ -26,6 +26,7 @@ import {
 } from '~/redux/api';
 import { Send } from 'emotion-icons/feather';
 import { SendChatMessageInfo, UserGithubInfo } from '~/redux/api/types';
+import { getSocket } from '~/utils/socket';
 
 type RoomsProps = {
   nowPage: number;
@@ -35,7 +36,6 @@ type RoomsProps = {
 
 const Rooms: React.FC<RoomsProps> = ({ nowPage, setNowPage, setRoomId }: RoomsProps) => {
   const dispatch = useAppDispatch();
-  // const location = useLocation();
 
   const showChatBoxHandler = () => {
     dispatch(open());
@@ -108,11 +108,24 @@ const Chat = () => {
 
   const showChatBoxHandler = () => {
     dispatch(open());
-    openChatRoomhandler();
+    makeChatRoom({ userName: location.state.keyword })
+      .then((res: any) => {
+        setRoomId(res.data.data.id);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const pageHandler = () => {
+    const stompClient = getSocket();
+
     setNowPage(-1);
+    setRoomId(-1);
+
+    stompClient.disconnect((frame: any) => {
+      console.log('Disconnected: ' + frame);
+    });
   };
 
   const [makeChatRoom] = useMakeChatRoomMutation();
@@ -124,18 +137,9 @@ const Chat = () => {
     },
     {
       skip: roomId < 0 ? true : false,
+      refetchOnMountOrArgChange: true,
     },
   );
-
-  const openChatRoomhandler = () => {
-    makeChatRoom({ userName: location.state.keyword })
-      .then((res: any) => {
-        setRoomId(res.data.data.id);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   const messageChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
