@@ -31,21 +31,36 @@ export interface UserGithubInfo {
 }
 
 export interface UserGithubData {
+  boardData: UserGithubBoardData[];
   repositoryInfo: UserGithubRepositoryInfo[];
   userInfo: UserGithubUserInfo;
 }
 
+export interface UserGithubBoardData {
+  userlogin: {
+    login: string;
+    score: number;
+  };
+  feature: string[];
+  field: string;
+}
+
 export interface UserGithubRepositoryInfo {
+  endDate: string;
+  frameworkUrls: SkillDetail[];
   id: number;
+  myCommitCnt: number;
+  repoDesc: string;
+  repoLanguages: string[];
   repoName: string;
   startDate: string;
-  endDate: string;
   totalCommitCnt: number;
-  myCommitCnt: number;
   totalContributors: number;
-  repoLanguages: string[];
-  featured: string[];
-  langFramework: string[];
+}
+
+export interface SkillDetail {
+  skill: string;
+  url: string;
 }
 
 export interface UserGithubUserInfo {
@@ -56,24 +71,44 @@ export interface UserGithubUserInfo {
   game: number;
   keywordSet: string[];
   login: string;
-  mobile: number;
   name: string;
   systemProgramming: number;
   webBackend: number;
   commitCalender: CalendarDatum[];
   commitStart: string;
+  commitEnd: string;
   webFrontend: number;
 }
 
 export interface KeywordSearchOutput {
   commitMessage: string;
-  commitDdate: string;
+  commitDate: string;
+  commitOid: string;
   keywordSet: string[];
   repoName: string;
 }
 
 export interface KeywordSearchOutputParams {
   query: string;
+  userName: string;
+}
+
+export interface GetCommitDetailsData {
+  diffs: GetCommitDetailsDiff[];
+}
+
+export interface GetCommitDetailsDiff {
+  filename: string;
+  content: string;
+  filetype: string;
+  status: {
+    deleted: number[];
+    original: number[];
+    inserted: number[];
+  };
+}
+export interface GetCommitDetailsParams {
+  commitOid: string;
 }
 
 export interface GetChatRoomHistory {
@@ -114,4 +149,22 @@ export interface GetChatRoomData {
   id: number;
   opponent: ChatUserType;
   Timestamp: string;
+}
+
+export interface GetBoardData {
+  userName: string;
+  language: string[];
+  framework: string[];
+  avataUrl: string;
+  field: string;
+}
+
+export interface GetBoardDataParams {
+  lang: string[];
+  frame: string[];
+  langDuration: number;
+  frameDuration: number;
+  keywordFilter: string[];
+  field: string;
+  fieldScore: number;
 }

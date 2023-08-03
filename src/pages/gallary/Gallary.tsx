@@ -16,10 +16,15 @@ import {
   StackTag,
 } from './gallary.styles';
 import { css } from '@emotion/react';
+// import { useGetBodrdQuery } from '~/redux/api';
+import { IosArrowRight } from 'emotion-icons/fluentui-system-filled';
+import { Link } from 'react-router-dom';
 
 interface Item {
   id: string;
   contents: string;
+  name: string;
+  stack: string[];
 }
 
 interface StackItem {
@@ -30,14 +35,24 @@ interface StackItem {
 
 const Gallary = () => {
   const [item, _setItem] = useState<Item[]>([
-    { id: '1', contents: 'Item 1' },
-    { id: '2', contents: 'Item 2' },
-    { id: '3', contents: 'Item 3' },
-    { id: '4', contents: 'Item 4' },
-    { id: '5', contents: 'Item 5' },
-    { id: '6', contents: 'Item 6' },
-    { id: '7', contents: 'Item 7' },
-    { id: '8', contents: 'Item 8' },
+    {
+      id: '1',
+      contents: '데이터의 속삭임: 코드로 이야기하는 개발자 Park Yun Chan.',
+      name: 'dbscks97',
+      stack: ['Spring', 'C#', 'JavaScript'],
+    },
+    {
+      id: '2',
+      contents: '알고리즘 마법사: 코딩의 미래를 이끄는 개발자 YoonpyoHong.',
+      name: 'YoonpyoHong',
+      stack: ['React', 'TypeScript', 'Angular'],
+    },
+    {
+      id: '3',
+      contents: '오류의 명인: 불완전함을 완성시키는 개발자 cocounni',
+      name: 'cocounni',
+      stack: ['C', 'Java', 'React'],
+    },
   ]);
   const [newItem, setNewItem] = useState<Item[]>([]);
   const [isShowContactbox, setIsShowContactBox] = useState<boolean>(false);
@@ -81,6 +96,18 @@ const Gallary = () => {
     },
   ];
 
+  // const { data, isSuccess } = useGetBodrdQuery({
+  //   lang: [],
+  //   frame: [],
+  //   langDuration: -1,
+  //   frameDuration: -1,
+  //   keywordFilter: [],
+  //   field: '',
+  //   fieldScore: -1,
+  // });
+
+  // const resumeList = data?.data ?? [];
+
   const stackClickHandler = (selectedTag: StackItem) => {
     const isExist = findTag(selectedTag);
 
@@ -121,6 +148,8 @@ const Gallary = () => {
       {
         id: id,
         contents: `Item ${id}`,
+        name: 'new',
+        stack: ['React'],
       },
     ]);
   };
@@ -242,7 +271,7 @@ const Gallary = () => {
                     font-size: 1.75rem;
                   `}
                 >
-                  Park Yun Chan
+                  {elem.name}
                 </p>
                 <p
                   css={css`
@@ -254,7 +283,7 @@ const Gallary = () => {
                     line-height: 110%;
                   `}
                 >
-                  Hear how Stephanie, TA Lead, saves 20+ hours per by relying on Metaview’s
+                  {elem.contents}
                 </p>
                 <div
                   css={css`
@@ -265,13 +294,13 @@ const Gallary = () => {
                     height: 5rem;
                   `}
                 >
-                  <p>stack</p>
-                  <p>stack</p>
-                  <p>stack</p>
+                  {elem.stack.map((item2, i) => (
+                    <p key={i}>{item2}</p>
+                  ))}
                 </div>
               </GallaryTextLeft>
               <GallaryBtn>
-                <div
+                <Link
                   css={css`
                     width: 4rem;
                     height: 4rem;
@@ -279,8 +308,17 @@ const Gallary = () => {
                     border-radius: 999px;
                     margin-bottom: 1rem;
                     cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                   `}
-                ></div>
+                  to={'/resume/dbscks97'}
+                  state={{
+                    keyword: 'dbscks97',
+                  }}
+                >
+                  <IosArrowRight size={20} />
+                </Link>
               </GallaryBtn>
             </GallaryTextBox>
           </GallaryItem>
@@ -300,16 +338,7 @@ const Gallary = () => {
               <GallaryTextBox>
                 <GallaryTextLeft></GallaryTextLeft>
                 <GallaryBtn>
-                  <div
-                    css={css`
-                      width: 4rem;
-                      height: 4rem;
-                      background-color: #f7f1e9;
-                      border-radius: 999px;
-                      margin-bottom: 1rem;
-                      cursor: pointer;
-                    `}
-                  ></div>
+                  <IosArrowRight height={25} />
                 </GallaryBtn>
               </GallaryTextBox>
             </GallaryItemInBox>

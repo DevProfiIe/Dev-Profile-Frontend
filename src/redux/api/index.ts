@@ -2,11 +2,15 @@ import { IMessage } from '@stomp/stompjs';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
   DefaultApi,
+  GetBoardData,
+  GetBoardDataParams,
   GetChatRoomData,
   GetChatRoomDetail,
   GetChatRoomHistory,
   GetChatRoomHistoryParams,
   GetChatRoomParams,
+  GetCommitDetailsData,
+  GetCommitDetailsParams,
   KeywordSearchOutput,
   KeywordSearchOutputParams,
   SendChatMessageInfo,
@@ -47,7 +51,7 @@ export const mainApi = createApi({
     getUserGithubInfo: builder.query<DefaultApi<UserGithubData>, any>({
       query(data) {
         return {
-          url: 'response_test',
+          url: 'combined_data',
           method: 'GET',
           params: data,
         };
@@ -57,6 +61,15 @@ export const mainApi = createApi({
       query(data) {
         return {
           url: 'search/similarity',
+          method: 'GET',
+          params: data,
+        };
+      },
+    }),
+    getCommitDetails: builder.query<DefaultApi<GetCommitDetailsData>, GetCommitDetailsParams>({
+      query(data) {
+        return {
+          url: 'search/commits',
           method: 'GET',
           params: data,
         };
@@ -130,6 +143,15 @@ export const mainApi = createApi({
         });
       },
     }),
+    getBodrd: builder.query<DefaultApi<GetBoardData>, GetBoardDataParams>({
+      query(data) {
+        return {
+          url: 'board',
+          method: 'GET',
+          params: data,
+        };
+      },
+    }),
   }),
 });
 
@@ -141,4 +163,6 @@ export const {
   useSendMessageMutation,
   useGetChatRoomListQuery,
   useMakeChatRoomMutation,
+  useGetCommitDetailsQuery,
+  useGetBodrdQuery,
 } = mainApi;

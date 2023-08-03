@@ -44,7 +44,6 @@ export const GallaryWrapper = styled.div<{ height?: string }>`
   ${DisplayFlexColumn}
   justify-content: center;
   width: 100%;
-  min-height: 100vh;
 `;
 
 export const GallaryFilterWrapper = styled.div`

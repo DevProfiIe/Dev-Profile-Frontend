@@ -7,6 +7,11 @@ const DisplayFlexRow = css`
   flex-flow: row nowrap;
 `;
 
+const DisplayFlexRowWrap = css`
+  display: flex;
+  flex-flow: row wrap;
+`;
+
 const DisplayFlexColumn = css`
   display: flex;
   flex-flow: column nowrap;
@@ -37,7 +42,7 @@ export const PopupWrapper = styled.div`
 
 export const PopupHeader = styled.div`
   width: 100%;
-  height: 3rem;
+  height: 50px;
   border-bottom: 1px solid #eee;
   ${DisplayFlexRow}
   justify-content: center;
@@ -51,19 +56,38 @@ export const PopupHeader = styled.div`
 
 export const PopupContents = styled.div`
   width: 100%;
+  height: 500px;
+  ${DisplayFlexRowWrap}
+  padding: 1.5rem;
+  justify-content: flex-start;
+  overflow: auto;
+  gap: 0.5rem 0.7rem;
+  position: relative;
+  align-content: start;
+`;
+
+export const PopupFileWrapper = styled.div<{ selected: boolean }>`
+  width: 100px;
+  height: 100px;
+  ${DisplayFlexColumn}
+  justify-content:center;
+  align-items: center;
+  gap: 0.5rem 0;
+  background-color: ${({ selected }) => (selected ? '#eee' : 'none')};
+
+  p {
+    width: 100px;
+    max-height: 30px;
+    text-align: center;
+    overflow: hidden;
+    user-select: none;
+  }
+`;
+
+export const PopupEditorWrapper = styled.div`
+  width: 100%;
   height: 100%;
-  ${DisplayFlexRow}
-  justify-content: center;
-`;
-
-export const PopupContentsLeft = styled.div`
-  width: 50%;
-  background: blue;
-  border-bottom-left-radius: 1.5rem;
-`;
-
-export const PopupContentsRight = styled.div`
-  width: 50%;
-  background: green;
-  border-bottom-right-radius: 1.5rem;
+  position: absolute;
+  left: 0;
+  top: 0;
 `;

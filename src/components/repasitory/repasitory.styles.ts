@@ -35,44 +35,37 @@ export const HeightBox = styled.div<{ height: string }>`
   height: ${({ height }) => height};
 `;
 
-export const RepasitoryBox = styled.div<{ index: number; nowRepo: boolean }>`
-  width: ${({ nowRepo }) => (nowRepo ? '1000px' : '35px')};
-  height: 35.5rem;
-  opacity: ${({ nowRepo }) => (nowRepo ? '1' : '0.5')};
-  background-color: ${color.myBiolet};
-  ${BorderRadius};
+export const RepositoryBox = styled.div<{ index: number; nowRepo: boolean }>`
+  width: ${({ nowRepo }) => (nowRepo ? '55.75rem' : '2.188rem')};
+  height: 25.5rem;
+  opacity: ${({ nowRepo }) => (nowRepo ? '1' : '0.3')};
+  background-color: ${color.keep};
+  border-radius: ${({ nowRepo }) => (nowRepo ? '1.5rem' : '0')};
   ${BoxShadow};
   transition: 0.5s all ease;
-  // transform: translate(-50%, -30%);
+  transform: ${({ nowRepo }) => (nowRepo ? 'scale(1.1)' : 'scale(0.8)')};
+  overflow: hidden;
 `;
 
-export const RepasitoryWrapper = styled.div<{ nowRepo: boolean }>`
+export const RepositoryWrapper = styled.div<{ nowRepo?: boolean }>`
   width: 100%;
-  height: 55rem;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-`;
-
-export const RepasitoryContents = styled.div`
+  height: 100%;
   display: flex;
   flex-flow: column nowrap;
-  gap: 2rem 0;
-  width: 45%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  opacity: ${({ nowRepo }) => (nowRepo ? '1' : '0')};
+  padding: 2.5rem;
 `;
 
-export const RepasitoryDetails = styled.div`
-  ${DisplayFlexColumn}
-  align-items: start;
-  gap: 2rem 0;
-`;
-
-export const SkillsBox = styled.div`
+export const RepositorySkills = styled.div`
   ${DisplayFlexRow}
-  gap: 0 2rem;
-`;
+  height: 2.5rem;
+  align-items: center;
+  gap: 0 0.5rem;
 
-export const ChartWrapper = styled.div<{ width: string; height: string }>`
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
+  p {
+    width: 2rem;
+    height: 2rem;
+  }
 `;

@@ -8,6 +8,7 @@ import { open } from '~/redux/features/popupSlice';
 import { useGetSearchOutputQuery } from '~/redux/api';
 import Loader from '../loader/Loader';
 import useDebounce from '~/hooks/useDebounce';
+import { UserGithubInfo } from '~/redux/api/types';
 
 const Commit: React.FC = () => {
   const [isShow, setIsShow] = useState<boolean>(false);
@@ -15,6 +16,7 @@ const Commit: React.FC = () => {
   const [searchKeyword, setSearchKeyword] = useState<string>('');
   const debouncedTerm = useDebounce(searchKeyword, 500);
   const dispatch = useAppDispatch();
+  const userInfo: UserGithubInfo = JSON.parse(localStorage.getItem('userInfo') ?? '');
 
   /**
    * 검색 input visible 핸들러
@@ -47,13 +49,14 @@ const Commit: React.FC = () => {
   /**
    * 팝업 visible 핸들러
    */
-  const popupToggleHandler = () => {
-    dispatch(open());
+  const popupToggleHandler = (oid: string) => {
+    dispatch(open({ commitOid: oid }));
   };
 
   const { data, isLoading, isSuccess } = useGetSearchOutputQuery(
     {
       query: searchKeyword,
+      userName: userInfo?.login,
     },
     {
       skip: debouncedTerm ? false : true,
@@ -103,12 +106,13 @@ const Commit: React.FC = () => {
                       font-size: 0.8rem;
                     `}
                   >
-                    {/* <p>{}</p> */}
-                    <p>{item.commitDdate}</p>
+                    <p>{item.commitDate}</p>
                   </div>
                 </CommitContentsTop>
                 <button
-                  onClick={popupToggleHandler}
+                  onClick={() => {
+                    popupToggleHandler(item.commitOid);
+                  }}
                   css={css`
                     padding: 0.5rem;
                     border-radius: 999px;

@@ -105,13 +105,14 @@ export const ResumeLeftTextBox = styled.div`
   height: 50%;
   padding: 2rem 1.5rem;
   justify-content: center;
-  gap: 4rem 0;
+  gap: 2.5rem 0;
   overflow: hidden;
 `;
 
 export const ResumeLeftTextDetail = styled.div`
   ${DisplayFlexRow}
   width: 100%;
+  height: 2.2rem;
 
   p: nth-of-type(1) {
     width: 30%;
@@ -119,7 +120,13 @@ export const ResumeLeftTextDetail = styled.div`
   }
 
   p: nth-of-type(2) {
+    ${DisplayFlexRowWrap}
     width: 70%;
+    overflow: auto;
+    gap: 0.5rem;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 `;
 
@@ -169,7 +176,7 @@ export const ResumeRepoWrapper = styled.div`
 
 export const ResumeRepoText = styled.div`
   width: 80%;
-  margin-top: 7.5rem;
+  margin-top: 5.5rem;
   user-select: none;
   color: hsla(146, 100%, 74%, 1);
   font-size: 95px;
@@ -185,19 +192,18 @@ export const ResumeRepoSvgbox = styled.div<{ position: number }>`
   overflow: auto;
   position: absolute;
   left: 0;
-  top: 25%;
+  top: 15.5rem;
   transform: translateX(-${({ position }) => position * 0.01 + 'px'});
-  transition: 0.09s;
+  transition: 0.1s;
   overflow: hidden;
 `;
 
 export const ResumeRepoContainer = styled.div`
   ${DisplayFlexRow}
-  padding: 5rem 2rem;
-  align-items: flex-end;
   gap: 0 0.2rem;
   width: 100%;
   height: 100%;
   position: absolute;
-  color: white;
+  top: 25.5rem;
+  color: #black;
 `;

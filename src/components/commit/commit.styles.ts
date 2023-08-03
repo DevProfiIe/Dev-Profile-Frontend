@@ -14,7 +14,7 @@ export const CommitSearchBox = styled.div`
   position: fixed;
   top: 4.5rem;
   width: 30rem;
-  max-height: 25rem;
+  height: 25rem;
   background-color: white;
   overflow: auto;
   border-radius: 1.5rem;
