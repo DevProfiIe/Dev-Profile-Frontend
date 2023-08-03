@@ -30,9 +30,10 @@ import { SendChatMessageInfo, UserGithubInfo } from '~/redux/api/types';
 type RoomsProps = {
   nowPage: number;
   setNowPage: Dispatch<SetStateAction<number>>;
+  setRoomId: Dispatch<SetStateAction<number>>;
 };
 
-const Rooms: React.FC<RoomsProps> = ({ nowPage, setNowPage }: RoomsProps) => {
+const Rooms: React.FC<RoomsProps> = ({ nowPage, setNowPage, setRoomId }: RoomsProps) => {
   const dispatch = useAppDispatch();
   // const location = useLocation();
 
@@ -40,7 +41,8 @@ const Rooms: React.FC<RoomsProps> = ({ nowPage, setNowPage }: RoomsProps) => {
     dispatch(open());
   };
 
-  const pageHandler = () => {
+  const pageHandler = (id: number) => {
+    setRoomId(id);
     setNowPage(1);
   };
 
@@ -84,7 +86,9 @@ const Rooms: React.FC<RoomsProps> = ({ nowPage, setNowPage }: RoomsProps) => {
                 cursor: pointer;
               `}
               size={30}
-              onClick={pageHandler}
+              onClick={() => {
+                pageHandler(item.id);
+              }}
             />
           </ChatRoomWrapper>
         ))}
@@ -158,7 +162,7 @@ const Chat = () => {
       <ChatBoxButton onClick={showChatBoxHandler}></ChatBoxButton>
 
       {isShow && nowPage < 0 ? (
-        <Rooms nowPage={nowPage} setNowPage={setNowPage} />
+        <Rooms nowPage={nowPage} setNowPage={setNowPage} setRoomId={setRoomId} />
       ) : isShow && nowPage > 0 ? (
         <ChatBoxContents>
           <ChatBoxContentsHeader>
