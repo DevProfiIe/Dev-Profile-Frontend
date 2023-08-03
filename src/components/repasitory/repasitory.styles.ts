@@ -42,7 +42,7 @@ export const RepositoryBox = styled.div<{ index: number; nowRepo: boolean }>`
   background-color: ${color.keep};
   border-radius: ${({ nowRepo }) => (nowRepo ? '1.5rem' : '0')};
   ${BoxShadow};
-  transition: 0.5s all ease;
+  transition: 0.1s all ease;
   transform: ${({ nowRepo }) => (nowRepo ? 'scale(1.1)' : 'scale(0.8)')};
   overflow: hidden;
 `;

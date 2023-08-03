@@ -82,7 +82,9 @@ const Repasitory: React.FC<RepositoryProps> = ({
           {repoDesc}
         </p>
         <HeightBox height='5.5rem' />
-        <div>기여도 그래프</div>
+        <div>
+          User Commit : {myCommitCnt} , Total Commit : {totalCommitCnt}
+        </div>
       </RepositoryWrapper>
     </RepositoryBox>
   );
