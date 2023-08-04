@@ -11,20 +11,95 @@ interface resumeList {
   };
 }
 
+const data = [
+  {
+    userName: 'Park Yun Chan',
+    language: ['Java', 'Python', 'CSS'],
+    imageUrl: 'https://avatars.githubusercontent.com/u/75676309?v=4',
+  },
+  {
+    userName: 'Go Hye Jung',
+    language: ['Java', 'Kotlin', 'Python'],
+  },
+  {
+    userName: 'Hong Yoon Pyo',
+    language: ['C++', 'TypeScript', 'React'],
+  },
+  {
+    userName: 'Park Yun Chan',
+    language: ['Java', 'Python', 'CSS'],
+    imageUrl: 'https://avatars.githubusercontent.com/u/75676309?v=4',
+  },
+  {
+    userName: 'Go Hye Jung',
+    language: ['Java', 'Kotlin', 'Python'],
+  },
+  {
+    userName: 'Hong Yoon Pyo',
+    language: ['C++', 'TypeScript', 'React'],
+  },
+  {
+    userName: 'Park Yun Chan',
+    language: ['Java', 'Python', 'CSS'],
+    imageUrl: 'https://avatars.githubusercontent.com/u/75676309?v=4',
+  },
+];
+
 function Mypage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // resume list는 pdf 출력 화면에서 드래그해서 담을 때 state에 담아서 가져올 것
-  const resumeList: resumeList = location.state;
+  // 클릭한 resume 테두리 색상 변경
+  const [selectedResumeIndex, setSelectedResumeIndex] = useState([]);
 
-  const [current, setCurrent] = useState(resumeList);
+  // 클릭한 resume 데이터 관리
+  const [selectedResumeData, setSelectedResumeData] = useState([]);
+
+  // 클릭한 data들의 데이터를 submit버튼을 클릭하면 여기로 업데이트
+  const [displayedData, setDisplayedData] = useState([]);
+
+  // 보낸 이력서 / 받은 이력서 선택에 따라 setData를 이용하여 data 변경해서 리스트에 띄우기
+  //   const [data, setData] = useState();
+
+  /**
+   * 보낸것 / 받은것 select option선택에 따라 이력서 구분해주는 함수
+   */
+  function resumeControlHandler(event) {
+    const value = event.target.value;
+    alert('value = ' + value);
+
+    if (value == 'sendResume') {
+      // 보낸 이력서를 골랐을 경우 보여줄 이력서 리스트/
+    } else {
+      // 받은 이력서일 경우 보여줄 이력서
+    }
+  }
+
+  /**
+   *
+   * @param index resume list들 중 선택한 resume 색상 변경
+   */
+  function handleResumeClick(index, itemData) {
+    const isSelected = selectedResumeIndex.includes(index);
+
+    if (isSelected) {
+      setSelectedResumeIndex(selectedResumeIndex.filter((i) => i !== index));
+      setSelectedResumeData(selectedResumeData.filter((data) => data !== itemData));
+    } else {
+      setSelectedResumeIndex([...selectedResumeIndex, index]);
+      setSelectedResumeData([...selectedResumeData, itemData]);
+    }
+  }
+
+  function handleSubmit() {
+    setDisplayedData(selectedResumeData);
+  }
 
   return (
     <>
-      <select className='selectBox'>
-        <option>보낸 이력서</option>
-        <option>받은 이력서</option>
+      <select className='selectBox' onChange={resumeControlHandler}>
+        <option value='sendResume'>보낸 이력서</option>
+        <option value='receiveResume'>받은 이력서</option>
       </select>
       <div className='Wrap'>
         <div className='topContentWrap'>
@@ -32,13 +107,19 @@ function Mypage() {
             <div className='Title'>진행중</div>
           </div>
           <div className='resumeWrap'>
-            <div className='resume'>resume</div>
-            <div className='resume'>resume</div>
-            <div className='resume'>resume</div>
-            <div className='resume'>resume</div>
-            <div className='resume'>resume</div>
+            {data.map((item, i) => (
+              <div
+                key={i}
+                className={selectedResumeIndex.includes(i) ? 'resume selected' : 'resume'}
+                onClick={() => handleResumeClick(i, item)}
+              >
+                <div className='userImage'>{item.imageUrl}</div>
+                {item.userName} resume
+                <div className='language'>{item.language}</div>
+              </div>
+            ))}
           </div>
-          <button type='submit' className='submit'>
+          <button type='submit' className='submit' onClick={handleSubmit}>
             Submit
           </button>
         </div>
@@ -48,11 +129,13 @@ function Mypage() {
             <div className='Title'>완료</div>
           </div>
           <div className='resumeWrap2'>
-            <div className='resume'>resume</div>
-            <div className='resume'>resume</div>
-            <div className='resume'>resume</div>
-            <div className='resume'>resume</div>
-            <div className='resume'>resume</div>
+            {displayedData.map((item, i) => (
+              <div key={i} className='resume'>
+                <div className='userImage'>{item.imageUrl}</div>
+                {item.userName} resume
+                <div className='language'>{item.language}</div>
+              </div>
+            ))}
           </div>
         </div>
         <div className='contentWrap'></div>
