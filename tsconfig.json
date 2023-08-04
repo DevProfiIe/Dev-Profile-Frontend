@@ -27,6 +27,6 @@
     },
     "jsxImportSource": "@emotion/react"
   },
-  "include": ["vite.config.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": ["vite.config.ts", "**/*.ts", "**/*.tsx", "src/pages/mypage/Mypage.js"],
+  "exclude": ["node_modules", "react-slick"]
 }

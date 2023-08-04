@@ -9,6 +9,7 @@ import Home from '~/pages/home/Home';
 import SignIn from '~/pages/signIn/SignIn';
 import Resume from '~/pages/resume/Resume';
 import Gallary from './pages/gallary/Gallary';
+import Mypage from './pages/mypage/Mypage';
 
 /* Components */
 // import PrivateRoute from '~/components/utils/PrivateRoute';
@@ -31,6 +32,7 @@ const App: React.FC = (): JSX.Element => {
             <Route path='board' element={<Board />} />
           </Route> */}
           <Route path='gallary' element={<Gallary />} />
+          <Route path='mypage' element={<Mypage />} />
 
           <Route path='resume/:keyword' element={<Resume />} />
         </Route>

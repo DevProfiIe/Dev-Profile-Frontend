@@ -22,6 +22,16 @@ const Header: React.FC = (): JSX.Element => {
       >
         TEAM 5
       </h1>
+      <p
+        css={css`
+          display: flex;
+          flex-flow: row nowrap;
+          align-items: center;
+          gap: 0 2rem;
+        `}
+      >
+        <Link to='/mypage'>Mypage</Link>
+      </p>
       <div
         css={css`
           display: flex;
