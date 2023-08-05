@@ -43,14 +43,12 @@
   float: left;
   width: 250px;
   height: 250px;
-  background-color: rgb(233, 233, 233);
+  background-color: rgb(212, 212, 212);
   border-radius: 15px;
   margin-left: 30px;
   margin-top: 20px;
   text-align: center;
-  /* opacity: 0.8; */
-  box-shadow:  3px 3px 10px rgb(138, 138, 138);
-
+  opacity: 0.8;
 }
 
 .resume.selected {
@@ -59,7 +57,7 @@
   opacity: 0.7;
 }
 
-.imageWrap img{
+.userImage {
   width: 230px;
   height: 130px;
   background-color: rgb(253, 253, 253);
@@ -70,19 +68,13 @@
   border-radius: 15px;
 }
 
-/* .userImage {
-  display: block;
-  width: 100%;
-  height: auto;
-} */
-
 .TitleWrap {
   padding-top: 20px;
 }
 
 .Title {
   display: flex;
-  width:90px;
+  width:70px;
   height: 30px;
   margin-left: 200px;
   background-color: rgb(245, 243, 243);
@@ -91,26 +83,8 @@
   box-shadow:  3px 3px 10px rgb(138, 138, 138);
   justify-content: center;
   align-items: center;
+  
 }
-
-.textWrap {
-  margin-top: 10px;
-}
-
-.analysisBtn {
-  position: absolute;
-  background-color: hsla(231, 100%, 53%, 1);
-  width: 40px;
-  height: 40px;
-  border-radius: 30px;
-  margin-left: 70px;
-  margin-top: 10px;
-}
-
-.language {
-  margin-top: 5px;
-}
-
 
 .submit {
   position: absolute;
@@ -123,7 +97,6 @@
   right: 120px;
   border-radius: 10px;
   border: none;
-  font-weight: bold;
 }
 
 .topContentWrap {
