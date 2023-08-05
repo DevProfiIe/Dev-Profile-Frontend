@@ -2,6 +2,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import './mypage.css';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import jungleImage from '~/assets/images/Logo1.jpg';
 
 interface resumeList {
   // pdf로 변환된 이력서 list
@@ -80,6 +81,49 @@ const data = [
   },
 ];
 
+const sendReceiveData = {
+  send: [
+    {
+      userName: '고혜정',
+      language: ['Java', 'Python', 'CSS'],
+      field: '백엔드 개발자',
+      keyword: ['알고리즘 귀재', '모듈의 장악자', '설명충'],
+      repoCnt: 9,
+      commitCnt: 210,
+      period: 8,
+    },
+    {
+      userName: '박윤찬',
+      language: ['C++', 'TypeScript', 'React'],
+      field: '백엔드 개발자',
+      keyword: ['알고리즘 귀재', '모듈의 장악자', '설명충'],
+      repoCnt: 13,
+      commitCnt: 230,
+      period: 6,
+    },
+  ],
+  receive: [
+    {
+      userName: '찬윤박',
+      language: ['C++', 'TypeScript', 'React'],
+      field: '백엔드 개발자',
+      keyword: ['알고리즘 귀재', '모듈의 장악자', '설명충'],
+      repoCnt: 13,
+      commitCnt: 230,
+      period: 6,
+    },
+    {
+      userName: '정혜고',
+      language: ['Java', 'Python', 'CSS'],
+      field: '백엔드 개발자',
+      keyword: ['알고리즘 귀재', '모듈의 장악자', '설명충'],
+      repoCnt: 9,
+      commitCnt: 210,
+      period: 8,
+    },
+  ],
+};
+
 function Mypage() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -130,6 +174,13 @@ function Mypage() {
     setDisplayedData(selectedResumeData);
   }
 
+  /**
+   * Btn 클릭 시 분석화면으로 이동할 핸들러
+   */
+  function navigateAnalysisHandler() {
+    navigate(`/resume/${data.userName}`);
+  }
+
   return (
     <>
       <select className='selectBox' onChange={resumeControlHandler}>
@@ -153,7 +204,7 @@ function Mypage() {
                 </div>
 
                 <div className='topTextWrap'>
-                  <div className='userImage'>{item.imageUrl}</div>
+                  <img className='userImage' src={jungleImage} alt='Jungle' />
                   <div className='nameFieldWrap'>
                     <div className='userName'>{item.userName}</div>
                     <div className='field'>{item.field}</div>
@@ -187,8 +238,15 @@ function Mypage() {
                       </div>
                     </div>
                     <div className='buttonWrap'>
-                      <button className='analysisBtn'>분석보기</button>
-                      <button className='printPdfBtn'>PDF 출력</button>
+                      <button
+                        className='analysisBtn'
+                        onClick={() => {
+                          navigateAnalysisHandler;
+                        }}
+                      >
+                        분석보기
+                      </button>
+                      {/* <button className='printPdfBtn'>PDF 출력</button> */}
                     </div>
                   </div>
                 </div>
@@ -212,7 +270,7 @@ function Mypage() {
                 </div>
 
                 <div className='topTextWrap'>
-                  <div className='userImage'>{item.imageUrl}</div>
+                  <div className='userImage'></div>
                   <div className='nameFieldWrap'>
                     <div className='userName'>{item.userName}</div>
                     <div className='field'>{item.field}</div>
@@ -247,7 +305,7 @@ function Mypage() {
                     </div>
                     <div className='buttonWrap'>
                       <button className='analysisBtn'>분석보기</button>
-                      <button className='printPdfBtn'>PDF 출력</button>
+                      {/* <button className='printPdfBtn'>PDF 출력</button> */}
                     </div>
                   </div>
                 </div>
