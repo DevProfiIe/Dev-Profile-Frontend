@@ -40,15 +40,18 @@
 }
 
 .resume {
+  position: relative;
   float: left;
-  width: 250px;
-  height: 250px;
-  background-color: rgb(212, 212, 212);
-  border-radius: 15px;
+  width: 270px;
+  height: 320px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
   margin-left: 30px;
   margin-top: 20px;
   text-align: center;
   opacity: 0.8;
+  box-shadow:  2px 2px 5px rgb(181, 181, 181);
+
 }
 
 .resume.selected {
@@ -57,15 +60,86 @@
   opacity: 0.7;
 }
 
+.resumeTitleWrap {
+  position: relative;
+  width: auto;
+  height: 50px;
+  background-color: rgb(231, 231, 231);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.stack {
+  position: absolute;
+  margin-top: 10px;
+  right: 10px;
+  font-size: small;
+}
+
 .userImage {
-  width: 230px;
-  height: 130px;
-  background-color: rgb(253, 253, 253);
+  position: relative;
+  width: 90px;
+  height: 90px;
+  background-color: rgb(243, 243, 243);
   align-items: center;
   justify-content: center;
   margin: 0 auto;
   margin-top: 10px;
-  border-radius: 15px;
+  margin-left: 20px;
+  border-radius: 50px;
+  border: 3px solid #7AFF9E;
+}
+
+.topTextWrap {
+  width: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  /* justify-content: center; */
+}
+
+.bottomTextWrap {
+  position: relative;
+  width: auto;
+}
+
+.nameFieldWrap {
+  width: fit-content;
+  margin-left: 80px;
+}
+
+.userName {
+  position: relative;
+  font-size: large;
+  font-weight: bold;
+  right:50px;
+}
+
+.field {
+  position: relative;
+  font-size: small;
+  right:50px;
+  margin-top: 10px;
+}
+
+.keywords {
+  display: flex;
+  width: 80%;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.single-keyword {
+  font-size: small;
+  width: fit-content;
+  height: fit-content;
+  padding: 5px;
+  margin: 2px;
+  background-color: rgb(41, 86, 200);
+  color: white;
+  border-radius: 15px; 
 }
 
 .TitleWrap {
@@ -105,6 +179,38 @@
   justify-content: center;
 }
 
+.miniBorder {
+  /* display: flex; */
+  width: 80%;
+  height: 2px;
+  background-color: rgb(229, 229, 229);
+  border-radius: 15px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.bottomMiddleWrap {
+  width: auto;
+  display: flex;
+  margin: 0 auto;
+}
+
+.bottomBotWrap {
+  /* display: flex;
+  font-size: small;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 20px; */
+}
+
+.cntCompo {
+  display: flex;
+  font-size: small;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 20px;
+}
+
 .borderLine {
   display: flex;
   width: 90%;
@@ -118,4 +224,38 @@
 
 .bottomContentWrap {
   margin-top: 50px;
+}
+
+.buttonWrap {
+  display: flex;
+  width: fit-content;
+  font-size: xx-small;
+  color: white;
+  font-weight: 300px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.analysisBtn {
+  display: flex;
+  width: fit-content;
+  height: 25px;
+  padding: 10px;
+  background-color: rgb(116, 44, 183);
+  border-radius: 3px;
+  align-items: center;
+}
+
+.printPdfBtn {
+  display: flex;
+  width: fit-content;
+  height: 25px;
+  padding: 10px;
+  background-color: rgb(125, 80, 232);
+  border-radius: 3px;
+  align-items: center;
+}
+
+.repoCntNum, .commitCntNum, .periodNum {
+  font-weight: bold;
 }

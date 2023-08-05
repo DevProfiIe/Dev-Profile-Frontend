@@ -13,35 +13,70 @@ interface resumeList {
 
 const data = [
   {
-    userName: 'Park Yun Chan',
+    userName: '박윤찬',
     language: ['Java', 'Python', 'CSS'],
-    imageUrl: 'https://avatars.githubusercontent.com/u/75676309?v=4',
+    // imageUrl: 'https://avatars.githubusercontent.com/u/75676309?v=4',
+    field: '백엔드 개발자',
+    keyword: ['알고리즘 귀재', '모듈의 장악자', '설명충'],
+    repoCnt: 13,
+    commitCnt: 230,
+    period: 6,
   },
   {
-    userName: 'Go Hye Jung',
+    userName: '고혜정',
     language: ['Java', 'Kotlin', 'Python'],
+    field: '프론트엔드 개발자',
+    keyword: ['알고리즘 귀재', '모듈의 장악자', '설명충'],
+    repoCnt: 9,
+    commitCnt: 210,
+    period: 8,
   },
   {
-    userName: 'Hong Yoon Pyo',
+    userName: '박윤찬',
     language: ['C++', 'TypeScript', 'React'],
+    field: '백엔드 개발자',
+    keyword: ['알고리즘 귀재', '모듈의 장악자', '설명충'],
+    repoCnt: 13,
+    commitCnt: 230,
+    period: 6,
   },
   {
-    userName: 'Park Yun Chan',
+    userName: '고혜정',
     language: ['Java', 'Python', 'CSS'],
-    imageUrl: 'https://avatars.githubusercontent.com/u/75676309?v=4',
+    // imageUrl: 'https://avatars.githubusercontent.com/u/75676309?v=4',
+    field: '백엔드 개발자',
+    keyword: ['알고리즘 귀재', '모듈의 장악자', '설명충'],
+    repoCnt: 9,
+    commitCnt: 210,
+    period: 8,
   },
   {
-    userName: 'Go Hye Jung',
+    userName: '고혜정',
     language: ['Java', 'Kotlin', 'Python'],
+    field: '프론트엔드 개발자',
+    keyword: ['알고리즘 귀재', '모듈의 장악자', '설명충'],
+    repoCnt: 9,
+    commitCnt: 210,
+    period: 8,
   },
   {
-    userName: 'Hong Yoon Pyo',
+    userName: '박윤찬',
     language: ['C++', 'TypeScript', 'React'],
+    field: '백엔드 개발자',
+    keyword: ['알고리즘 귀재', '모듈의 장악자', '설명충'],
+    repoCnt: 13,
+    commitCnt: 230,
+    period: 6,
   },
   {
-    userName: 'Park Yun Chan',
+    userName: '박윤찬',
     language: ['Java', 'Python', 'CSS'],
-    imageUrl: 'https://avatars.githubusercontent.com/u/75676309?v=4',
+    // imageUrl: 'https://avatars.githubusercontent.com/u/75676309?v=4',
+    field: '백엔드 개발자',
+    keyword: ['알고리즘 귀재', '모듈의 장악자', '설명충'],
+    repoCnt: 13,
+    commitCnt: 230,
+    period: 6,
   },
 ];
 
@@ -113,9 +148,50 @@ function Mypage() {
                 className={selectedResumeIndex.includes(i) ? 'resume selected' : 'resume'}
                 onClick={() => handleResumeClick(i, item)}
               >
-                <div className='userImage'>{item.imageUrl}</div>
-                {item.userName} resume
-                <div className='language'>{item.language}</div>
+                <div className='resumeTitleWrap'>
+                  <div className='stack'>스택</div>
+                </div>
+
+                <div className='topTextWrap'>
+                  <div className='userImage'>{item.imageUrl}</div>
+                  <div className='nameFieldWrap'>
+                    <div className='userName'>{item.userName}</div>
+                    <div className='field'>{item.field}</div>
+                  </div>
+                </div>
+                <div className='bottomTextWrap'>
+                  <div className='bottomMiddleWrap'>
+                    {/* <div className='language'>{item.language}</div> */}
+                    <div className='keywords'>
+                      {item.keyword.map((kw, index) => (
+                        <div key={index} className='single-keyword'>
+                          #{kw}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className='miniBorder'></div>
+                  <div className='bottomBotWrap'>
+                    <div className='cntCompo'>
+                      <div className='repoWrap'>
+                        <div className='repoCnt'>레포지토리</div>
+                        <div className='repoCntNum'>{item.repoCnt}</div>
+                      </div>
+                      <div className='commitWrap'>
+                        <div className='commitCnt'>커밋</div>
+                        <div className='commitCntNum'>{item.commitCnt}</div>
+                      </div>
+                      <div className='periodWrap'>
+                        <div className='period'>기간</div>
+                        <div className='periodNum'>{item.period}</div>
+                      </div>
+                    </div>
+                    <div className='buttonWrap'>
+                      <button className='analysisBtn'>분석보기</button>
+                      <button className='printPdfBtn'>PDF 출력</button>
+                    </div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -131,9 +207,50 @@ function Mypage() {
           <div className='resumeWrap2'>
             {displayedData.map((item, i) => (
               <div key={i} className='resume'>
-                <div className='userImage'>{item.imageUrl}</div>
-                {item.userName} resume
-                <div className='language'>{item.language}</div>
+                <div className='resumeTitleWrap'>
+                  <div className='stack'>스택</div>
+                </div>
+
+                <div className='topTextWrap'>
+                  <div className='userImage'>{item.imageUrl}</div>
+                  <div className='nameFieldWrap'>
+                    <div className='userName'>{item.userName}</div>
+                    <div className='field'>{item.field}</div>
+                  </div>
+                </div>
+                <div className='bottomTextWrap'>
+                  <div className='bottomMiddleWrap'>
+                    {/* <div className='language'>{item.language}</div> */}
+                    <div className='keywords'>
+                      {item.keyword.map((kw, index) => (
+                        <div key={index} className='single-keyword'>
+                          #{kw}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className='miniBorder'></div>
+                  <div className='bottomBotWrap'>
+                    <div className='cntCompo'>
+                      <div className='repoWrap'>
+                        <div className='repoCnt'>레포지토리</div>
+                        <div className='repoCntNum'>{item.repoCnt}</div>
+                      </div>
+                      <div className='commitWrap'>
+                        <div className='commitCnt'>커밋</div>
+                        <div className='commitCntNum'>{item.commitCnt}</div>
+                      </div>
+                      <div className='periodWrap'>
+                        <div className='period'>기간</div>
+                        <div className='periodNum'>{item.period}</div>
+                      </div>
+                    </div>
+                    <div className='buttonWrap'>
+                      <button className='analysisBtn'>분석보기</button>
+                      <button className='printPdfBtn'>PDF 출력</button>
+                    </div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
