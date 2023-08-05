@@ -16,10 +16,12 @@ const data = [
     userName: 'Park Yun Chan',
     language: ['Java', 'Python', 'CSS'],
     imageUrl: 'https://avatars.githubusercontent.com/u/75676309?v=4',
+    userId: 'dbscks97',
   },
   {
     userName: 'Go Hye Jung',
     language: ['Java', 'Kotlin', 'Python'],
+    imgUrl: 'https://images.unsplash.com/photo-1561948955-570b270e7c36',
   },
   {
     userName: 'Hong Yoon Pyo',
@@ -29,10 +31,12 @@ const data = [
     userName: 'Park Yun Chan',
     language: ['Java', 'Python', 'CSS'],
     imageUrl: 'https://avatars.githubusercontent.com/u/75676309?v=4',
+    userId: 'dbscks97',
   },
   {
     userName: 'Go Hye Jung',
     language: ['Java', 'Kotlin', 'Python'],
+    imgUrl: 'https://images.unsplash.com/photo-1561948955-570b270e7c36',
   },
   {
     userName: 'Hong Yoon Pyo',
@@ -42,6 +46,7 @@ const data = [
     userName: 'Park Yun Chan',
     language: ['Java', 'Python', 'CSS'],
     imageUrl: 'https://avatars.githubusercontent.com/u/75676309?v=4',
+    userId: 'dbscks97',
   },
 ];
 
@@ -91,8 +96,19 @@ function Mypage() {
     }
   }
 
+  /**
+   * resume list에서 resume 선택 후 submit 버튼 클릭 시 클릭한 요소들의 data 배열로 생성
+   */
   function handleSubmit() {
     setDisplayedData(selectedResumeData);
+  }
+
+  /**
+   *
+   * @param userId resume list에서 분석하기 버튼 누르면 해당 유저 분석페이지로 navigate
+   */
+  function onAnalysisClick(userId) {
+    navigate(`/resume/${userId}`);
   }
 
   return (
@@ -113,9 +129,24 @@ function Mypage() {
                 className={selectedResumeIndex.includes(i) ? 'resume selected' : 'resume'}
                 onClick={() => handleResumeClick(i, item)}
               >
-                <div className='userImage'>{item.imageUrl}</div>
-                {item.userName} resume
-                <div className='language'>{item.language}</div>
+                <div className='imageWrap'>
+                  <div className='userImage'>
+                    <img src={item.imageUrl}></img>
+                  </div>
+                </div>
+                <div className='bottomWrap'>
+                  <div className='textWrap'>
+                    <div className='userName'>{item.userName}</div>
+                    <div className='language'>{item.language + ','}</div>
+                  </div>
+                  <button
+                    className='analysisBtn'
+                    onClick={(e) => {
+                      e.stopPropagation(); // 이벤트 버블링 방지
+                      onAnalysisClick(item.userId);
+                    }}
+                  ></button>
+                </div>
               </div>
             ))}
           </div>
@@ -126,22 +157,24 @@ function Mypage() {
         <div className='borderLine'></div>
         <div className='bottomContentWrap'>
           <div className='TitleWrap'>
-            <div className='Title'>완료</div>
+            <div className='Title'>검토 완료</div>
           </div>
           <div className='resumeWrap2'>
             {displayedData.map((item, i) => (
               <div key={i} className='resume'>
-                <div className='userImage'>{item.imageUrl}</div>
-                {item.userName} resume
-                <div className='language'>{item.language}</div>
+                <div className='imageWrap'>
+                  <div className='userImage'>
+                    <img src={item.imageUrl}></img>
+                  </div>
+                </div>
+                <div className='textWrap'>
+                  <div className='userName'>{item.userName}</div>
+                  <div className='language'>{item.language}</div>
+                </div>
               </div>
             ))}
           </div>
         </div>
-        <div className='contentWrap'></div>
-        <div className='watchedList'></div>
-        <div className='center'></div>
-        <div className='messageList'></div>
       </div>
     </>
   );
