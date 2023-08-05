@@ -1,8 +1,7 @@
 /* CSS */
-
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { color } from '~/styles/theme/primary';
+import { boxShadow, color } from '~/styles/theme/primary';
 import backgroundImage from '~/assets/images/Logo1.jpg';
 
 const DisplayFlexRow = css`
@@ -18,7 +17,7 @@ const DisplayFlexRowWrap = css`
 
 const DisplayFlexColumn = css`
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: column wrap;
   align-items: center;
 `;
 
@@ -61,6 +60,32 @@ export const GallaryFilterBox = styled.div`
   border: 1px solid #ececec;
   border-radius: 5px;
   position: relative;
+  z-index: 16;
+
+  &: hover {
+    background-color: #ececec;
+  }
+`;
+
+export const GallaryFilterContent = styled.div<{ gap: string }>`
+  ${DisplayFlexRow}
+  align-items: center;
+  gap: ${({ gap }) => gap};
+`;
+
+export const GallaryFilterBtnWrapper = styled.div`
+  ${DisplayFlexRow};
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 999px;
+  border: 1px solid #ececec;
+
+  &: hover {
+    border: 1px solid #aaa;
+    transition: 0.3s;
+  }
 `;
 
 export const StackTag = styled.div<{ color?: string; border?: boolean }>`
@@ -71,6 +96,7 @@ export const StackTag = styled.div<{ color?: string; border?: boolean }>`
   min-width: 3.438rem;
   height: 2rem;
   background-color: ${({ color }) => color};
+  color: ${({ color }) => (color ? 'white' : 'black')};
   padding: 0 0.7rem;
   border: ${({ border }) =>
     border ? `1px solid ${color.myBlue}` : `1px solid rgba(1, 5, 27, 0.07);`};
@@ -78,21 +104,20 @@ export const StackTag = styled.div<{ color?: string; border?: boolean }>`
 `;
 
 export const GallaryContentsWrapper = styled.div`
-  ${DisplayFlexRowWrap}
-  justify-content: center;
-  gap: 10rem 7rem;
+  ${DisplayFlexRow}
+  justify-content: space-between;
   width: 80%;
-  padding: 2rem 0;
+  gap: 5rem 0;
   //   background-color: blue;
 `;
 
 export const GallaryItem = styled.div`
-  width: 20rem;
-  height: 25rem;
+  width: 24.5%;
+  min-height: 25.5rem;
   border: 1px solid rgba(1, 5, 27, 0.07);
   background: #fff;
+  border-radius: 0.5rem;
   ${BoxShadow}
-  ${BorderRadius}
 `;
 
 export const GallaryItemInBox = styled.div<{ index: number }>`
@@ -114,36 +139,12 @@ export const GallaryItemInBox = styled.div<{ index: number }>`
   }
 `;
 
-export const GallaryImage = styled.div`
-  width: 100%;
-  height: 12.5rem;
-  background-image: url(${backgroundImage});
-  background-size: contain;
-  ${BorderRadius}
-`;
-
-export const GallaryTextBox = styled.div`
-  ${DisplayFlexRow}
-  ${BorderRadius}
-  width: 100%;
-  height: 12.5rem;
-  justify-content: space-between;
-`;
-
 export const GallaryTextLeft = styled.div`
   ${DisplayFlexColumn}
   align-items: flex-start;
   width: 70%;
   height: 100%;
   padding: 0.5rem 1rem;
-`;
-
-export const GallaryBtn = styled.div`
-  ${DisplayFlexRow}
-  justify-content: center;
-  align-items: flex-end;
-  width: 28%;
-  height: 100%;
 `;
 
 export const GallaryContactBox = styled.div<{ isShow: boolean }>`
@@ -166,4 +167,98 @@ export const GallaryDropBox = styled.div`
   height: 90%;
   padding: 2rem;
   position: relative;
+`;
+
+export const GallaryHeader = styled.div`
+  ${DisplayFlexRow}
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  height: 80px;
+  background-color: #eee;
+`;
+
+export const GallaryContent = styled.div`
+  padding: 1rem 3rem;
+  position: relative;
+`;
+
+export const GallaryItemImg = styled.div`
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  border-radius: 999px;
+  top: -55px;
+  border: 3px solid ${color.mintGreen};
+  background-image: url(${backgroundImage});
+  background-size: contain;
+  background-position: center center;
+  z-index: 15;
+`;
+
+export const GallaryItemText = styled.div`
+  ${DisplayFlexRowWrap}
+  min-width: 70px;
+  gap: 0.2rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+`;
+
+export const GallaryTag = styled.div`
+  min-width: 50px;
+  padding: 0.5rem 1rem;
+  background-color: #189bfa;
+  color: white;
+  border-radius: 999px;
+  ${DisplayFlexRow}
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75rem;
+`;
+
+export const GallaryDetails = styled.div`
+  ${DisplayFlexRow}
+  justify-content: space-around;
+  margin-bottom: 2rem;
+
+  div {
+    ${DisplayFlexColumn}
+  }
+`;
+
+export const GallaryBtnWrapper = styled.div`
+  ${DisplayFlexRow}
+  width: 100%;
+  justify-content: center;
+`;
+
+export const GallaryBtn = styled.div<{ bgColor: string }>`
+  ${DisplayFlexRow}
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  padding: 0.5rem 0;
+  background-color: ${({ bgColor }) => bgColor};
+  font-size: 0.75rem;
+  color: white;
+  ${BoxShadow}
+`;
+
+export const GallaryFilterDropMenu = styled.div<{ width: string; height: string }>`
+  display: flex;
+  flex-flow: column wrap;
+  gap: 0rem 0.5rem;
+  padding: 1rem 1rem;
+  position: absolute;
+  width: ${({ width }) => width};
+  min-height: ${({ height }) => height};
+  background-color: white;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(1, 5, 27, 0.07);
+  left: 0;
+  top: 120%;
+  z-index: 24;
+  ${boxShadow}
 `;
