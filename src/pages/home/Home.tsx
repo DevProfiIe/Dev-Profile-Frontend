@@ -24,13 +24,13 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '~/redux/store';
 import { change } from '~/redux/features/searchSlice';
 import { UserGithubInfo } from '~/redux/api/types';
-import { getCookie } from '~/utils/cookie';
+// import { getCookie } from '~/utils/cookie';
 import Message from '~/components/message/Message';
 
 const MAIN_TEXT = 'nd discover underlying insights from github.'.split('');
 
 const Home: React.FC = (): JSX.Element => {
-  const token = getCookie('token');
+  // const token = getCookie('token');
   const navigate = useNavigate();
   const [distance, setDistance] = useState<number | undefined>(10);
   const textArea = useRef<HTMLDivElement>(null);
