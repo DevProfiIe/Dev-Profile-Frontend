@@ -48,7 +48,7 @@ const Resume: React.FC = (): JSX.Element => {
 
   const keyword = location.state.keyword ?? '';
   const { isError, isLoading, data, error } = useGetUserGithubInfoQuery({
-    userName: keyword ?? 'dbscks97',
+    userName: keyword === '' ? 'dbscks97' : keyword,
   });
 
   const userData = (data?.data as UserGithubData) ?? {
