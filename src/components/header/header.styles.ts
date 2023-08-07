@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { color } from '~/styles/theme/primary';
 
 export const HeaderWrapper = styled.div<{ scrollPosition: number }>`
   width: ${({ scrollPosition }) => (scrollPosition > 50 ? '85%' : '80%')};
