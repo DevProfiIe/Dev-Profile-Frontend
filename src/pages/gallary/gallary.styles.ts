@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { boxShadow, color } from '~/styles/theme/primary';
-import backgroundImage from '~/assets/images/Logo1.jpg';
+import backgroundImage from '~/assets/images/Logo1.webp';
 
 const DisplayFlexRow = css`
   display: flex;
@@ -112,13 +112,14 @@ export const GallaryContentsWrapper = styled.div`
   //   background-color: blue;
 `;
 
-export const GallaryItem = styled.div`
+export const GallaryItem = styled.div<{ selected: boolean }>`
   width: 30%;
   min-height: 25.5rem;
   border: 1px solid rgba(1, 5, 27, 0.07);
   background: #fff;
   border-radius: 0.5rem;
-  ${BoxShadow}
+  outline: ${({ selected }) => (selected ? '#189bfa 2px solid' : '')};
+  ${BoxShadow};
 `;
 
 export const GallaryItemInBox = styled.div<{ index: number }>`
@@ -179,6 +180,9 @@ export const GallaryHeader = styled.div`
   height: 80px;
   background-color: #eee;
   padding-right: 1rem;
+  position: relative;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
 `;
 
 export const GallaryContent = styled.div`

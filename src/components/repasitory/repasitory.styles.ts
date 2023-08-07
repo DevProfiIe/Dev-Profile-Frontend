@@ -54,7 +54,7 @@ export const RepositoryWrapper = styled.div<{ nowRepo?: boolean }>`
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: flex-start;
-  transition: 0.5s opacity linear;
+  transition: 1s opacity linear;
   opacity: ${({ nowRepo }) => (nowRepo ? '1' : '0')};
   padding: 2rem 2.5rem;
 `;

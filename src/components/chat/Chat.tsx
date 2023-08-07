@@ -156,7 +156,9 @@ const Chat = () => {
 
   return (
     <Fragment>
-      <ChatBoxButton onClick={showChatBoxHandler}></ChatBoxButton>
+      <ChatBoxButton onClick={showChatBoxHandler}>
+        <ChatDots size={25} />
+      </ChatBoxButton>
 
       {isShow && nowPage < 0 ? (
         <Rooms nowPage={nowPage} setNowPage={setNowPage} setRoomId={setRoomId} />

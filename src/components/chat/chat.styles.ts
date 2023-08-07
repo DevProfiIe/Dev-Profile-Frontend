@@ -17,7 +17,7 @@ const DisplayFlexColumn = css`
   flex-flow: column nowrap;
 `;
 
-export const ChatBoxButton = styled.button`
+export const ChatBoxButton = styled.div`
   width: 3.5rem;
   height: 3.5rem;
   background-color: #189bfa;
@@ -28,6 +28,9 @@ export const ChatBoxButton = styled.button`
   z-index: 200;
   ${boxShadow};
   ${DisplayFlexRow}
+  justify-content: center;
+  align-items: center;
+  color: white;
 `;
 
 export const ChatBoxContents = styled.button`

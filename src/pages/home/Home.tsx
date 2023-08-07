@@ -2,14 +2,14 @@
 
 /* Libraries & Hooks */
 import { css } from '@emotion/react';
-import background from '~/assets/images/background2.png';
+import background from '~/assets/images/background2.webp';
 import { useEffect, useRef, useState } from 'react';
 
 /* Components */
 import Search from '~/components/search/Search';
 
 /* ETC */
-import line from '~/assets/images/line.png';
+import line from '~/assets/images/line.webp';
 import {
   BackgroundImage,
   HeightBox,
@@ -237,7 +237,7 @@ const Home: React.FC = (): JSX.Element => {
                   `}
                 >
                   <Link to='/resume/dbscks97' state={{ keyword: 'dbscks97' }}>
-                    분석하기
+                    Let's Go Analyze
                   </Link>
                 </p>
 
@@ -261,7 +261,7 @@ const Home: React.FC = (): JSX.Element => {
                     letter-spacing: -0.1rem;
                   `}
                 >
-                  <Link to='/gallary'>갤러리 보기</Link>
+                  <Link to='/gallary'>Go To Gallary</Link>
                 </p>
               </div>
             </HomeContentsBox>

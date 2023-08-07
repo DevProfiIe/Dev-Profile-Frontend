@@ -33,7 +33,6 @@ import {
   UserGithubInfo,
 } from '~/redux/api/types';
 import Loader from '~/components/loader/Loader';
-import Message from '~/components/message/Message';
 import { useInView } from 'react-intersection-observer';
 import { MailSend } from 'emotion-icons/remix-fill';
 import { Send } from 'emotion-icons/feather';
@@ -283,6 +282,7 @@ const Gallary = () => {
   const keyword = boardSortData.data?.data.keyword ?? [];
 
   const postBoardQuery = usePostBoardItemsMutation();
+  const [selectedGallaryItems, setSelectedGallaryItems] = useState<GetBoardDataDetails[]>([]);
 
   /**
    * 드랍 메뉴
@@ -380,7 +380,7 @@ const Gallary = () => {
           return _item;
         }
       });
-
+      setSelectedGallaryItems([]);
       setGetBoardParams((state) => {
         return {
           ...state,
@@ -399,6 +399,7 @@ const Gallary = () => {
       });
 
       setNowPage(1);
+      setSelectedGallaryItems([]);
       setGetBoardParams((state) => {
         return {
           ...state,
@@ -427,6 +428,7 @@ const Gallary = () => {
     setSelectedSort(sort);
     setIsShowSortBox(false);
     setNowPage(1);
+    setSelectedGallaryItems([]);
     setGetBoardParams({
       ...getBoardParams,
       field: sort,
@@ -459,6 +461,7 @@ const Gallary = () => {
 
     setSelectedKeywords([...newSelectedKeywords]);
     setNowPage(1);
+    setSelectedGallaryItems([]);
     setGetBoardParams({
       ...getBoardParams,
       keywordsFilter: [...newGetBoardParamsKeyword],
@@ -506,6 +509,7 @@ const Gallary = () => {
       keywordsFilter: [...newArr],
     });
 
+    setSelectedGallaryItems([]);
     setIsShowTagBox(false);
   };
 
@@ -553,6 +557,32 @@ const Gallary = () => {
     // });
 
     setIsShowShareBox(false);
+  };
+
+  /**
+   *
+   */
+  const selectItemHandler = (item: GetBoardDataDetails) => {
+    const isExist = selectedGallaryItems.some((resume) => resume.userName === item.userName);
+
+    if (isExist) {
+      const newItems = selectedGallaryItems.filter((resume) => resume.userName !== item.userName);
+
+      setSelectedGallaryItems(newItems);
+    } else {
+      setSelectedGallaryItems((prevState) => {
+        return [...prevState, item];
+      });
+    }
+  };
+
+  /**
+   *
+   */
+  const findSelectedItem = (item: GetBoardDataDetails) => {
+    const isExist = selectedGallaryItems.some((resume) => resume.userName === item.userName);
+
+    return isExist;
   };
 
   useEffect(() => {
@@ -918,6 +948,7 @@ const Gallary = () => {
             display: flex;
             flex-flow: row nowrap;
             justify-content: space-between;
+            align-items: center;
           `}
         >
           <p>
@@ -956,14 +987,14 @@ const Gallary = () => {
               <MailSend size={25} />
             </div>
             {isShowShareBox && (
-              <p
+              <div
                 css={css`
                   display: flex;
-                  flex-flow: row nowrap;
+                  flex-flow: column nowrap;
                   align-items: center;
-                  gap: 0.5rem;
-                  height: 5rem;
-                  width: 200px;
+                  gap: 0.5rem 0;
+                  height: auto;
+                  width: 270px;
                   position: absolute;
                   top: 150%;
                   left: 0;
@@ -971,37 +1002,64 @@ const Gallary = () => {
                   background-color: white;
                   border: 1px solid #ececec;
                   padding: 1rem;
+                  z-index: 2;
                 `}
               >
-                <input
+                <p
                   css={css`
-                    width: 70%;
-                    padding: 0.7rem;
-                    border: 1px solid #ececec;
-                    border-radius: 4px;
+                    line-height: 160%;
                   `}
-                  type='text'
-                  placeholder='Enter ID...'
-                />
+                >
+                  <span
+                    css={css`
+                      font-size: 1.2rem;
+                      font-weight: 700;
+                      color: #189bfa;
+                    `}
+                  >
+                    {selectedGallaryItems.length > 0
+                      ? selectedGallaryItems.length + '명의 '
+                      : '전체 '}
+                  </span>
+                  분석 데이터를 전달합니다.
+                </p>
                 <div
                   css={css`
                     display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 999px;
-                    background-color: #189bfa;
-                    color: white;
+                    flex-flow: row nowrap;
+                    gap: 0.8rem;
                   `}
-                  onClick={clickShareHandler}
-                  onKeyDown={() => {}}
-                  role='button'
-                  tabIndex={0}
                 >
-                  <Send size={25}>보내기</Send>
+                  <input
+                    css={css`
+                      width: 70%;
+                      padding: 0.7rem;
+                      border: 1px solid #ececec;
+                      border-radius: 4px;
+                    `}
+                    type='text'
+                    placeholder='Enter ID...'
+                  />
+                  <div
+                    css={css`
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      width: 40px;
+                      height: 40px;
+                      border-radius: 999px;
+                      background-color: #189bfa;
+                      color: white;
+                    `}
+                    onClick={clickShareHandler}
+                    onKeyDown={() => {}}
+                    role='button'
+                    tabIndex={0}
+                  >
+                    <Send size={25}>보내기</Send>
+                  </div>
                 </div>
-              </p>
+              </div>
             )}
           </div>
         </div>
@@ -1009,7 +1067,14 @@ const Gallary = () => {
       <HeightBox height='3rem' />
       <GallaryContentsWrapper>
         {boardItems.map((item, i) => (
-          <GallaryItem key={i} ref={i === boardItems.length - 1 ? ref : null}>
+          <GallaryItem
+            key={i}
+            ref={i === boardItems.length - 1 ? ref : null}
+            onClick={() => {
+              selectItemHandler(item);
+            }}
+            selected={findSelectedItem(item)}
+          >
             <GallaryHeader>
               {item.language.map((lang) => (
                 <img
@@ -1023,9 +1088,7 @@ const Gallary = () => {
               ))}
             </GallaryHeader>
             <GallaryContent>
-              <GallaryItemImg imgUrl={item.avataUrl}>
-                <img src='' alt='' />
-              </GallaryItemImg>
+              <GallaryItemImg imgUrl={item.avataUrl}></GallaryItemImg>
               <h2
                 css={css`
                   width: 100%;

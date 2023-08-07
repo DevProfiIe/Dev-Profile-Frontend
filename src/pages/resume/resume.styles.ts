@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import backgroundImage from '~/assets/images/background3.png';
-import backgroundImage2 from '~/assets/images/twirl.7dde194b.png';
+import backgroundImage from '~/assets/images/background3.webp';
+import backgroundImage2 from '~/assets/images/twirl.7dde194b.webp';
 import { color } from '~/styles/theme/primary';
 
 /* CSS */
