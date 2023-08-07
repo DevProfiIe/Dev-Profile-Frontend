@@ -14,6 +14,8 @@ const searchSlice = createSlice({
   reducers: {
     change: (state, action) => {
       state.keyword = action.payload;
+
+      localStorage.setItem('keyword', JSON.stringify(action.payload));
     },
   },
 });

@@ -28,6 +28,7 @@ export interface UserGithubInfo {
   login: string;
   name: string;
   node_id: string;
+  analyzed: boolean;
 }
 
 export interface UserGithubData {
@@ -167,6 +168,7 @@ export interface GetBoardDataDetails {
   commitCount: number;
   commitDays: number;
   repoCount: number;
+  login: string;
 }
 
 export interface GetBoardData {

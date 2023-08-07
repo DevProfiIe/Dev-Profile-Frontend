@@ -36,6 +36,8 @@ import { useInView } from 'react-intersection-observer';
 import { MailSend } from 'emotion-icons/remix-fill';
 import { Send } from 'emotion-icons/feather';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '~/redux/store';
+import { change } from '~/redux/features/searchSlice';
 
 const sortList = [
   {
@@ -226,6 +228,7 @@ const iconList = [
 
 const Gallary = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [isShowStackBox, setIsShowStackBox] = useState<boolean>(false);
   const [isShowTagBox, setIsShowTagBox] = useState<boolean>(false);
   const [isShowSortBox, setIsShowSortBox] = useState<boolean>(false);
@@ -573,6 +576,14 @@ const Gallary = () => {
     const isExist = selectedGallaryItems.some((resume) => resume.userName === item.userName);
 
     return isExist;
+  };
+
+  /**
+   *
+   */
+  const navigateResumeHandler = (user: GetBoardDataDetails) => {
+    dispatch(change(user.login));
+    navigate(`/resume/${user.login}`);
   };
 
   useEffect(() => {
@@ -1170,7 +1181,7 @@ const Gallary = () => {
                   `}
                   bgColor='#6366f1'
                   onClick={() => {
-                    navigate('/resume/dbscks97', { state: { keyword: 'dbscks97' } });
+                    navigateResumeHandler(item);
                   }}
                 >
                   분석보기

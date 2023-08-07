@@ -20,21 +20,48 @@ import {
   HomeWrapper,
 } from './home.styles';
 import { color } from '~/styles/theme/primary';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '~/redux/store';
+import { change } from '~/redux/features/searchSlice';
+import { UserGithubInfo } from '~/redux/api/types';
+import { getCookie } from '~/utils/cookie';
+import Message from '~/components/message/Message';
 
 const MAIN_TEXT = 'nd discover underlying insights from github.'.split('');
 
 const Home: React.FC = (): JSX.Element => {
+  const token = getCookie('token');
+  const navigate = useNavigate();
   const [distance, setDistance] = useState<number | undefined>(10);
   const textArea = useRef<HTMLDivElement>(null);
+  const dispatch = useAppDispatch();
   const textArr = MAIN_TEXT;
-  let animeInterval: number;
+  const [userInfo, setUserInfo] = useState<UserGithubInfo | null>(null);
+  let animeIntervalResume: number;
   let textIndex = 0;
+
+  const analyzeHandler = () => {
+    if (userInfo && userInfo.analyzed) {
+      dispatch(change(userInfo.login));
+      navigate(`resume/${userInfo.login}`);
+    } else {
+      return <Message msg='분석데이터가 존재하지 않습니다.' />;
+    }
+  };
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem('userInfo') ?? null;
+
+    if (userInfo) {
+      const userData = JSON.parse(userInfo) as UserGithubInfo;
+      setUserInfo(userData);
+    }
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
       if (textArea && textArea.current) {
-        animeInterval = setInterval(function () {
+        animeIntervalResume = setInterval(() => {
           if (textIndex < textArr.length) {
             if (textArea && textArea.current) {
               textArea.current.textContent += textArr[textIndex];
@@ -42,14 +69,14 @@ const Home: React.FC = (): JSX.Element => {
             textIndex++;
             setDistance(textArea.current?.offsetWidth);
           } else {
-            clearInterval(animeInterval);
+            clearInterval(animeIntervalResume);
           }
         }, 100);
       }
     }, 1000);
 
     return () => {
-      clearInterval(animeInterval);
+      clearInterval(animeIntervalResume);
     };
   }, []);
 
@@ -215,7 +242,7 @@ const Home: React.FC = (): JSX.Element => {
                   gap: 0 0.5rem;
                 `}
               >
-                <p
+                <button
                   css={css`
                     padding: 16px 32px;
                     line-height: 1.6;
@@ -234,13 +261,12 @@ const Home: React.FC = (): JSX.Element => {
                     display: block;
                     letter-spacing: -0.1rem;
                   `}
+                  onClick={analyzeHandler}
                 >
-                  <Link to='/resume/dbscks97' state={{ keyword: 'dbscks97' }}>
-                    Let's Go Analyze
-                  </Link>
-                </p>
+                  <p>Let's Go Analyze</p>
+                </button>
 
-                <p
+                <button
                   css={css`
                     padding: 16px 32px;
                     line-height: 1.6;
@@ -259,9 +285,12 @@ const Home: React.FC = (): JSX.Element => {
                     display: block;
                     letter-spacing: -0.1rem;
                   `}
+                  onClick={() => {
+                    navigate('/gallary');
+                  }}
                 >
-                  <Link to='/gallary'>Go To Gallary</Link>
-                </p>
+                  <p>Go To Gallary</p>
+                </button>
               </div>
             </HomeContentsBox>
           </HomeSearchBox>

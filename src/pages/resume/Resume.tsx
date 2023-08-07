@@ -28,27 +28,27 @@ import {
 import Repasitory from '~/components/repasitory/Repasitory';
 import Loader from '~/components/loader/Loader';
 import Message from '~/components/message/Message';
-import { useLocation } from 'react-router-dom';
 import { useRef, useState, useEffect } from 'react';
 import useScroll from '~/hooks/useScroll';
 import Chat from '~/components/chat/Chat';
 import { color } from '~/styles/theme/primary';
 import { UserGithubData } from '~/redux/api/types';
 
+/* etx */
+
 const MAIN_TEXT = '이터의 속삭임: 코드로 이야기하는 개발자 Park Yun Chan 입니다.'.split('');
 
 const Resume: React.FC = (): JSX.Element => {
-  const [distance, _setDistance] = useState<number | undefined>(10);
-  const location = useLocation();
+  const [distance, setDistance] = useState<number | undefined>(10);
   const { scrollY } = useScroll();
   const textArea = useRef<HTMLDivElement>(null);
   const textArr = MAIN_TEXT;
   let animeInterval: number;
   let textIndex = 0;
 
-  const keyword = location.state.keyword ?? '';
+  const [keyword, setKeyword] = useState<string>('');
   const { isError, isLoading, data, error } = useGetUserGithubInfoQuery({
-    userName: keyword === '' ? 'dbscks97' : keyword,
+    userName: keyword,
   });
 
   const userData = (data?.data as UserGithubData) ?? {
@@ -81,6 +81,14 @@ const Resume: React.FC = (): JSX.Element => {
   });
 
   useEffect(() => {
+    const userKeyword = localStorage.getItem('keyword');
+
+    if (userKeyword) {
+      setKeyword(JSON.parse(userKeyword));
+    }
+  }, []);
+
+  useEffect(() => {
     setTimeout(() => {
       if (textArea && textArea.current) {
         animeInterval = setInterval(function () {
@@ -89,7 +97,7 @@ const Resume: React.FC = (): JSX.Element => {
               textArea.current.textContent += textArr[textIndex];
             }
             textIndex++;
-            _setDistance(textArea.current?.offsetWidth);
+            setDistance(textArea.current?.offsetWidth);
           } else {
             clearInterval(animeInterval);
           }
@@ -119,7 +127,7 @@ const Resume: React.FC = (): JSX.Element => {
               line-height: 100%;
             `}
           >
-            {userData.userInfo.name}
+            {userData.userInfo?.name}
           </h1>
           <HeightBox height='1.25rem' />
           <div>
@@ -139,7 +147,7 @@ const Resume: React.FC = (): JSX.Element => {
                   letter-spacing: -0.01em;
                 `}
               >
-                데이터의 속삭임: 코드로 이야기하는 개발자 {userData.userInfo.name} 입니다.
+                데이터의 속삭임: 코드로 이야기하는 개발자 {userData.userInfo?.name} 입니다.
               </div>
               <div
                 css={css`
@@ -238,19 +246,19 @@ const Resume: React.FC = (): JSX.Element => {
           </div>
           <HeightBox height='1.25rem' />
           <ResumeTagBox>
-            <ResumeTag color='#ffffff'>👨🏻‍🔧 AI : {userData.userInfo.ai ?? 0} Commits</ResumeTag>
+            <ResumeTag color='#ffffff'>👨🏻‍🔧 AI : {userData.userInfo?.ai ?? 0} Commits</ResumeTag>
             <ResumeTag color='#ffffff'>
-              🧑🏻‍💻 Web-Backend : {userData.userInfo.webBackend ?? 0} Commits
+              🧑🏻‍💻 Web-Backend : {userData.userInfo?.webBackend ?? 0} Commits
             </ResumeTag>
             <ResumeTag color='#ffffff'>
-              🧑🏻‍💻 Web-Frontend : {userData.userInfo.webFrontend ?? 0} Commits
+              🧑🏻‍💻 Web-Frontend : {userData.userInfo?.webFrontend ?? 0} Commits
             </ResumeTag>
             <ResumeTag color='#ffffff'>
-              💾 Database : {userData.userInfo.database ?? 0} Commits
+              💾 Database : {userData.userInfo?.database ?? 0} Commits
             </ResumeTag>
-            <ResumeTag color='#ffffff'>🕹️ Game : {userData.userInfo.game ?? 0} Commits</ResumeTag>
+            <ResumeTag color='#ffffff'>🕹️ Game : {userData.userInfo?.game ?? 0} Commits</ResumeTag>
             <ResumeTag color='#ffffff'>
-              💎 System-Programming : {userData.userInfo.systemProgramming ?? 0} Commits
+              💎 System-Programming : {userData.userInfo?.systemProgramming ?? 0} Commits
             </ResumeTag>
           </ResumeTagBox>
         </ResumeSection>
@@ -388,7 +396,7 @@ const Resume: React.FC = (): JSX.Element => {
                     align-self: start;
                   `}
                 >
-                  {userData.userInfo.keywordSet?.map((item, i) => (
+                  {userData.userInfo?.keywordSet?.map((item, i) => (
                     <ResumeTag color='#F7F1E9' border='none' key={i}>
                       #{item}
                     </ResumeTag>
@@ -408,9 +416,9 @@ const Resume: React.FC = (): JSX.Element => {
                   `}
                 >
                   <ResponsiveCalendar
-                    data={userData.userInfo.commitCalender}
-                    from={userData.userInfo.commitStart}
-                    to={userData.userInfo.commitEnd}
+                    data={userData.userInfo?.commitCalender}
+                    from={userData.userInfo?.commitStart}
+                    to={userData.userInfo?.commitEnd}
                     emptyColor='#eeeeee'
                     colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
                     margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
@@ -453,7 +461,7 @@ const Resume: React.FC = (): JSX.Element => {
             ))}
           </div>
         </ResumeSection> */}
-        <ResumeSection height={(userData.repositoryInfo.length + 1) * 1000 + 'px'}>
+        <ResumeSection height={(userData.repositoryInfo?.length + 1) * 1000 + 'px'}>
           <ResumeRepoWrapper>
             <ResumeRepoText>
               <span
