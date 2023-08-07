@@ -20,7 +20,7 @@ import {
   StackTag,
 } from './gallary.styles';
 import { css } from '@emotion/react';
-import { useGetBoardQuery, useGetBoardSortDataQuery, usePostBoardItemsMutation } from '~/redux/api';
+import { useGetBoardQuery, useGetBoardSortDataQuery } from '~/redux/api';
 import { ArrowIosDownward } from 'emotion-icons/evaicons-solid';
 import { Close } from 'emotion-icons/evil';
 import {
@@ -30,20 +30,12 @@ import {
   GetBoardSortDataSkiisDetail,
   PostBoardQueryData,
   SkillFilterDetails,
-  UserGithubInfo,
 } from '~/redux/api/types';
 import Loader from '~/components/loader/Loader';
 import { useInView } from 'react-intersection-observer';
 import { MailSend } from 'emotion-icons/remix-fill';
 import { Send } from 'emotion-icons/feather';
 import { useNavigate } from 'react-router-dom';
-
-interface Item {
-  id: string;
-  contents: string;
-  name: string;
-  stack: string[];
-}
 
 const sortList = [
   {
@@ -234,13 +226,11 @@ const iconList = [
 
 const Gallary = () => {
   const navigate = useNavigate();
-  const [newItem, setNewItem] = useState<Item[]>([]);
-  const [isShowContactbox, setIsShowContactBox] = useState<boolean>(false);
   const [isShowStackBox, setIsShowStackBox] = useState<boolean>(false);
   const [isShowTagBox, setIsShowTagBox] = useState<boolean>(false);
   const [isShowSortBox, setIsShowSortBox] = useState<boolean>(false);
   const [isShowShareBox, setIsShowShareBox] = useState<boolean>(false);
-  const [sendBoardItems, setSendBoardItems] = useState<PostBoardQueryData>({
+  const [_sendBoardItems, _setSendBoardItems] = useState<PostBoardQueryData>({
     sendUserName: '',
     receiveUserName: '',
     boardUserNames: [],
@@ -281,7 +271,7 @@ const Gallary = () => {
   const stacks = boardSortData.data?.data.skills ?? [];
   const keyword = boardSortData.data?.data.keyword ?? [];
 
-  const postBoardQuery = usePostBoardItemsMutation();
+  // const postBoardQuery = usePostBoardItemsMutation();
   const [selectedGallaryItems, setSelectedGallaryItems] = useState<GetBoardDataDetails[]>([]);
 
   /**
@@ -542,22 +532,22 @@ const Gallary = () => {
   /**
    *
    */
-  const shareTargetHandler = () => {
-    const userName = JSON.parse(localStorage.getItem('userInfo') ?? '') as UserGithubInfo;
-    const boardItems = currentBoardData.data?.data.content.map((item) => item.userName);
+  // const shareTargetHandler = () => {
+  //   const userName = JSON.parse(localStorage.getItem('userInfo') ?? '') as UserGithubInfo;
+  //   const boardItems = currentBoardData.data?.data.content.map((item) => item.userName);
 
-    console.log(boardItems);
+  //   console.log(boardItems);
 
-    // setSendBoardItems((state) => {
-    //   return {
-    //     ...state,
-    //     sendUserName: userName.name,
-    //     boardUserNames: boardItems,
-    //   };
-    // });
+  //   // setSendBoardItems((state) => {
+  //   //   return {
+  //   //     ...state,
+  //   //     sendUserName: userName.name,
+  //   //     boardUserNames: boardItems,
+  //   //   };
+  //   // });
 
-    setIsShowShareBox(false);
-  };
+  //   setIsShowShareBox(false);
+  // };
 
   /**
    *

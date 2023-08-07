@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { FileEarmarkCodeFill } from 'emotion-icons/bootstrap';
-import { ArrowIosDownwardOutline, ArrowIosForwardOutline } from 'emotion-icons/evaicons-outline';
-import { Folder, FolderOpen } from 'emotion-icons/fluentui-system-filled';
+import { Folder } from 'emotion-icons/fluentui-system-filled';
 import { DevProfileNode } from '../Tree';
 import { useAppDispatch, useAppSelector } from '~/redux/store';
 import { click } from '~/redux/features/popupSlice';

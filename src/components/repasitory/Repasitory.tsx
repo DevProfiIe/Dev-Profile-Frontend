@@ -1,7 +1,6 @@
 import { HeightBox, RepositoryBox, RepositorySkills, RepositoryWrapper } from './repasitory.styles';
 import { UserGithubRepositoryInfo } from '~/redux/api/types';
 import { css } from '@emotion/react';
-import { color } from '~/styles/theme/primary';
 
 interface RepositoryProps {
   repo: UserGithubRepositoryInfo;
@@ -14,18 +13,8 @@ const Repasitory: React.FC<RepositoryProps> = ({
   indexNum,
   scrollY,
 }: RepositoryProps): JSX.Element => {
-  const {
-    endDate,
-    frameworkUrls,
-    id,
-    myCommitCnt,
-    repoDesc,
-    repoLanguages,
-    repoName,
-    startDate,
-    totalCommitCnt,
-    totalContributors,
-  } = repo;
+  const { endDate, frameworkUrls, myCommitCnt, repoDesc, repoName, startDate, totalCommitCnt } =
+    repo;
 
   return (
     <RepositoryBox

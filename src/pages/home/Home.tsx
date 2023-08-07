@@ -6,7 +6,6 @@ import background from '~/assets/images/background2.webp';
 import { useEffect, useRef, useState } from 'react';
 
 /* Components */
-import Search from '~/components/search/Search';
 
 /* ETC */
 import line from '~/assets/images/line.webp';

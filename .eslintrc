@@ -34,6 +34,8 @@
     "react-hooks/exhaustive-deps": "off",
 
     "react/no-unknown-property": ["error", { "ignore": ["css"] }],
+    "no-empty-function": "off",
+    "@typescript-eslint/no-empty-function": "off",
 
     "prettier/prettier": [
       "warn",

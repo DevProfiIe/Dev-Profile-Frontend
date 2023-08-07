@@ -3,7 +3,6 @@ import {
   PopupBackground,
   PopupContents,
   PopupEditorWrapper,
-  PopupFileWrapper,
   PopupHeader,
   PopupSideView,
   PopupWrapper,
@@ -11,13 +10,11 @@ import {
 import { Close } from 'emotion-icons/evil';
 import { clear, close } from '~/redux/features/popupSlice';
 import { useGetCommitDetailsQuery } from '~/redux/api';
-import { FileEarmarkCodeFill } from 'emotion-icons/bootstrap';
 import { GetCommitDetailsData } from '~/redux/api/types';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import Loader from '../loader/Loader';
-import { ArrowLeft } from 'emotion-icons/feather';
 import { DiffEditor } from '@monaco-editor/react';
-import Node from '../tree/node/Node';
+
 import Tree from '../tree/Tree';
 import { css } from '@emotion/react';
 
@@ -29,7 +26,7 @@ const Popup = () => {
   const orgCode = useAppSelector((state) => state.popup.orgCode);
   const modifiedCode = useAppSelector((state) => state.popup.modifiedCode);
 
-  const { data, isLoading, isSuccess } = useGetCommitDetailsQuery(
+  const { data, isLoading } = useGetCommitDetailsQuery(
     {
       commitOid: selectedOid,
     },
