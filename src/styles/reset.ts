@@ -7,12 +7,12 @@ const resetStyle = css`
 
   @font-face {
     font-family: Bungee;
-    src: url('~/assets/fonts/Bungee/BungeeShade-Regular.ttf');
+    src: url('~/assets/fonts/Bungee/BungeeShade-Regular.ttf') format('ttf');
   }
 
   @font-face {
     font-family: Roboto;
-    src: url('~/assets/fonts/Roboto/Roboto-Regular.ttf');
+    src: url('~/assets/fonts/Roboto/Roboto-Regular.ttf') format('ttf');
   }
 
   * {
