@@ -1,5 +1,3 @@
-// import { BarDatum } from '@nivo/bar';
-import useScroll from '~/hooks/useScroll';
 import { HeightBox, RepositoryBox, RepositorySkills, RepositoryWrapper } from './repasitory.styles';
 import { UserGithubRepositoryInfo } from '~/redux/api/types';
 import { css } from '@emotion/react';
@@ -28,14 +26,6 @@ const Repasitory: React.FC<RepositoryProps> = ({
     totalCommitCnt,
     totalContributors,
   } = repo;
-
-  // const barData: BarDatum[] = [
-  //   {
-  //     'total commits': (totalCommitCnt / totalCommitCnt) * 100,
-  //     'user commits': Math.round((myCommitCnt / totalCommitCnt) * 100),
-  //     contribution: 'User',
-  //   },
-  // ];
 
   return (
     <RepositoryBox
@@ -77,6 +67,7 @@ const Repasitory: React.FC<RepositoryProps> = ({
           css={css`
             line-height: 160%;
             font-size: 1.5rem;
+            height: 5.5rem;
           `}
         >
           {repoDesc}

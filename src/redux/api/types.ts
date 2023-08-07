@@ -95,6 +95,12 @@ export interface KeywordSearchOutputParams {
 
 export interface GetCommitDetailsData {
   diffs: GetCommitDetailsDiff[];
+  fileTree: TreeData;
+}
+
+export interface TreeData {
+  children: TreeData[];
+  name: string;
 }
 
 export interface GetCommitDetailsDiff {
@@ -151,20 +157,54 @@ export interface GetChatRoomData {
   Timestamp: string;
 }
 
-export interface GetBoardData {
+export interface GetBoardDataDetails {
   userName: string;
   language: string[];
   framework: string[];
   avataUrl: string;
   field: string;
+  styles: string[];
+  commitCount: number;
+  commitDays: number;
+  repoCount: number;
+}
+
+export interface GetBoardData {
+  total: number;
+  content: GetBoardDataDetails[];
 }
 
 export interface GetBoardDataParams {
   lang: string[];
   frame: string[];
-  langDuration: number;
-  frameDuration: number;
-  keywordFilter: string[];
+  keywordsFilter: number[] | null;
   field: string;
-  fieldScore: number;
+  page: number;
+}
+
+export interface SkillFilterDetails {
+  name: string;
+  duration: number;
+  sort: string;
+}
+
+export interface GetBoardSortData {
+  skills: GetBoardSortDataSkiisDetail[];
+  keyword: GetBoardSortDataKeywordDetail[];
+}
+
+export interface GetBoardSortDataSkiisDetail {
+  sort: string;
+  name: string;
+}
+
+export interface GetBoardSortDataKeywordDetail {
+  num: number;
+  keyword: string;
+}
+
+export interface PostBoardQueryData {
+  sendUserName: string;
+  receiveUserName: string;
+  boardUserNames: string[];
 }

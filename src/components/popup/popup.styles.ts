@@ -7,11 +7,6 @@ const DisplayFlexRow = css`
   flex-flow: row nowrap;
 `;
 
-const DisplayFlexRowWrap = css`
-  display: flex;
-  flex-flow: row wrap;
-`;
-
 const DisplayFlexColumn = css`
   display: flex;
   flex-flow: column nowrap;
@@ -27,8 +22,8 @@ export const PopupBackground = styled.div`
 `;
 
 export const PopupWrapper = styled.div`
-  width: 50%;
-  height: 550px;
+  width: 1200px;
+  height: auto;
   background-color: white;
   position: fixed;
   left: 50%;
@@ -56,12 +51,9 @@ export const PopupHeader = styled.div`
 
 export const PopupContents = styled.div`
   width: 100%;
-  height: 500px;
-  ${DisplayFlexRowWrap}
-  padding: 1.5rem;
+  ${DisplayFlexRow}
   justify-content: flex-start;
   overflow: auto;
-  gap: 0.5rem 0.7rem;
   position: relative;
   align-content: start;
 `;
@@ -84,10 +76,17 @@ export const PopupFileWrapper = styled.div<{ selected: boolean }>`
   }
 `;
 
+export const PopupSideView = styled.div`
+  width: 300px;
+  height: 800px;
+  padding: 0.2rem 0.3rem;
+  overflow: auto;
+  // border-bottom-left-radius: 1.5rem;
+  ${boxShadow};
+`;
+
 export const PopupEditorWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
+  width: 900px;
+  height: 800px;
+  border-bottom-right-radius: 1.5rem;
 `;

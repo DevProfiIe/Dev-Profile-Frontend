@@ -41,7 +41,6 @@ const Resume: React.FC = (): JSX.Element => {
   const location = useLocation();
   const { scrollY } = useScroll();
   const textArea = useRef<HTMLDivElement>(null);
-  const fixedElem = useRef<HTMLDivElement>(null);
   const textArr = MAIN_TEXT;
   let animeInterval: number;
   let textIndex = 0;
@@ -453,7 +452,7 @@ const Resume: React.FC = (): JSX.Element => {
             ))}
           </div>
         </ResumeSection> */}
-        <ResumeSection height={userData.repositoryInfo.length * 1000 + 'px'} ref={fixedElem}>
+        <ResumeSection height={(userData.repositoryInfo.length + 1) * 1000 + 'px'}>
           <ResumeRepoWrapper>
             <ResumeRepoText>
               <span

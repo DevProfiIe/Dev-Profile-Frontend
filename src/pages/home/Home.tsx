@@ -183,8 +183,8 @@ const Home: React.FC = (): JSX.Element => {
               </div>
             </HomeParagragh>
             <HeightBox height={'2.875rem'} />
-            <Search outputBox={false} redirectTo='/resume' />
-            <HeightBox height={'5rem'} />
+            {/* <Search outputBox={false} redirectTo='/resume' /> */}
+            <HeightBox height={'2rem'} />
             <HomeContentsBox>
               <div
                 css={css`
@@ -212,7 +212,8 @@ const Home: React.FC = (): JSX.Element => {
                 css={css`
                   width: 100%;
                   display: flex;
-                  justify-content: flex-end;
+                  justify-content: center;
+                  gap: 0 0.5rem;
                 `}
               >
                 <p
@@ -235,7 +236,32 @@ const Home: React.FC = (): JSX.Element => {
                     letter-spacing: -0.1rem;
                   `}
                 >
-                  <Link to='/gallary'>Go To Gallary</Link>
+                  <Link to='/resume/dbscks97' state={{ keyword: 'dbscks97' }}>
+                    분석하기
+                  </Link>
+                </p>
+
+                <p
+                  css={css`
+                    padding: 16px 32px;
+                    line-height: 1.6;
+                    color: #01051b;
+                    background-color: ${color.aquaMarine};
+                    border: none;
+                    border-radius: 32px;
+                    text-decoration: none;
+                    overflow: auto;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    user-select: none;
+                    cursor: pointer;
+                    transition: all 0.25s ease 0s;
+                    text-align: center;
+                    display: block;
+                    letter-spacing: -0.1rem;
+                  `}
+                >
+                  <Link to='/gallary'>갤러리 보기</Link>
                 </p>
               </div>
             </HomeContentsBox>

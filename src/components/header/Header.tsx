@@ -20,7 +20,7 @@ const Header: React.FC = (): JSX.Element => {
           ${HerderFont}
         `}
       >
-        TEAM 5
+        DEV-PROFILE
       </h1>
       <div
         css={css`

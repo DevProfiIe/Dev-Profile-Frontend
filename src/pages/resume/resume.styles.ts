@@ -105,7 +105,7 @@ export const ResumeLeftTextBox = styled.div`
   height: 50%;
   padding: 2rem 1.5rem;
   justify-content: center;
-  gap: 2.5rem 0;
+  gap: 2rem;
   overflow: hidden;
 `;
 
@@ -194,7 +194,7 @@ export const ResumeRepoSvgbox = styled.div<{ position: number }>`
   left: 0;
   top: 15.5rem;
   transform: translateX(-${({ position }) => position * 0.01 + 'px'});
-  transition: 0.1s;
+  transition: 0.1s translate linear;
   overflow: hidden;
 `;
 

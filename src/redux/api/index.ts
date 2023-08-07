@@ -4,6 +4,7 @@ import {
   DefaultApi,
   GetBoardData,
   GetBoardDataParams,
+  GetBoardSortData,
   GetChatRoomData,
   GetChatRoomDetail,
   GetChatRoomHistory,
@@ -13,6 +14,7 @@ import {
   GetCommitDetailsParams,
   KeywordSearchOutput,
   KeywordSearchOutputParams,
+  PostBoardQueryData,
   SendChatMessageInfo,
   UserGithubData,
   UserGithubDataParams,
@@ -38,6 +40,7 @@ export const mainApi = createApi({
       return headers;
     },
   }),
+
   endpoints: (builder) => ({
     authUser: builder.query<DefaultApi<UserGithubInfo>, UserGithubDataParams>({
       query(data) {
@@ -99,6 +102,7 @@ export const mainApi = createApi({
           method: 'GET',
         };
       },
+      keepUnusedDataFor: 5,
       async onCacheEntryAdded(userData, { cacheDataLoaded, cacheEntryRemoved, updateCachedData }) {
         try {
           await cacheDataLoaded;
@@ -143,12 +147,29 @@ export const mainApi = createApi({
         });
       },
     }),
-    getBodrd: builder.query<DefaultApi<GetBoardData>, GetBoardDataParams>({
+    getBoard: builder.query<DefaultApi<GetBoardData>, GetBoardDataParams>({
       query(data) {
         return {
           url: 'board',
           method: 'GET',
           params: data,
+        };
+      },
+    }),
+    getBoardSortData: builder.query<DefaultApi<GetBoardSortData>, any>({
+      query() {
+        return {
+          url: 'board/filter',
+          method: 'GET',
+        };
+      },
+    }),
+    postBoardItems: builder.mutation<DefaultApi<any>, PostBoardQueryData>({
+      query(data) {
+        return {
+          url: 'board/send',
+          method: 'POST',
+          body: data,
         };
       },
     }),
@@ -164,5 +185,7 @@ export const {
   useGetChatRoomListQuery,
   useMakeChatRoomMutation,
   useGetCommitDetailsQuery,
-  useGetBodrdQuery,
+  useGetBoardQuery,
+  useGetBoardSortDataQuery,
+  usePostBoardItemsMutation,
 } = mainApi;

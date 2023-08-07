@@ -5,10 +5,11 @@ import {
   PopupEditorWrapper,
   PopupFileWrapper,
   PopupHeader,
+  PopupSideView,
   PopupWrapper,
 } from './popup.styles';
 import { Close } from 'emotion-icons/evil';
-import { close } from '~/redux/features/popupSlice';
+import { clear, close } from '~/redux/features/popupSlice';
 import { useGetCommitDetailsQuery } from '~/redux/api';
 import { FileEarmarkCodeFill } from 'emotion-icons/bootstrap';
 import { GetCommitDetailsData } from '~/redux/api/types';
@@ -16,16 +17,17 @@ import { useEffect, useRef, useState } from 'react';
 import Loader from '../loader/Loader';
 import { ArrowLeft } from 'emotion-icons/feather';
 import { DiffEditor } from '@monaco-editor/react';
+import Node from '../tree/node/Node';
+import Tree from '../tree/Tree';
+import { css } from '@emotion/react';
 
 const Popup = () => {
   const dispatch = useAppDispatch();
   const selectedOid = useAppSelector((state) => state.popup.commitOid);
-  const [clickedFile, setClickedFile] = useState<number>(-1);
-  const [isShowCodeEditor, setIsShowCodeEditor] = useState<boolean>(false);
-  const [orgCodeContent, setOrgCodeContent] = useState<string>('');
-  const [modCodeContent, setModCodeContent] = useState<string>('');
-  const [codeFileType, setCodeFileType] = useState<string>('');
-  const [codeValue, setCodeValue] = useState<string>();
+  const clickedNode = useAppSelector((state) => state.popup.clickedNode);
+  const isOpenEditor = useAppSelector((state) => state.popup.isOpenEditor);
+  const orgCode = useAppSelector((state) => state.popup.orgCode);
+  const modifiedCode = useAppSelector((state) => state.popup.modifiedCode);
 
   const { data, isLoading, isSuccess } = useGetCommitDetailsQuery(
     {
@@ -45,48 +47,20 @@ const Popup = () => {
 
   /**
    *
-   * @param index
-   */
-  const clickFolderHandler = (index: number) => {
-    setClickedFile(index);
-
-    const selectedFile = commitData.diffs[index];
-    let orgCode = '';
-    let modifiedCode = '';
-    let codeValue = '';
-
-    selectedFile.content.split('\n').forEach((item, i) => {
-      if (selectedFile.status.deleted.find((code) => code === i + 1)) {
-        orgCode += `\n ${item.trim()}`;
-      }
-
-      if (selectedFile.status.inserted.find((code) => code === i + 1)) {
-        modifiedCode += `\n ${item.trim()}`;
-      }
-
-      if (selectedFile.status.original.find((code) => code === i + 1)) {
-        codeValue += `\n ${item.trim()}`;
-      }
-    });
-
-    setOrgCodeContent(orgCode);
-    setModCodeContent(modifiedCode);
-    setCodeFileType(commitData.diffs[index].filetype);
-  };
-
-  /**
-   *
-   */
-  const showCodeEditorHandler = () => {
-    setIsShowCodeEditor((state) => !state);
-  };
-
-  /**
-   *
    */
   const commitData: GetCommitDetailsData = data?.data ?? {
     diffs: [],
+    fileTree: {
+      name: '',
+      children: [],
+    },
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(clear());
+    };
+  }, []);
 
   if (isLoading) {
     return <Loader />;
@@ -97,53 +71,49 @@ const Popup = () => {
       <PopupBackground onClick={onToggleHandler} />
       <PopupWrapper>
         <PopupHeader>
-          <p>Commits Details</p>
-          <button onClick={isShowCodeEditor ? showCodeEditorHandler : onToggleHandler}>
-            {isShowCodeEditor ? <ArrowLeft height={35} /> : <Close height={35} />}
+          <p
+            css={css`
+              font-weight: 700;
+            `}
+          >
+            Commit Details
+          </p>
+          <button onClick={onToggleHandler}>
+            <Close size={25} />
           </button>
         </PopupHeader>
         <PopupContents>
-          {commitData.diffs?.map((item, i) => (
-            <PopupFileWrapper
-              key={i}
-              onClick={() => {
-                clickFolderHandler(i);
-              }}
-              onDoubleClick={showCodeEditorHandler}
-              selected={clickedFile === i ? true : false}
-            >
-              <FileEarmarkCodeFill size={50} />
-              <p>{item.filename}</p>
-            </PopupFileWrapper>
-          ))}
+          <PopupSideView>
+            <Tree fileTree={commitData.fileTree} commitData={commitData.diffs} />
+          </PopupSideView>
 
-          {isShowCodeEditor && (
+          {isOpenEditor ? (
             <PopupEditorWrapper>
               <DiffEditor
                 height='100%'
-                // defaultLanguage={codeFileType}
-                // defaultValue={codeContent}
                 theme='vs-dark'
                 options={{
                   enableSplitViewResizing: false,
-                  renderSideBySide: false,
-                  autoIndent: 'advanced',
-                  readOnly: true,
-                  readOnlyMessage: {
-                    value: '',
-                  },
                 }}
-                original={orgCodeContent}
-                modified={modCodeContent}
-                language={codeFileType}
+                original={orgCode}
+                modified={modifiedCode}
+                language={clickedNode?.data?.filetype}
+                loading={<Loader />}
               />
             </PopupEditorWrapper>
+          ) : (
+            <p
+              css={css`
+                width: 900px;
+                height: 800px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              `}
+            >
+              파일을 선택해주세요.
+            </p>
           )}
-
-          {commitData.diffs.length === 0 ? <p>데이터가 존재하지 않습니다.</p> : null}
-
-          {/* <PopupcontentsLeft></PopupcontentsLeft>
-          <PopupcontentsRight></PopupcontentsRight> */}
         </PopupContents>
       </PopupWrapper>
     </>

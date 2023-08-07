@@ -127,7 +127,19 @@ const Commit: React.FC = () => {
                 </button>
               </CommitContents>
             ))
-          ) : null}
+          ) : (
+            <div
+              css={css`
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              `}
+            >
+              <p>검색 결과가 존재하지 않습니다.</p>
+            </div>
+          )}
         </CommitSearchBox>
       )}
     </>

@@ -10,12 +10,12 @@ const DisplayFlexRow = css`
   justify-content: center;
 `;
 
-const DisplayFlexColumn = css`
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
-  align-items: center;
-`;
+// const DisplayFlexColumn = css`
+//   display: flex;
+//   flex-flow: column nowrap;
+//   justify-content: space-between;
+//   align-items: center;
+// `;
 
 const BoxShadow = css`
   box-shadow: 0px 109px 106px rgb(92 40 0 / 1%), 0px 45.5376px 44.2843px rgb(92 40 0 / 1%),
@@ -24,9 +24,9 @@ const BoxShadow = css`
     0 0 0 1px rgb(0 0 0 / 4%);
 `;
 
-const BorderRadius = css`
-  border-radius: 1.5rem;
-`;
+// const BorderRadius = css`
+//   border-radius: 1.5rem;
+// `;
 
 /* Components */
 
@@ -38,11 +38,11 @@ export const HeightBox = styled.div<{ height: string }>`
 export const RepositoryBox = styled.div<{ index: number; nowRepo: boolean }>`
   width: ${({ nowRepo }) => (nowRepo ? '55.75rem' : '2.188rem')};
   height: 25.5rem;
-  opacity: ${({ nowRepo }) => (nowRepo ? '1' : '0.3')};
+  opacity: ${({ nowRepo }) => (nowRepo ? '1' : '0.2')};
   background-color: ${color.keep};
   border-radius: ${({ nowRepo }) => (nowRepo ? '1.5rem' : '0')};
   ${BoxShadow};
-  transition: 0.1s all ease;
+  transition: 0.3s all linear;
   transform: ${({ nowRepo }) => (nowRepo ? 'scale(1.1)' : 'scale(0.8)')};
   overflow: hidden;
 `;
@@ -54,8 +54,9 @@ export const RepositoryWrapper = styled.div<{ nowRepo?: boolean }>`
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: flex-start;
+  transition: 0.5s opacity linear;
   opacity: ${({ nowRepo }) => (nowRepo ? '1' : '0')};
-  padding: 2.5rem;
+  padding: 2rem 2.5rem;
 `;
 
 export const RepositorySkills = styled.div`

@@ -26,7 +26,6 @@ import {
 } from '~/redux/api';
 import { Send } from 'emotion-icons/feather';
 import { SendChatMessageInfo, UserGithubInfo } from '~/redux/api/types';
-import { getSocket } from '~/utils/socket';
 
 type RoomsProps = {
   nowPage: number;
@@ -118,14 +117,8 @@ const Chat = () => {
   };
 
   const pageHandler = () => {
-    const stompClient = getSocket();
-
     setNowPage(-1);
     setRoomId(-1);
-
-    stompClient.disconnect((frame: any) => {
-      console.log('Disconnected: ' + frame);
-    });
   };
 
   const [makeChatRoom] = useMakeChatRoomMutation();
