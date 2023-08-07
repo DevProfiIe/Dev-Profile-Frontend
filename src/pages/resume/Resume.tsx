@@ -33,6 +33,7 @@ import { useRef, useState, useEffect } from 'react';
 import useScroll from '~/hooks/useScroll';
 import Chat from '~/components/chat/Chat';
 import { color } from '~/styles/theme/primary';
+import { UserGithubData } from '~/redux/api/types';
 
 const MAIN_TEXT = '이터의 속삭임: 코드로 이야기하는 개발자 Park Yun Chan 입니다.'.split('');
 
@@ -45,9 +46,9 @@ const Resume: React.FC = (): JSX.Element => {
   let animeInterval: number;
   let textIndex = 0;
 
-  const keyword = location.state.keyword;
+  const keyword = location.state.keyword ?? '';
   const { isError, isLoading, data, error } = useGetUserGithubInfoQuery({
-    userName: keyword,
+    userName: keyword ?? 'dbscks97',
   });
 
   const userData = data?.data ?? {
