@@ -24,13 +24,13 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '~/redux/store';
 import { change } from '~/redux/features/searchSlice';
 import { UserGithubInfo } from '~/redux/api/types';
-// import { getCookie } from '~/utils/cookie';
+import { getCookie } from '~/utils/cookie';
 import Message from '~/components/message/Message';
-
+import logo from '~/assets/images/github.webp';
 const MAIN_TEXT = 'nd discover underlying insights from github.'.split('');
 
 const Home: React.FC = (): JSX.Element => {
-  // const token = getCookie('token');
+  const token = getCookie('token');
   const navigate = useNavigate();
   const [distance, setDistance] = useState<number | undefined>(10);
   const textArea = useRef<HTMLDivElement>(null);
@@ -41,12 +41,17 @@ const Home: React.FC = (): JSX.Element => {
   let textIndex = 0;
 
   const analyzeHandler = () => {
+    if (!token) {
+      return <Message msg='로그인이 필요합니다.' />;
+    }
+
     if (userInfo && userInfo.analyzed) {
       dispatch(change(userInfo.login));
       navigate(`resume/${userInfo.login}`);
-    } else {
-      return <Message msg='분석데이터가 존재하지 않습니다.' />;
+      return;
     }
+
+    return <Message msg='분석데이터가 존재하지 않습니다.' />;
   };
 
   useEffect(() => {
@@ -94,12 +99,25 @@ const Home: React.FC = (): JSX.Element => {
           <HomeSearchBox>
             <h1
               css={css`
+                display: flex;
+                align-items: center;
                 font-weight: 600;
                 font-size: 3rem;
                 line-height: 100%;
               `}
             >
-              DEV-PROFILE 🧙🏻‍♂️
+              <p>DEV-PROFILE</p>
+              <p
+                css={css`
+                  width: 30px;
+                  height: 30px;
+                  background-image: url(${logo});
+                  background-position: left top;
+                  background-size: contain;
+                  background-repeat: no-repeat;
+                  margin: 0 0 0.5rem 0.5rem;
+                `}
+              ></p>
             </h1>
             <HeightBox height={'2.25rem'} />
             <HomeParagragh>

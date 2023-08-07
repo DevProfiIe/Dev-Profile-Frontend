@@ -9,6 +9,7 @@ import Commit from '../commit/Commit';
 import useScroll from '~/hooks/useScroll';
 import { UserGithubInfo } from '~/redux/api/types';
 import { useEffect, useState } from 'react';
+import logo from '~/assets/images/github.webp';
 
 const Header: React.FC = (): JSX.Element => {
   const token = getCookie('token');
@@ -28,10 +29,30 @@ const Header: React.FC = (): JSX.Element => {
     <HeaderWrapper scrollPosition={scrollY}>
       <h1
         css={css`
-          ${HerderFont}
+          display: flex;
+          flex-flow: row nowrap;
+          align-items: center;
+          gap: 0 0.2rem;
+          height: 100%;
         `}
       >
-        DEV-PROFILE
+        <p
+          css={css`
+            ${HerderFont}
+          `}
+        >
+          DEV-PROFILE
+        </p>
+        <p
+          css={css`
+            width: 20px;
+            height: 20px;
+            background-image: url(${logo});
+            background-size: contain;
+            background-repeat: no-repeat;
+            padding-bottom: 1.8rem;
+          `}
+        ></p>
       </h1>
       <div
         css={css`

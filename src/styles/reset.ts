@@ -22,7 +22,7 @@ const resetStyle = css`
     font-display: swap;
     color: inherit;
     scroll-behavior: smooth;
-    font-family: 'Roboto Mono', monospace;
+    font-family: Roboto;
   }
 
   *,

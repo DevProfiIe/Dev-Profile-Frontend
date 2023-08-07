@@ -23,7 +23,7 @@ export const HeaderWrapper = styled.div<{ scrollPosition: number }>`
 
 export const HerderFont = css`
   font-family: Roboto;
-  font-size: 1.2rem;
+  font-size: 1.7rem;
   font-weight: 900;
   background: linear-gradient(
     -45deg,
