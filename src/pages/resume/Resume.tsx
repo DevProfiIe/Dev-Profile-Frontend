@@ -51,7 +51,7 @@ const Resume: React.FC = (): JSX.Element => {
     userName: keyword ?? 'dbscks97',
   });
 
-  const userData = data?.data ?? {
+  const userData = (data?.data as UserGithubData) ?? {
     boardData: [],
     repositoryInfo: [],
     userInfo: {
