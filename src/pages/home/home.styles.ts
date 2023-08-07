@@ -19,7 +19,7 @@ export const HomeWrapper = styled.div`
   height: 100%;
   display: flex;
   flex-flow: column nowrap;
-  font-family: ${font.fontFamily};
+  font-family: ${font.mainFont};
   font-weight: 500;
 `;
 
@@ -61,9 +61,10 @@ export const HomeParagragh = styled.div`
   ${DisplayFlexColumn}
 
   p {
-    font-weight: 500;
+    font-weight: 600;
     font-size: 1.25rem;
     line-height: 134%;
+    letter-spacing: 0.05rem;
   }
 `;
 
@@ -71,10 +72,10 @@ export const HomeText = styled.div`
   opacity: 0.16;
   white-space: nowrap;
   color: #01051b8f;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1.25rem;
   line-height: 134%;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.05rem;
 `;
 
 export const HomeContentsBox = styled.div`

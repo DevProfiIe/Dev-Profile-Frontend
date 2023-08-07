@@ -67,7 +67,7 @@ const Home: React.FC = (): JSX.Element => {
           <HomeSearchBox>
             <h1
               css={css`
-                font-weight: 500;
+                font-weight: 600;
                 font-size: 3rem;
                 line-height: 100%;
               `}
@@ -92,10 +92,10 @@ const Home: React.FC = (): JSX.Element => {
                     top: 0;
                     left: 0;
                     pointer-events: none;
-                    font-weight: 500;
+                    font-weight: 600;
                     font-size: 1.25rem;
                     line-height: 134%;
-                    letter-spacing: -0.01em;
+                    letter-spacing: 0.05rem;
                   `}
                 >
                   <div ref={textArea}>a</div>

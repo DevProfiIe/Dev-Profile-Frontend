@@ -12,7 +12,7 @@ const primary = {
   },
 
   font: {
-    fontFamily: "'Roboto Mono', monospace",
+    mainFont: 'Roboto',
   },
 
   boxShadow: `box-shadow: 0px 109px 106px rgb(92 40 0 / 1%), 0px 45.5376px 44.2843px rgb(92 40 0 / 1%),

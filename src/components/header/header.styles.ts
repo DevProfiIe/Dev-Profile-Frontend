@@ -22,8 +22,7 @@ export const HeaderWrapper = styled.div<{ scrollPosition: number }>`
 `;
 
 export const HerderFont = css`
-  font-family: 'Bungee Shade', cursive;
-  font-weight: normal;
+  font-family: Bungee;
   font-size: 2rem;
   background: linear-gradient(
     -45deg,
