@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { color } from '~/styles/theme/primary';
 
 export const HeaderWrapper = styled.div<{ scrollPosition: number }>`
   width: ${({ scrollPosition }) => (scrollPosition > 50 ? '85%' : '80%')};
@@ -22,7 +23,7 @@ export const HeaderWrapper = styled.div<{ scrollPosition: number }>`
 `;
 
 export const HerderFont = css`
-  font-family: Bungee;
+  font-family: 'Bungee Shade', cursive;
   font-size: 2rem;
   background: linear-gradient(
     -45deg,
@@ -44,4 +45,21 @@ export const HerderFont = css`
       background-position: 20px 0, 20px 0, 20px 0;
     }
   }
+`;
+
+export const HeaderUserInfoWrapper = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 0 0.5rem;
+`;
+
+export const HeaderUserImg = styled.div<{ source?: string }>`
+  width: 35px;
+  height: 35px;
+  border-radius: 999px;
+  background-color: white;
+  background-image: url(${({ source }) => source});
+  background-size: contain;
+  border: 2px solid #ececec;
 `;

@@ -6,8 +6,8 @@ const resetStyle = css`
   ${emotionReset}
 
   @font-face {
-    font-family: Bungee;
-    src: url('~/assets/fonts/Bungee/BungeeShade-Regular.ttf') format('ttf');
+    font-family: 'Bungee Shade', cursive;
+    src: url('../assets/fonts/Bungee/BungeeShade-Regular.ttf') format('truetype');
   }
 
   @font-face {
