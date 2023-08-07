@@ -90,7 +90,7 @@ const Popup = () => {
                 height='100%'
                 theme='vs-dark'
                 options={{
-                  enableSplitViewResizing: false,
+                  enableSplitViewResizing: true,
                 }}
                 original={orgCode}
                 modified={modifiedCode}
