@@ -98,7 +98,7 @@ export const mainApi = createApi({
     getChatMessages: builder.query<DefaultApi<GetChatRoomDetail[]>, GetChatRoomHistoryParams>({
       query(data) {
         return {
-          url: `api/chatroom/${data.chatroomId}/messages`,
+          url: `/chatroom/${data.chatroomId}/messages`,
           method: 'GET',
         };
       },
