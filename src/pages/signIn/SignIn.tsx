@@ -17,7 +17,7 @@ import {
 } from './sginIn.styles';
 
 const CLIENT_ID = 'a990f185d45f796f1b7e';
-const REDIRECT_URL = 'http://localhost:3000/auth/callback';
+const REDIRECT_URL = 'http://15.165.41.192:80/auth/callback';
 const GITHUB_URL = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URL}`;
 
 const SignIn: React.FC = (): JSX.Element => {
