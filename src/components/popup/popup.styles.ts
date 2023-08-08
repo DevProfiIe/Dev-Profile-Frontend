@@ -22,7 +22,7 @@ export const PopupBackground = styled.div`
 `;
 
 export const PopupWrapper = styled.div`
-  width: 1440px;
+  width: 1640px;
   height: auto;
   background-color: white;
   position: fixed;
@@ -87,7 +87,7 @@ export const PopupSideView = css`
 `;
 
 export const PopupEditorWrapper = styled.div`
-  width: 1140px;
+  width: 1340px;
   height: 800px;
   border-bottom-right-radius: 1.5rem;
 `;
