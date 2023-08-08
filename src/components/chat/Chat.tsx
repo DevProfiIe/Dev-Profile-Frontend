@@ -24,24 +24,31 @@ import {
   useSendMessageMutation,
 } from '~/redux/api';
 import { Send } from 'emotion-icons/feather';
-import { SendChatMessageInfo, UserGithubInfo } from '~/redux/api/types';
+import { GetChatRoomData, SendChatMessageInfo, UserGithubInfo } from '~/redux/api/types';
 
 type RoomsProps = {
   nowPage: number;
   setNowPage: Dispatch<SetStateAction<number>>;
   setRoomId: Dispatch<SetStateAction<number>>;
+  setKeyword: Dispatch<SetStateAction<string>>;
 };
 
-const Rooms: React.FC<RoomsProps> = ({ nowPage, setNowPage, setRoomId }: RoomsProps) => {
+const Rooms: React.FC<RoomsProps> = ({
+  nowPage,
+  setNowPage,
+  setRoomId,
+  setKeyword,
+}: RoomsProps) => {
   const dispatch = useAppDispatch();
 
   const showChatBoxHandler = () => {
     dispatch(open());
   };
 
-  const pageHandler = (id: number) => {
-    setRoomId(id);
+  const pageHandler = (obj: GetChatRoomData) => {
+    setRoomId(obj.id);
     setNowPage(1);
+    setKeyword(obj.opponent.login);
   };
 
   const { data } = useGetChatRoomListQuery(null, {
@@ -85,7 +92,7 @@ const Rooms: React.FC<RoomsProps> = ({ nowPage, setNowPage, setRoomId }: RoomsPr
               `}
               size={30}
               onClick={() => {
-                pageHandler(item.id);
+                pageHandler(item);
               }}
             />
           </ChatRoomWrapper>
@@ -184,7 +191,12 @@ const Chat = () => {
       </ChatBoxButton>
 
       {isShow && nowPage < 0 ? (
-        <Rooms nowPage={nowPage} setNowPage={setNowPage} setRoomId={setRoomId} />
+        <Rooms
+          nowPage={nowPage}
+          setNowPage={setNowPage}
+          setRoomId={setRoomId}
+          setKeyword={setKeyword}
+        />
       ) : isShow && nowPage > 0 ? (
         <ChatBoxContents>
           <ChatBoxContentsHeader>
