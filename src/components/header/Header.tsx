@@ -82,6 +82,7 @@ const Header: React.FC = (): JSX.Element => {
           flex-flow: row nowrap;
           align-items: center;
           gap: 0 2rem;
+          position: relative;
         `}
       >
         {location.pathname.includes('resume') ? <Commit /> : ''}
