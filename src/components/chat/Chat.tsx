@@ -1,4 +1,4 @@
-import React, { Dispatch, Fragment, SetStateAction, useState } from 'react';
+import React, { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react';
 import {
   ChatBox,
   ChatBoxButton,
@@ -16,7 +16,6 @@ import { useAppDispatch, useAppSelector } from '~/redux/store';
 import { open } from '~/redux/features/chatSlice';
 import { Close } from 'emotion-icons/evil';
 import { css } from '@emotion/react';
-import { useLocation } from 'react-router-dom';
 import { ArrowLeft, ChatDots } from 'emotion-icons/bootstrap';
 import {
   useGetChatMessagesQuery,
@@ -54,7 +53,7 @@ const Rooms: React.FC<RoomsProps> = ({ nowPage, setNowPage, setRoomId }: RoomsPr
   return (
     <ChatBoxContents>
       <ChatBoxContentsHeader>
-        <div>내 채팅</div>
+        <div>대화 목록</div>
         <Close
           css={css`
             position: absolute;
@@ -99,26 +98,26 @@ const Rooms: React.FC<RoomsProps> = ({ nowPage, setNowPage, setRoomId }: RoomsPr
 const Chat = () => {
   const dispatch = useAppDispatch();
   const isShow = useAppSelector((state) => state.chat.isShow);
+  const [keyword, setKeyword] = useState<string>('');
   const [nowPage, setNowPage] = useState<number>(1);
-  const location = useLocation();
   const [roomId, setRoomId] = useState<number>(-1);
   const [message, setMessage] = useState<string>('');
   const userInfo: UserGithubInfo = JSON.parse(localStorage.getItem('userInfo') ?? '');
 
   const showChatBoxHandler = () => {
     dispatch(open());
-    makeChatRoom({ userName: location.state.keyword })
-      .then((res: any) => {
-        setRoomId(res.data.data.id);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
-  const pageHandler = () => {
-    setNowPage(-1);
-    setRoomId(-1);
+    if (keyword === userInfo.login) {
+      setNowPage(-1);
+    } else {
+      makeChatRoom({ userName: keyword })
+        .then((res: any) => {
+          setRoomId(res.data.data.id);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   const [makeChatRoom] = useMakeChatRoomMutation();
@@ -134,10 +133,27 @@ const Chat = () => {
     },
   );
 
+  const chatHistory = data?.data ?? [];
+
+  /**
+   *
+   */
+  const pageHandler = () => {
+    setNowPage(-1);
+    setRoomId(-1);
+  };
+
+  /**
+   *
+   * @param e
+   */
   const messageChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
   };
 
+  /**
+   *
+   */
   const sendChatMessage = () => {
     const info: SendChatMessageInfo = {
       chatRoomId: roomId,
@@ -152,7 +168,14 @@ const Chat = () => {
     setMessage('');
   };
 
-  const chatHistory = data?.data ?? [];
+  useEffect(() => {
+    const userKeyword = localStorage.getItem('keyword');
+
+    if (userKeyword) {
+      const parsedKeyword = JSON.parse(userKeyword);
+      setKeyword(parsedKeyword);
+    }
+  }, []);
 
   return (
     <Fragment>
@@ -174,7 +197,7 @@ const Chat = () => {
               size={30}
               onClick={pageHandler}
             />
-            <div>채팅방</div>
+            <div>{keyword}님과의 대화</div>
             <Close
               css={css`
                 position: absolute;
