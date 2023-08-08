@@ -73,7 +73,7 @@ const Header: React.FC = (): JSX.Element => {
             <HeaderUserImg source={userInfo?.avatar_url} />
             <p>{userInfo?.login}</p>
             <div>
-              <Link>My Page</Link>
+              <button>My Page</button>
               <button onClick={handleLogout}>Logout</button>
             </div>
           </HeaderUserInfoWrapper>
