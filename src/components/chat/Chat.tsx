@@ -116,6 +116,7 @@ const Chat = () => {
 
     if (keyword === userInfo.login) {
       setNowPage(-1);
+      refetch();
     } else {
       makeChatRoom({ userName: keyword })
         .then((res: any) => {
@@ -134,7 +135,7 @@ const Chat = () => {
   const [makeChatRoom] = useMakeChatRoomMutation();
   const [sendMessage] = useSendMessageMutation();
 
-  const { data } = useGetChatMessagesQuery(
+  const { data, refetch } = useGetChatMessagesQuery(
     {
       chatroomId: roomId,
     },
