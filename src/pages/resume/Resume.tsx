@@ -493,9 +493,9 @@ const Resume: React.FC = (): JSX.Element => {
                   css={css`
                     position: absolute;
                     transition: 0.2s;
-                    opacity: ${Math.ceil((scrollY - 1657) * 0.0004) === i ? '1' : '0'};
+                    opacity: ${Math.ceil((scrollY - 1657) * 0.0003) === i ? '1' : '0'};
                     transform: translateY(
-                      ${Math.ceil((scrollY - 1657) * 0.0004) === i ? '0%' : '-120%'}
+                      ${Math.ceil((scrollY - 1657) * 0.0003) === i ? '0%' : '-120%'}
                     );
                   `}
                 >
