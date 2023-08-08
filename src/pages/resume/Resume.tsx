@@ -575,7 +575,7 @@ const Resume: React.FC = (): JSX.Element => {
                     border-radius: 24px;
                     backdrop-filter: blur(22px);
                     padding: 24px 32px;
-                    right: 15%;
+                    right: 10%;
                     z-index: 5;
                     color: white;
                     opacity: ${Math.ceil((scrollY - 1657) * 0.0003) === i ? '1' : '0'};
