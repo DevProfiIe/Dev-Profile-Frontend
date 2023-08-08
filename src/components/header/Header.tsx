@@ -2,7 +2,7 @@
 
 /* Libraries & Hooks */
 import { css } from '@emotion/react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { getCookie, removeCookie } from '~/utils/cookie';
 import {
   HeaderDropMenuWrapper,
