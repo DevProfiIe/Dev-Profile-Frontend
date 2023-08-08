@@ -82,12 +82,15 @@ const Header: React.FC = (): JSX.Element => {
           flex-flow: row nowrap;
           align-items: center;
           gap: 0 2rem;
-          position: relative;
         `}
       >
         {location.pathname.includes('resume') ? <Commit /> : ''}
         {token ? (
-          <>
+          <div
+            css={css`
+              position: relative;
+            `}
+          >
             <HeaderUserInfoWrapper onClick={handleDropMenu}>
               <HeaderUserImg source={userInfo?.avatar_url} />
               <p>{userInfo?.login}</p>
@@ -104,7 +107,7 @@ const Header: React.FC = (): JSX.Element => {
                 <button onClick={handleLogout}>Logout</button>
               </HeaderDropMenuWrapper>
             )}
-          </>
+          </div>
         ) : (
           <Link to='/auth/sign-in'>Sign in</Link>
         )}
