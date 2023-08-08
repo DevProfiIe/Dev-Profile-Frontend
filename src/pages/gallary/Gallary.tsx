@@ -38,6 +38,7 @@ import { Send } from 'emotion-icons/feather';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '~/redux/store';
 import { change } from '~/redux/features/searchSlice';
+import { getCookie } from '~/utils/cookie';
 
 const sortList = [
   {
@@ -227,6 +228,7 @@ const iconList = [
 ];
 
 const Gallary = () => {
+  const token = getCookie('token');
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [isShowStackBox, setIsShowStackBox] = useState<boolean>(false);
@@ -964,105 +966,107 @@ const Gallary = () => {
             </span>{' '}
             명이 존재합니다.
           </p>
-          <div
-            css={css`
-              position: relative;
-            `}
-          >
+          {token && (
             <div
               css={css`
-                display: flex;
-                align-items: center;
-                gap: 0 0.5rem;
-                padding: 0.6rem 1.5rem;
-                border: 1px solid #ececec;
-                border-radius: 5px;
-                z-index: 2;
+                position: relative;
               `}
-              onClick={clickShareHandler}
-              onKeyDown={() => {}}
-              role='button'
-              tabIndex={0}
             >
-              <p>공유하기</p>
-              <MailSend size={25} />
-            </div>
-            {isShowShareBox && (
               <div
                 css={css`
                   display: flex;
-                  flex-flow: column nowrap;
                   align-items: center;
-                  gap: 0.5rem 0;
-                  height: auto;
-                  width: 270px;
-                  position: absolute;
-                  top: 150%;
-                  left: 0;
-                  border-radius: 0.5rem;
-                  background-color: white;
+                  gap: 0 0.5rem;
+                  padding: 0.6rem 1.5rem;
                   border: 1px solid #ececec;
-                  padding: 1rem;
+                  border-radius: 5px;
                   z-index: 2;
                 `}
+                onClick={clickShareHandler}
+                onKeyDown={() => {}}
+                role='button'
+                tabIndex={0}
               >
-                <p
-                  css={css`
-                    line-height: 160%;
-                  `}
-                >
-                  <span
-                    css={css`
-                      font-size: 1.2rem;
-                      font-weight: 700;
-                      color: #189bfa;
-                    `}
-                  >
-                    {selectedGallaryItems.length > 0
-                      ? selectedGallaryItems.length + '명의 '
-                      : '전체 '}
-                  </span>
-                  분석 데이터를 전달합니다.
-                </p>
+                <p>공유하기</p>
+                <MailSend size={25} />
+              </div>
+              {isShowShareBox && (
                 <div
                   css={css`
                     display: flex;
-                    flex-flow: row nowrap;
-                    gap: 0.8rem;
+                    flex-flow: column nowrap;
+                    align-items: center;
+                    gap: 0.5rem 0;
+                    height: auto;
+                    width: 270px;
+                    position: absolute;
+                    top: 150%;
+                    left: 0;
+                    border-radius: 0.5rem;
+                    background-color: white;
+                    border: 1px solid #ececec;
+                    padding: 1rem;
+                    z-index: 2;
                   `}
                 >
-                  <input
+                  <p
                     css={css`
-                      width: 70%;
-                      padding: 0.7rem;
-                      border: 1px solid #ececec;
-                      border-radius: 4px;
+                      line-height: 160%;
                     `}
-                    type='text'
-                    placeholder='Enter ID...'
-                  />
+                  >
+                    <span
+                      css={css`
+                        font-size: 1.2rem;
+                        font-weight: 700;
+                        color: #189bfa;
+                      `}
+                    >
+                      {selectedGallaryItems.length > 0
+                        ? selectedGallaryItems.length + '명의 '
+                        : '전체 '}
+                    </span>
+                    분석 데이터를 전달합니다.
+                  </p>
                   <div
                     css={css`
                       display: flex;
-                      justify-content: center;
-                      align-items: center;
-                      width: 40px;
-                      height: 40px;
-                      border-radius: 999px;
-                      background-color: #189bfa;
-                      color: white;
+                      flex-flow: row nowrap;
+                      gap: 0.8rem;
                     `}
-                    onClick={clickShareHandler}
-                    onKeyDown={() => {}}
-                    role='button'
-                    tabIndex={0}
                   >
-                    <Send size={25}>보내기</Send>
+                    <input
+                      css={css`
+                        width: 70%;
+                        padding: 0.7rem;
+                        border: 1px solid #ececec;
+                        border-radius: 4px;
+                      `}
+                      type='text'
+                      placeholder='Enter ID...'
+                    />
+                    <div
+                      css={css`
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 999px;
+                        background-color: #189bfa;
+                        color: white;
+                      `}
+                      onClick={clickShareHandler}
+                      onKeyDown={() => {}}
+                      role='button'
+                      tabIndex={0}
+                    >
+                      <Send size={25}>보내기</Send>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          )}
         </div>
       </GallaryFilterWrapper>
       <HeightBox height='3rem' />
