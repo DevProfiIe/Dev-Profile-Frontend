@@ -28,7 +28,7 @@ import Message from '~/components/message/Message';
 import logo from '~/assets/images/github.png';
 import { change } from '~/redux/features/searchSlice';
 
-const MAIN_TEXT = 'EVPROFILE is a service for culling suitable new developers.'.split('');
+const MAIN_TEXT = 'EV-PROFILE is a service for culling suitable new developers.'.split('');
 
 const Home: React.FC = (): JSX.Element => {
   const token = getCookie('token');
@@ -134,7 +134,7 @@ const Home: React.FC = (): JSX.Element => {
                   position: relative;
                 `}
               >
-                <HomeText>DEVPROFILE is a service for culling suitable new developers.</HomeText>
+                <HomeText>DEV-PROFILE is a service for culling suitable new developers.</HomeText>
                 <div
                   css={css`
                     position: absolute;

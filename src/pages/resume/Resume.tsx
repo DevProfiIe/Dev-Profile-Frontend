@@ -79,7 +79,7 @@ const Resume: React.FC = (): JSX.Element => {
       commitEnd: '',
       webFrontend: -1,
     },
-    styles: [],
+    styleInfo: [],
   };
 
   const radarData = userData.boardData?.map((item) => {
@@ -405,6 +405,43 @@ const Resume: React.FC = (): JSX.Element => {
               <ResumeHashTagWrapper>
                 <div
                   css={css`
+                    border-bottom: 1px solid #ececec;
+                    padding: 0 0 0.5rem 0;
+                    margin-bottom: 1rem;
+                  `}
+                >
+                  <h2
+                    css={css`
+                      font-size: 2rem;
+                      font-weight: 700;
+                      margin-bottom: 1rem;
+                    `}
+                  >
+                    {userData.userInfo.userTitle}
+                  </h2>
+                  <div
+                    css={css`
+                      display: flex;
+                      flex-flow: column nowrap;
+                      gap: 0.5rem 0;
+                    `}
+                  >
+                    {userData.userInfo.userKeywordAnalyze.split('.').map((item) => (
+                      <p
+                        key={item}
+                        css={css`
+                          font-size: 1rem;
+                          line-height: 134%;
+                          color: #ececec;
+                        `}
+                      >
+                        {item}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+                <div
+                  css={css`
                     display: flex;
                     flex-flow: row wrap;
                     gap: 0.5rem 1rem;
@@ -487,9 +524,9 @@ const Resume: React.FC = (): JSX.Element => {
         <ResumeSection height={(userData.repositoryInfo?.length + 1) * 1000 + 'px'}>
           <ResumeRepoWrapper>
             <ResumeRepoText>
-              {userData.styles.map((item, i) => (
+              {userData.styleInfo.map((item, i) => (
                 <span
-                  key={i}
+                  key={item.keyword}
                   css={css`
                     position: absolute;
                     transition: 0.2s;
@@ -499,7 +536,7 @@ const Resume: React.FC = (): JSX.Element => {
                     );
                   `}
                 >
-                  #{item}
+                  #{item.keyword}
                 </span>
               ))}
 

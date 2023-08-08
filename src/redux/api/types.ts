@@ -35,7 +35,12 @@ export interface UserGithubData {
   boardData: UserGithubBoardData[];
   repositoryInfo: UserGithubRepositoryInfo[];
   userInfo: UserGithubUserInfo;
-  styles: string[];
+  styleInfo: UserStyle[];
+}
+
+export interface UserStyle {
+  keyword: string;
+  detail: string;
 }
 
 export interface UserGithubBoardData {
@@ -80,6 +85,8 @@ export interface UserGithubUserInfo {
   commitStart: string;
   commitEnd: string;
   webFrontend: number;
+  userKeywordAnalyze: string;
+  userTitle: string;
 }
 
 export interface KeywordSearchOutput {

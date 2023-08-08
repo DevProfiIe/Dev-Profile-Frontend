@@ -112,7 +112,7 @@ export const ResumeLeftTextBox = styled.div`
 export const ResumeLeftTextDetail = styled.div`
   ${DisplayFlexRow}
   width: 100%;
-  height: 2.5rem;
+  height: 2rem;
 
   p: nth-of-type(1) {
     width: 30%;
@@ -140,7 +140,6 @@ export const ResumeRightContents = styled.div`
 export const ResumeHashTagWrapper = styled.div`
   ${BoxShadow}
   ${BorderRadius}
-  ${DisplayFlexRowWrap}
   width: 100%;
   height: 48%;
   padding: 1.2rem;
