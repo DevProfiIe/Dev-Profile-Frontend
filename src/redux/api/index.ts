@@ -81,7 +81,7 @@ export const mainApi = createApi({
     getChatRoomList: builder.query<DefaultApi<GetChatRoomData[]>, null>({
       query() {
         return {
-          url: `api/user/chatrooms`,
+          url: `user/chatrooms`,
           method: 'GET',
         };
       },
@@ -89,7 +89,7 @@ export const mainApi = createApi({
     makeChatRoom: builder.mutation<DefaultApi<GetChatRoomHistory>, GetChatRoomParams>({
       query(data) {
         return {
-          url: 'api/chatroom',
+          url: 'chatroom',
           method: 'POST',
           params: data,
         };
@@ -98,7 +98,7 @@ export const mainApi = createApi({
     getChatMessages: builder.query<DefaultApi<GetChatRoomDetail[]>, GetChatRoomHistoryParams>({
       query(data) {
         return {
-          url: `/chatroom/${data.chatroomId}/messages`,
+          url: `chatroom/${data.chatroomId}/messages`,
           method: 'GET',
         };
       },
