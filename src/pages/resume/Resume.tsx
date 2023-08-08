@@ -89,6 +89,8 @@ const Resume: React.FC = (): JSX.Element => {
     };
   });
 
+  const keywordTextData = userData.userInfo?.userKeywordAnalyze?.split('.');
+
   /**
    *
    */
@@ -417,7 +419,7 @@ const Resume: React.FC = (): JSX.Element => {
                       margin-bottom: 1rem;
                     `}
                   >
-                    {/* {userData.userInfo.userTitle} */}
+                    {userData.userInfo.userTitle}
                   </h2>
                   <div
                     css={css`
@@ -426,18 +428,27 @@ const Resume: React.FC = (): JSX.Element => {
                       gap: 0.5rem 0;
                     `}
                   >
-                    {/* {userData.userInfo.userKeywordAnalyze.split('.').map((item) => (
+                    {/* <p
+                      css={css`
+                        font-size: 1rem;
+                        line-height: 134%;
+                        color: ${color.myBiolet};
+                      `}
+                    >
+                      {userData.userInfo.userKeywordAnalyze}
+                    </p> */}
+                    {keywordTextData?.map((item) => (
                       <p
                         key={item}
                         css={css`
                           font-size: 1rem;
                           line-height: 134%;
-                          color: #ececec;
+                          color: ${color.myBiolet};
                         `}
                       >
                         {item}
                       </p>
-                    ))} */}
+                    ))}
                   </div>
                 </div>
                 <div
@@ -530,6 +541,11 @@ const Resume: React.FC = (): JSX.Element => {
                   css={css`
                     position: absolute;
                     transition: 0.2s;
+                    color: hsla(146, 100%, 74%, 1);
+                    font-size: 95px;
+                    font-weight: 500;
+                    letter-spacing: -0.03em;
+                    font-variant: tabular-nums;
                     opacity: ${Math.ceil((scrollY - 1657) * 0.0003) === i ? '1' : '0'};
                     transform: translateY(
                       ${Math.ceil((scrollY - 1657) * 0.0003) === i ? '0%' : '-120%'}
@@ -538,6 +554,56 @@ const Resume: React.FC = (): JSX.Element => {
                 >
                   #{item.keyword}
                 </span>
+              ))}
+
+              {userData.styleInfo.map((item, i) => (
+                <div
+                  key={item.keyword}
+                  css={css`
+                    width: 45rem;
+                    height: 15rem;
+                    position: absolute;
+                    background: radial-gradient(
+                        73.24% 242.56% at 32.22% -52.96%,
+                        rgba(14, 51, 255, 0) 56.38%,
+                        rgba(14, 51, 255, 0.05) 75.52%,
+                        rgba(68, 171, 255, 0.05) 85.8%,
+                        rgba(122, 255, 180, 0.05) 94.99%
+                      ),
+                      rgba(15, 19, 41, 0.92);
+                    border-radius: 24px;
+                    backdrop-filter: blur(22px);
+                    padding: 24px 32px;
+                    right: 15%;
+                    z-index: 5;
+                    color: white;
+                    opacity: ${Math.ceil((scrollY - 1657) * 0.0003) === i ? '1' : '0'};
+                    transform: translateX(
+                      ${Math.ceil((scrollY - 1657) * 0.0003) === i ? '0%' : '120%'}
+                    );
+                    transition: 0.2s;
+                  `}
+                >
+                  <p
+                    css={css`
+                      font-size: 28px;
+                      font-weight: 600;
+                    `}
+                  >
+                    #{item.keyword}
+                  </p>
+                  <HeightBox height='2rem' />
+                  <p
+                    css={css`
+                      font-size: 20px;
+                      font-weight: 600;
+                      line-height: 116%;
+                      letter-spacing: -0.02rem;
+                    `}
+                  >
+                    {item.detail}
+                  </p>
+                </div>
               ))}
 
               {/* <span

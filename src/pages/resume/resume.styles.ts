@@ -177,11 +177,6 @@ export const ResumeRepoText = styled.div`
   width: 80%;
   margin-top: 5.5rem;
   user-select: none;
-  color: hsla(146, 100%, 74%, 1);
-  font-size: 95px;
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  font-variant: tabular-nums;
 `;
 
 export const ResumeRepoSvgbox = styled.div<{ position: number }>`
