@@ -417,7 +417,7 @@ const Resume: React.FC = (): JSX.Element => {
                       margin-bottom: 1rem;
                     `}
                   >
-                    {userData.userInfo.userTitle}
+                    {/* {userData.userInfo.userTitle} */}
                   </h2>
                   <div
                     css={css`
@@ -426,7 +426,7 @@ const Resume: React.FC = (): JSX.Element => {
                       gap: 0.5rem 0;
                     `}
                   >
-                    {userData.userInfo.userKeywordAnalyze.split('.').map((item) => (
+                    {/* {userData.userInfo.userKeywordAnalyze.split('.').map((item) => (
                       <p
                         key={item}
                         css={css`
@@ -437,7 +437,7 @@ const Resume: React.FC = (): JSX.Element => {
                       >
                         {item}
                       </p>
-                    ))}
+                    ))} */}
                   </div>
                 </div>
                 <div
