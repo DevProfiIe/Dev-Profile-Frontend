@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import backgroundImage from '~/assets/images/background1.webp';
+import backgroundImage from '~/assets/images/background1.png';
 
 export const SignInWrapper = styled.div`
   width: 100%;

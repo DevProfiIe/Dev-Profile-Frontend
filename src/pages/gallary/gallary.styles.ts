@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { boxShadow, color } from '~/styles/theme/primary';
-import backgroundImage from '~/assets/images/Logo1.webp';
+import backgroundImage from '~/assets/images/Logo1.jpg';
 
 const DisplayFlexRow = css`
   display: flex;

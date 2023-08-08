@@ -2,13 +2,13 @@
 
 /* Libraries & Hooks */
 import { css } from '@emotion/react';
-import background from '~/assets/images/background2.webp';
+import background from '~/assets/images/background2.png';
 import { useEffect, useRef, useState } from 'react';
 
 /* Components */
 
 /* ETC */
-import line from '~/assets/images/line.webp';
+import line from '~/assets/images/line.png';
 import {
   BackgroundImage,
   HeightBox,
@@ -25,7 +25,7 @@ import { useAppDispatch } from '~/redux/store';
 import { UserGithubInfo } from '~/redux/api/types';
 import { getCookie } from '~/utils/cookie';
 import Message from '~/components/message/Message';
-import logo from '~/assets/images/github.webp';
+import logo from '~/assets/images/github.png';
 import { change } from '~/redux/features/searchSlice';
 
 const MAIN_TEXT = 'EVPROFILE is a service for culling suitable new developers.'.split('');

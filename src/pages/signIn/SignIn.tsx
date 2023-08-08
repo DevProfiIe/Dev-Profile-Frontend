@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 /* Components */
 
 /* Styles */
-import githubIcon from '~/assets/images/github.webp';
+import githubIcon from '~/assets/images/github.png';
 import {
   SignInBackground,
   SignInBox,

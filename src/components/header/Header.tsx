@@ -15,7 +15,7 @@ import Commit from '../commit/Commit';
 import useScroll from '~/hooks/useScroll';
 import { UserGithubInfo } from '~/redux/api/types';
 import { useEffect, useState } from 'react';
-import logo from '~/assets/images/github.webp';
+import logo from '~/assets/images/github.png';
 
 const Header: React.FC = (): JSX.Element => {
   const token = getCookie('token');
