@@ -2,7 +2,7 @@
 
 /* Libraries & Hooks */
 import { css } from '@emotion/react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { getCookie, removeCookie } from '~/utils/cookie';
 import {
   HeaderDropMenuWrapper,
@@ -49,7 +49,7 @@ const Header: React.FC = (): JSX.Element => {
 
   return (
     <HeaderWrapper scrollPosition={scrollY}>
-      <h1
+      <Link
         css={css`
           display: flex;
           flex-flow: row nowrap;
@@ -57,6 +57,7 @@ const Header: React.FC = (): JSX.Element => {
           gap: 0 0.2rem;
           height: 100%;
         `}
+        to='/'
       >
         <p
           css={css`
@@ -75,7 +76,7 @@ const Header: React.FC = (): JSX.Element => {
             padding-bottom: 1.5rem;
           `}
         ></p>
-      </h1>
+      </Link>
       <div
         css={css`
           display: flex;

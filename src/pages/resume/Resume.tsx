@@ -562,6 +562,8 @@ const Resume: React.FC = (): JSX.Element => {
                     transform: translateY(
                       ${Math.ceil((scrollY - 1657) * 0.0003) === i ? '0%' : '-120%'}
                     );
+                    left: 15%;
+                    top: 100px;
                   `}
                 >
                   #{item.keyword}
