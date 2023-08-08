@@ -22,12 +22,13 @@ import {
 import { color } from '~/styles/theme/primary';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '~/redux/store';
-import { change } from '~/redux/features/searchSlice';
 import { UserGithubInfo } from '~/redux/api/types';
 import { getCookie } from '~/utils/cookie';
 import Message from '~/components/message/Message';
 import logo from '~/assets/images/github.webp';
-const MAIN_TEXT = 'nd discover underlying insights from github.'.split('');
+import { change } from '~/redux/features/searchSlice';
+
+const MAIN_TEXT = 'EVPROFILE is a service for culling suitable new developers.'.split('');
 
 const Home: React.FC = (): JSX.Element => {
   const token = getCookie('token');
@@ -41,17 +42,20 @@ const Home: React.FC = (): JSX.Element => {
   let textIndex = 0;
 
   const analyzeHandler = () => {
-    if (!token) {
-      return <Message msg='로그인이 필요합니다.' />;
-    }
+    localStorage.setItem('keyword', JSON.stringify('dbscks97'));
+    navigate('/resume/dbscks97');
 
-    if (userInfo && userInfo.analyzed) {
-      dispatch(change(userInfo.login));
-      navigate(`resume/${userInfo.login}`);
-      return;
-    }
+    // if (!token) {
+    //   return <Message msg='로그인이 필요합니다.' />;
+    // }
 
-    return <Message msg='분석데이터가 존재하지 않습니다.' />;
+    // if (userInfo && userInfo.analyzed) {
+    //   dispatch(change(userInfo.login));
+    //   navigate(`resume/${userInfo.login}`);
+    //   return;
+    // }
+
+    // return <Message msg='분석데이터가 존재하지 않습니다.' />;
   };
 
   useEffect(() => {
@@ -122,28 +126,28 @@ const Home: React.FC = (): JSX.Element => {
             <HeightBox height={'2.25rem'} />
             <HomeParagragh>
               <p>
-                Just type in a box and our AI will instantly <br />
-                summarize key information, recall exact details,
+                It uses CHAT GPT to quickly analyze applicants' Github. <br />
+                After that, you can find the developer you want.
               </p>
               <div
                 css={css`
                   position: relative;
                 `}
               >
-                <HomeText>and discover underlying insights from github.</HomeText>
+                <HomeText>DEVPROFILE is a service for culling suitable new developers.</HomeText>
                 <div
                   css={css`
                     position: absolute;
                     top: 0;
                     left: 0;
                     pointer-events: none;
-                    font-weight: 600;
+                    font-weight: 700;
                     font-size: 1.25rem;
                     line-height: 134%;
                     letter-spacing: 0.05rem;
                   `}
                 >
-                  <div ref={textArea}>a</div>
+                  <div ref={textArea}>D</div>
                   <div
                     css={css`
                       position: relative;

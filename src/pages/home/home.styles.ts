@@ -63,8 +63,10 @@ export const HomeParagragh = styled.div`
   p {
     font-weight: 600;
     font-size: 1.25rem;
-    line-height: 134%;
+    line-height: 150%;
     letter-spacing: 0.05rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
   }
 `;
 
@@ -72,7 +74,7 @@ export const HomeText = styled.div`
   opacity: 0.16;
   white-space: nowrap;
   color: #01051b8f;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.25rem;
   line-height: 134%;
   letter-spacing: 0.05rem;
