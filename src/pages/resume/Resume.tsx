@@ -121,7 +121,8 @@ const Resume: React.FC = (): JSX.Element => {
           }
         }, 100);
       }
-    }, 1000);
+    }, 3000);
+
     return () => {
       clearInterval(animeInterval);
     };
