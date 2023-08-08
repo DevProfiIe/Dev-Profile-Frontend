@@ -416,7 +416,7 @@ const Resume: React.FC = (): JSX.Element => {
                   <h2
                     css={css`
                       font-size: 2rem;
-                      font-weight: 700;
+                      font-weight: 600;
                       margin-bottom: 1rem;
                     `}
                   >
@@ -452,27 +452,38 @@ const Resume: React.FC = (): JSX.Element => {
                     ))}
                   </div>
                 </div>
-                <div
-                  css={css`
-                    display: flex;
-                    flex-flow: row wrap;
-                    gap: 0.5rem 1rem;
-                    width: 100%;
-                    align-self: start;
-                  `}
-                >
-                  {userData.userInfo?.keywordSet?.map((item, i) => (
-                    <ResumeTag
-                      onClick={() => {
-                        searchKeywordHandler(item);
-                      }}
-                      color='#F7F1E9'
-                      border='none'
-                      key={i}
-                    >
-                      #{item}
-                    </ResumeTag>
-                  ))}
+                <div>
+                  <p
+                    css={css`
+                      font-size: 2rem;
+                      font-weight: 600;
+                      margin-bottom: 1rem;
+                    `}
+                  >
+                    키워드
+                  </p>
+                  <div
+                    css={css`
+                      display: flex;
+                      flex-flow: row wrap;
+                      gap: 0.5rem 1rem;
+                      width: 100%;
+                      align-self: start;
+                    `}
+                  >
+                    {userData.userInfo?.keywordSet?.map((item, i) => (
+                      <ResumeTag
+                        onClick={() => {
+                          searchKeywordHandler(item);
+                        }}
+                        color='#F7F1E9'
+                        border='none'
+                        key={i}
+                      >
+                        #{item}
+                      </ResumeTag>
+                    ))}
+                  </div>
                 </div>
               </ResumeHashTagWrapper>
               <ResumeTimeLineWrapper>
