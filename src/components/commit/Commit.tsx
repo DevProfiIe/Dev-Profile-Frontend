@@ -1,49 +1,27 @@
 import { css } from '@emotion/react';
 import { SearchAlt } from 'emotion-icons/boxicons-regular';
-import { useState } from 'react';
 import { CommitContents, CommitContentsTop, CommitSearchBox } from './commit.styles';
 import { Popup } from 'emotion-icons/entypo';
-import { useAppDispatch } from '~/redux/store';
+import { useAppDispatch, useAppSelector } from '~/redux/store';
 import { open } from '~/redux/features/popupSlice';
 import { useGetSearchOutputQuery } from '~/redux/api';
 import Loader from '../loader/Loader';
 import useDebounce from '~/hooks/useDebounce';
 import { UserGithubInfo } from '~/redux/api/types';
+import { commitSearch } from '~/redux/features/searchSlice';
 
 const Commit: React.FC = () => {
-  const [isShow, setIsShow] = useState<boolean>(false);
-  const [isShowSearchResult, setIsShowSearchResult] = useState<boolean>(false);
-  const [searchKeyword, setSearchKeyword] = useState<string>('');
+  const searchKeyword = useAppSelector((state) => state.search.commitKeyword);
   const debouncedTerm = useDebounce(searchKeyword, 500);
   const dispatch = useAppDispatch();
   const userInfo: UserGithubInfo = JSON.parse(localStorage.getItem('userInfo') ?? '');
-
-  /**
-   * 검색 input visible 핸들러
-   */
-  const showSearchInputHandler = () => {
-    if (isShow && searchKeyword !== '') {
-      setSearchKeyword('');
-      setIsShowSearchResult(false);
-    }
-
-    setIsShow((state) => !state);
-  };
 
   /**
    * 검색 input focus 핸들러
    * @param e
    */
   const searchInputFocusHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchKeyword(() => {
-      if (e.target.value !== '') {
-        setIsShowSearchResult(true);
-      } else {
-        setIsShowSearchResult(false);
-      }
-
-      return e.target.value;
-    });
+    dispatch(commitSearch({ commitKeyword: e.target.value }));
   };
 
   /**
@@ -70,7 +48,7 @@ const Commit: React.FC = () => {
       <div>
         <input
           css={css`
-            width: ${isShow ? '15rem' : '0'};
+            width: 15rem;
             border-bottom: 1px solid #000;
             transition: 0.3s;
             text-indent: 0.5rem;
@@ -80,10 +58,10 @@ const Commit: React.FC = () => {
           value={searchKeyword}
         />
         <button>
-          <SearchAlt height={30} onClick={showSearchInputHandler} />
+          <SearchAlt height={30} />
         </button>
       </div>
-      {isShowSearchResult && (
+      {searchKeyword !== '' && (
         <CommitSearchBox>
           {isLoading ? (
             <Loader />

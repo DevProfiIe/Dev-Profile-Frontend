@@ -33,6 +33,8 @@ import useScroll from '~/hooks/useScroll';
 import Chat from '~/components/chat/Chat';
 import { color } from '~/styles/theme/primary';
 import { UserGithubData } from '~/redux/api/types';
+import { useAppDispatch } from '~/redux/store';
+import { commitSearch } from '~/redux/features/searchSlice';
 
 /* etx */
 
@@ -45,11 +47,17 @@ const Resume: React.FC = (): JSX.Element => {
   const textArr = MAIN_TEXT;
   let animeInterval: number;
   let textIndex = 0;
-
+  const dispatch = useAppDispatch();
   const [keyword, setKeyword] = useState<string>('');
-  const { isError, isLoading, data, error } = useGetUserGithubInfoQuery({
-    userName: keyword,
-  });
+
+  const { isError, isLoading, data, error } = useGetUserGithubInfoQuery(
+    {
+      userName: keyword,
+    },
+    {
+      skip: keyword === '',
+    },
+  );
 
   const userData = (data?.data as UserGithubData) ?? {
     boardData: [],
@@ -71,6 +79,7 @@ const Resume: React.FC = (): JSX.Element => {
       commitEnd: '',
       webFrontend: -1,
     },
+    styles: [],
   };
 
   const radarData = userData.boardData?.map((item) => {
@@ -79,6 +88,13 @@ const Resume: React.FC = (): JSX.Element => {
       user: item.userlogin.score,
     };
   });
+
+  /**
+   *
+   */
+  const searchKeywordHandler = (keyword: string) => {
+    dispatch(commitSearch({ commitKeyword: keyword }));
+  };
 
   useEffect(() => {
     const userKeyword = localStorage.getItem('keyword');
@@ -397,7 +413,14 @@ const Resume: React.FC = (): JSX.Element => {
                   `}
                 >
                   {userData.userInfo?.keywordSet?.map((item, i) => (
-                    <ResumeTag color='#F7F1E9' border='none' key={i}>
+                    <ResumeTag
+                      onClick={() => {
+                        searchKeywordHandler(item);
+                      }}
+                      color='#F7F1E9'
+                      border='none'
+                      key={i}
+                    >
                       #{item}
                     </ResumeTag>
                   ))}
@@ -464,15 +487,34 @@ const Resume: React.FC = (): JSX.Element => {
         <ResumeSection height={(userData.repositoryInfo?.length + 1) * 1000 + 'px'}>
           <ResumeRepoWrapper>
             <ResumeRepoText>
-              <span
+              {userData.styles.map((item, i) => (
+                <span
+                  key={i}
+                  css={css`
+                    position: absolute;
+                    transition: 0.2s;
+                    opacity: ${Math.round((scrollY - 1657) * 0.0001) === i ? '1' : '0'};
+                    transform: translateY(
+                      ${Math.round((scrollY - 1657) * 0.0001) === i ? '0%' : '-120%'}
+                    );
+                  `}
+                >
+                  #{item}
+                </span>
+              ))}
+
+              {/* <span
                 css={css`
                   display: inline-block;
                   margin-right: 2rem;
                 `}
               >
-                Commits
-              </span>
-              <span>{scrollY > 1657 ? Math.round((scrollY - 1657) * 0.01) : 0}</span>
+                #
+                {userData.styles.length > Math.round((scrollY - 1657) * 0.0001)
+                  ? userData.styles[Math.round((scrollY - 1657) * 0.0001)]
+                  : userData.styles[userData.styles.length - 1]}
+              </span> */}
+              {/* <span>{scrollY > 1657 ? Math.round((scrollY - 1657) * 0.0001) : 0}</span> */}
             </ResumeRepoText>
             <ResumeRepoSvgbox position={scrollY > 1657 ? Math.round(scrollY - 1657) : 0}>
               <svg

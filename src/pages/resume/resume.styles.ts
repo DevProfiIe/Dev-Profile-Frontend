@@ -76,9 +76,9 @@ export const ResumeTag = styled.div<{ color: string; border?: string }>`
   border: ${({ border }) => (border === 'none' ? '' : `1px solid ${color.aquaMarine}`)};
   transition: 0.2s;
 
-  // &: hover {
-  //   transform: translateY(-10%);
-  // }
+  &: hover {
+    transform: translateY(-10%);
+  }
 `;
 
 export const ResumeChartBox = styled.div`
@@ -112,7 +112,7 @@ export const ResumeLeftTextBox = styled.div`
 export const ResumeLeftTextDetail = styled.div`
   ${DisplayFlexRow}
   width: 100%;
-  height: 2.2rem;
+  height: 2.5rem;
 
   p: nth-of-type(1) {
     width: 30%;

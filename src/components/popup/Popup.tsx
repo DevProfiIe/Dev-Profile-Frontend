@@ -17,6 +17,7 @@ import { DiffEditor } from '@monaco-editor/react';
 
 import Tree from '../tree/Tree';
 import { css } from '@emotion/react';
+import { Resizable } from 're-resizable';
 
 const Popup = () => {
   const dispatch = useAppDispatch();
@@ -80,9 +81,17 @@ const Popup = () => {
           </button>
         </PopupHeader>
         <PopupContents>
-          <PopupSideView>
+          <Resizable
+            css={css`
+              ${PopupSideView}
+            `}
+            defaultSize={{
+              width: 300,
+              height: 800,
+            }}
+          >
             <Tree fileTree={commitData.fileTree} commitData={commitData.diffs} />
-          </PopupSideView>
+          </Resizable>
 
           {isOpenEditor ? (
             <PopupEditorWrapper>

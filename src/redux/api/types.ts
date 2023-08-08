@@ -35,6 +35,7 @@ export interface UserGithubData {
   boardData: UserGithubBoardData[];
   repositoryInfo: UserGithubRepositoryInfo[];
   userInfo: UserGithubUserInfo;
+  styles: string[];
 }
 
 export interface UserGithubBoardData {

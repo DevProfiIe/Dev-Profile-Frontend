@@ -2,10 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 type InitialState = {
   keyword: string;
+  commitKeyword: string;
 };
 
 const initialState: InitialState = {
   keyword: '',
+  commitKeyword: '',
 };
 
 const searchSlice = createSlice({
@@ -17,8 +19,11 @@ const searchSlice = createSlice({
 
       localStorage.setItem('keyword', JSON.stringify(action.payload));
     },
+    commitSearch: (state, action) => {
+      state.commitKeyword = action.payload.commitKeyword;
+    },
   },
 });
 
 export default searchSlice;
-export const { change } = searchSlice.actions;
+export const { change, commitSearch } = searchSlice.actions;

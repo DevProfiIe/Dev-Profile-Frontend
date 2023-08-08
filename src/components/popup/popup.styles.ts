@@ -76,13 +76,14 @@ export const PopupFileWrapper = styled.div<{ selected: boolean }>`
   }
 `;
 
-export const PopupSideView = styled.div`
-  width: 300px;
-  height: 800px;
+export const PopupSideView = css`
   padding: 0.2rem 0.3rem;
   overflow: auto;
-  // border-bottom-left-radius: 1.5rem;
   ${boxShadow};
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const PopupEditorWrapper = styled.div`

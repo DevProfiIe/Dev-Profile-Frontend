@@ -2,8 +2,8 @@
 
 /* Libraries & Hooks */
 import { css } from '@emotion/react';
-import { Link, useLocation } from 'react-router-dom';
-import { getCookie } from '~/utils/cookie';
+import { Link, redirect, useLocation } from 'react-router-dom';
+import { getCookie, removeCookie } from '~/utils/cookie';
 import { HeaderUserImg, HeaderUserInfoWrapper, HeaderWrapper, HerderFont } from './header.styles';
 import Commit from '../commit/Commit';
 import useScroll from '~/hooks/useScroll';
@@ -16,6 +16,11 @@ const Header: React.FC = (): JSX.Element => {
   const { scrollY } = useScroll();
   const location = useLocation();
   const [userInfo, setUserInfo] = useState<UserGithubInfo | null>(null);
+
+  const handleLogout = () => {
+    removeCookie('token');
+    redirect('/');
+  };
 
   useEffect(() => {
     const storageData = localStorage.getItem('userInfo');
@@ -50,7 +55,7 @@ const Header: React.FC = (): JSX.Element => {
             background-image: url(${logo});
             background-size: contain;
             background-repeat: no-repeat;
-            padding-bottom: 1.8rem;
+            padding-bottom: 1.5rem;
           `}
         ></p>
       </h1>
@@ -67,6 +72,10 @@ const Header: React.FC = (): JSX.Element => {
           <HeaderUserInfoWrapper>
             <HeaderUserImg source={userInfo?.avatar_url} />
             <p>{userInfo?.login}</p>
+            <div>
+              <Link>My Page</Link>
+              <button onClick={handleLogout}>Logout</button>
+            </div>
           </HeaderUserInfoWrapper>
         ) : (
           <Link to='/auth/sign-in'>Sign in</Link>
