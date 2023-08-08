@@ -13,7 +13,7 @@ import {
   ChatRoomWrapper,
 } from './chat.styles';
 import { useAppDispatch, useAppSelector } from '~/redux/store';
-import { open } from '~/redux/features/chatSlice';
+import { close, open } from '~/redux/features/chatSlice';
 import { Close } from 'emotion-icons/evil';
 import { css } from '@emotion/react';
 import { ArrowLeft, ChatDots } from 'emotion-icons/bootstrap';
@@ -127,6 +127,10 @@ const Chat = () => {
     }
   };
 
+  const closeChatBoxHandler = () => {
+    dispatch(close());
+  };
+
   const [makeChatRoom] = useMakeChatRoomMutation();
   const [sendMessage] = useSendMessageMutation();
 
@@ -217,7 +221,7 @@ const Chat = () => {
                 cursor: pointer;
               `}
               size={30}
-              onClick={showChatBoxHandler}
+              onClick={closeChatBoxHandler}
             />
           </ChatBoxContentsHeader>
           <ChatBoxContentsMain height='32rem'>

@@ -102,7 +102,6 @@ export const mainApi = createApi({
           method: 'GET',
         };
       },
-      keepUnusedDataFor: 5,
       async onCacheEntryAdded(userData, { cacheDataLoaded, cacheEntryRemoved, updateCachedData }) {
         try {
           await cacheDataLoaded;

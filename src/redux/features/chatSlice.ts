@@ -1,3 +1,4 @@
+import { getSocket } from './../../utils/socket';
 import { createSlice } from '@reduxjs/toolkit';
 
 type InitialState = {
@@ -13,10 +14,20 @@ const chatSlice = createSlice({
   initialState,
   reducers: {
     open: (state) => {
-      state.isShow = !state.isShow;
+      state.isShow = true;
+    },
+
+    close: (state) => {
+      state.isShow = false;
+
+      const stompClient = getSocket();
+
+      stompClient.disconnect((frame: any) => {
+        console.log('Disconnected: ' + frame);
+      });
     },
   },
 });
 
 export default chatSlice;
-export const { open } = chatSlice.actions;
+export const { open, close } = chatSlice.actions;
