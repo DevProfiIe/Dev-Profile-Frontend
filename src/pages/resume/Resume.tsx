@@ -587,16 +587,16 @@ const Resume: React.FC = (): JSX.Element => {
                 >
                   <p
                     css={css`
-                      font-size: 28px;
+                      font-size: 32px;
                       font-weight: 600;
                     `}
                   >
-                    #{item.keyword}
+                    ✓ {item.keyword}
                   </p>
                   <HeightBox height='2rem' />
                   <p
                     css={css`
-                      font-size: 20px;
+                      font-size: 28px;
                       font-weight: 600;
                       line-height: 116%;
                       letter-spacing: -0.02rem;
