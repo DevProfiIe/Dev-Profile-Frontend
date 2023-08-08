@@ -2,9 +2,15 @@
 
 /* Libraries & Hooks */
 import { css } from '@emotion/react';
-import { Link, redirect, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { getCookie, removeCookie } from '~/utils/cookie';
-import { HeaderUserImg, HeaderUserInfoWrapper, HeaderWrapper, HerderFont } from './header.styles';
+import {
+  HeaderDropMenuWrapper,
+  HeaderUserImg,
+  HeaderUserInfoWrapper,
+  HeaderWrapper,
+  HerderFont,
+} from './header.styles';
 import Commit from '../commit/Commit';
 import useScroll from '~/hooks/useScroll';
 import { UserGithubInfo } from '~/redux/api/types';
@@ -16,10 +22,21 @@ const Header: React.FC = (): JSX.Element => {
   const { scrollY } = useScroll();
   const location = useLocation();
   const [userInfo, setUserInfo] = useState<UserGithubInfo | null>(null);
+  const [isShow, setIsShow] = useState<boolean>(false);
 
+  /**
+   *
+   */
   const handleLogout = () => {
     removeCookie('token');
-    redirect('/');
+    window.location.reload();
+  };
+
+  /**
+   *
+   */
+  const handleDropMenu = () => {
+    setIsShow((state) => !state);
   };
 
   useEffect(() => {
@@ -69,14 +86,24 @@ const Header: React.FC = (): JSX.Element => {
       >
         {location.pathname.includes('resume') ? <Commit /> : ''}
         {token ? (
-          <HeaderUserInfoWrapper>
-            <HeaderUserImg source={userInfo?.avatar_url} />
-            <p>{userInfo?.login}</p>
-            <div>
-              <button>My Page</button>
-              <button onClick={handleLogout}>Logout</button>
-            </div>
-          </HeaderUserInfoWrapper>
+          <>
+            <HeaderUserInfoWrapper onClick={handleDropMenu}>
+              <HeaderUserImg source={userInfo?.avatar_url} />
+              <p>{userInfo?.login}</p>
+            </HeaderUserInfoWrapper>
+            {isShow && (
+              <HeaderDropMenuWrapper>
+                <button
+                  css={css`
+                    border-bottom: 1px solid #ececec;
+                  `}
+                >
+                  My Page
+                </button>
+                <button onClick={handleLogout}>Logout</button>
+              </HeaderDropMenuWrapper>
+            )}
+          </>
         ) : (
           <Link to='/auth/sign-in'>Sign in</Link>
         )}

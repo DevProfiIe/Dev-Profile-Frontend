@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { color } from '~/styles/theme/primary';
 
 export const HeaderWrapper = styled.div<{ scrollPosition: number }>`
   width: ${({ scrollPosition }) => (scrollPosition > 50 ? '85%' : '80%')};
@@ -62,4 +63,21 @@ export const HeaderUserImg = styled.div<{ source?: string }>`
   background-image: url(${({ source }) => source});
   background-size: contain;
   border: 2px solid #ececec;
+`;
+
+export const HeaderDropMenuWrapper = styled.div`
+  width: 10rem;
+  height: 5rem;
+  background-color: ${color.aquaMarine};
+  position: absolute;
+  top: 100%;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  border: 1px solid #ececec;
+
+  button {
+    height: 50%;
+  }
 `;
