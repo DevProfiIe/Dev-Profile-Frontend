@@ -18,7 +18,7 @@ export default defineConfig({
       devOptions: {
         enabled: true,
       },
-      injectRegister: 'inline',
+      injectRegister: 'auto',
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
       },
