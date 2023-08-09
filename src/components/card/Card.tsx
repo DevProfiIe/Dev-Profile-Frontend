@@ -12,6 +12,7 @@ import {
 import { GetBoardDataDetails } from '~/redux/api/types';
 import { css } from '@emotion/react';
 import { iconList } from '~/utils/icon';
+import { useNavigate } from 'react-router-dom';
 
 interface CardPropsType {
   data: GetBoardDataDetails;
@@ -21,6 +22,7 @@ interface CardPropsType {
 
 const Card: React.FC<CardPropsType> = ({ data, isSelected, onClick }: CardPropsType) => {
   const { language, avataUrl, userName, field, styles, commitCount, commitDays, repoCount } = data;
+  const navigate = useNavigate();
 
   /**
    * 아이템 별 필드 수정
@@ -140,7 +142,11 @@ const Card: React.FC<CardPropsType> = ({ data, isSelected, onClick }: CardPropsT
             </p>
           </div>
         </CardDetails>
-        <CardBtnWrapper>
+        <CardBtnWrapper
+          onClick={() => {
+            navigate('/resume/dbscks97');
+          }}
+        >
           <CardBtn
             css={css`
               border-radius: 4px;
