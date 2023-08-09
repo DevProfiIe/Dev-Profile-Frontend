@@ -14,6 +14,7 @@ export interface DevProfileNode {
   sort: 'folder' | 'file' | 'root';
   isSelectable: boolean;
   data?: GetCommitDetailsDiff;
+  id: string;
 }
 
 const Tree: React.FC<TreeProps> = ({ fileTree, commitData }: TreeProps) => {
@@ -30,6 +31,7 @@ const Tree: React.FC<TreeProps> = ({ fileTree, commitData }: TreeProps) => {
       children: [],
       sort: 'root',
       isSelectable: false,
+      id: '',
     };
 
     const getNode = (node: TreeData, parent: DevProfileNode, depth = 1) => {
@@ -40,6 +42,7 @@ const Tree: React.FC<TreeProps> = ({ fileTree, commitData }: TreeProps) => {
         sort: 'folder',
         isSelectable: false,
         data: commitData.find((item) => item.filename === node.name),
+        id: node.id,
       };
 
       if (node.children.length <= 0) {

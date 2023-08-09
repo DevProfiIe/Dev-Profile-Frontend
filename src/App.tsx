@@ -30,8 +30,8 @@ const App: React.FC = (): JSX.Element => {
 
           {/* Private Route */}
           <Route element={<PrivateRoute />}>
-            <Route path='resume/:keyword' element={<Resume />} />
             <Route path='gallary' element={<Gallary />} />
+            <Route path='resume/:keyword' element={<Resume />} />
             <Route path='mypage' element={<User />} />
           </Route>
         </Route>

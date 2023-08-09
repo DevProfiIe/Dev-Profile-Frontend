@@ -110,6 +110,7 @@ export interface GetCommitDetailsData {
 export interface TreeData {
   children: TreeData[];
   name: string;
+  id: string;
 }
 
 export interface GetCommitDetailsDiff {

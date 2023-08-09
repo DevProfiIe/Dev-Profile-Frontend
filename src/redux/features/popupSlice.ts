@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { DevProfileNode } from '~/components/tree/Tree';
 
 type InitialState = {
@@ -8,6 +8,14 @@ type InitialState = {
   orgCode: string;
   modifiedCode: string;
   isOpenEditor: boolean;
+  isMessageOpen: boolean;
+  messageInfo: MessageProps;
+};
+
+type MessageProps = {
+  msg: any;
+  type: 'error' | 'confirm' | 'alert';
+  content: string;
 };
 
 const initialState: InitialState = {
@@ -17,6 +25,12 @@ const initialState: InitialState = {
   orgCode: '',
   modifiedCode: '',
   isOpenEditor: false,
+  isMessageOpen: false,
+  messageInfo: {
+    msg: '',
+    type: 'error',
+    content: '',
+  },
 };
 
 const popupSlice = createSlice({
@@ -42,8 +56,15 @@ const popupSlice = createSlice({
       state.orgCode = '';
       state.modifiedCode = '';
     },
+    showMessages: (state, action: PayloadAction<MessageProps>) => {
+      state.isMessageOpen = true;
+      state.messageInfo = action.payload;
+    },
+    closeMessages: (state) => {
+      state.isMessageOpen = false;
+    },
   },
 });
 
 export default popupSlice;
-export const { open, close, click, clear } = popupSlice.actions;
+export const { open, close, click, clear, showMessages, closeMessages } = popupSlice.actions;

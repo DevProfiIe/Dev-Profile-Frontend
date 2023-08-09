@@ -62,7 +62,7 @@ const Node: React.FC<NodeProps> = ({ node }: NodeProps) => {
             padding-top: 0.25rem;
             padding-bottom: 0.25rem;
             font-size: 0.875rem;
-            background-color: ${isClicked?.name === node.name ? '#eee' : ''};
+            background-color: ${isClicked?.id === node.id ? '#eee' : ''};
             cursor: ${node.isSelectable ? 'pointer' : ''};
 
             &: hover {

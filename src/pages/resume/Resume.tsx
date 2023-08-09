@@ -27,7 +27,6 @@ import {
 } from './resume.styles';
 import Repasitory from '~/components/repasitory/Repasitory';
 import Loader from '~/components/loader/Loader';
-import Message from '~/components/message/Message';
 import { useRef, useState, useEffect } from 'react';
 import useScroll from '~/hooks/useScroll';
 import Chat from '~/components/chat/Chat';
@@ -35,6 +34,7 @@ import { color } from '~/styles/theme/primary';
 import { UserGithubData } from '~/redux/api/types';
 import { useAppDispatch } from '~/redux/store';
 import { commitSearch } from '~/redux/features/searchSlice';
+import { showMessages } from '~/redux/features/popupSlice';
 
 /* etx */
 
@@ -58,6 +58,16 @@ const Resume: React.FC = (): JSX.Element => {
       skip: keyword === '',
     },
   );
+
+  if (isError) {
+    dispatch(
+      showMessages({
+        msg: error,
+        content: 'DevProfile Api Error',
+        type: 'error',
+      }),
+    );
+  }
 
   const userData = (data?.data as UserGithubData) ?? {
     boardData: [],
@@ -131,7 +141,13 @@ const Resume: React.FC = (): JSX.Element => {
   if (isLoading) {
     return <Loader />;
   } else if (isError) {
-    return <Message msg={JSON.stringify(error)} />;
+    dispatch(
+      showMessages({
+        msg: '전송이 완료되었습니다.',
+        content: 'DevProfile Message',
+        type: 'confirm',
+      }),
+    );
   }
 
   return (

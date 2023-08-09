@@ -25,6 +25,7 @@ import {
 } from '~/redux/api';
 import { Send } from 'emotion-icons/feather';
 import { GetChatRoomData, SendChatMessageInfo, UserGithubInfo } from '~/redux/api/types';
+import { showMessages } from '~/redux/features/popupSlice';
 
 type RoomsProps = {
   nowPage: number;
@@ -45,10 +46,17 @@ const Rooms: React.FC<RoomsProps> = ({
   //   dispatch(open());
   // };
 
+  /**
+   *
+   */
   const closeChatBoxHandler = () => {
     dispatch(close({}));
   };
 
+  /**
+   *
+   * @param obj
+   */
   const pageHandler = (obj: GetChatRoomData) => {
     setRoomId(obj.id);
     setNowPage(1);
@@ -139,7 +147,7 @@ const Chat = () => {
   const [makeChatRoom] = useMakeChatRoomMutation();
   const [sendMessage] = useSendMessageMutation();
 
-  const { data } = useGetChatMessagesQuery(
+  const { data, error, isError } = useGetChatMessagesQuery(
     {
       chatroomId: roomId,
     },
@@ -150,6 +158,16 @@ const Chat = () => {
   );
 
   const chatHistory = data?.data ?? [];
+
+  if (isError) {
+    dispatch(
+      showMessages({
+        msg: error,
+        content: 'DevProfile Chat Error',
+        type: 'error',
+      }),
+    );
+  }
 
   /**
    *

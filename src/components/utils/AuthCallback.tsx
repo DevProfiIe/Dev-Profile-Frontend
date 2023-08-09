@@ -6,12 +6,14 @@ import { getCookie, setCookie } from '~/utils/cookie';
 
 /* Components */
 import Loader from '../loader/Loader';
-import Message from '../message/Message';
+import { useAppDispatch } from '~/redux/store';
+import { showMessages } from '~/redux/features/popupSlice';
 
 const AuthCallback: React.FC = () => {
   const token = getCookie('token');
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useAppDispatch();
 
   /**
    * url에서 code파싱
@@ -52,24 +54,22 @@ const AuthCallback: React.FC = () => {
     navigate('/');
   }
 
+  if (isError) {
+    dispatch(
+      showMessages({
+        msg: error,
+        content: 'DevProfile Login Error',
+        type: 'error',
+      }),
+    );
+  }
+
   if (isSuccess) {
     setUserData();
   }
   // if (isError) return <Message msg={JSON.stringify(error)} />;
 
-  return (
-    <>
-      {isLoading ? (
-        <Loader />
-      ) : isSuccess ? (
-        <Navigate to='/' />
-      ) : isError ? (
-        <Message msg={JSON.stringify(error)} />
-      ) : (
-        <Loader />
-      )}
-    </>
-  );
+  return <>{isLoading ? <Loader /> : isSuccess ? <Navigate to='/' /> : <Loader />}</>;
 };
 
 export default AuthCallback;

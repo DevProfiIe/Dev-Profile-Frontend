@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { color } from '~/styles/theme/primary';
+
+const DisplayFlexRow = css`
+  display: flex;
+  flex-flow: row nowrap;
+`;
 
 const DisplayFlexColumn = css`
   display: flex;
@@ -24,43 +30,68 @@ const BoxShadow = css`
 export const Wrapper = styled.div`
   position: absolute;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   left: 0;
   top: 0;
   z-index: 99;
 `;
 
 export const MessageBoxWrapper = styled.div`
-  position: absolute;
+  ${DisplayFlexColumn}
+  position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   width: 25rem;
-  min-height: 25rem;
+  height: 25rem;
   z-index: 100;
-  ${DisplayFlexColumn}
+  background-color: beige;
   ${BoxShadow}
   ${BorderRadius}
   ${BorderSolid}
 `;
 
 export const MessageBoxHeader = styled.div`
-  ${DisplayFlexColumn}
+  ${DisplayFlexRow}
   justify-content: center;
   align-items: center;
-  height: 3rem;
-
-  button {
-    position: absolute;
-    right: 5%;
-  }
+  padding: 1.5rem 0;
+  height: 2rem;
+  background-color: white;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  font-weight: 700;
+  font-size: 1.2rem;
 `;
 
 export const MessageBoxContents = styled.div`
-  height: 22rem;
+  height: 18rem;
   overflow: hidden;
-  background-color: beige;
   padding: 1.3rem;
-  border-bottom-left-radius: 1.5rem;
-  border-bottom-right-radius: 1.5rem;
+  line-height: 134%;
+  font-size: 1.2rem;
+`;
+
+export const MessageBoxFooter = styled.div`
+  ${DisplayFlexRow}
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 5rem;
+  bottom: 10px;
+  gap: 0 0.5rem;
+
+  button {
+    width: 100px;
+    height: 50px;
+    padding: 0.1rem 0;
+    background-color: ${color.blueCharcoal};
+    border-radius: 0.5rem;
+    color: #ffffff80;
+
+    &: hover {
+      color: white;
+    }
+  }
 `;

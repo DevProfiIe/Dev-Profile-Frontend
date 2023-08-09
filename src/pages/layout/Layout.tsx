@@ -5,17 +5,20 @@ import { Outlet } from 'react-router-dom';
 
 /* Components */
 import Header from '~/components/header/Header';
+import Message from '~/components/message/Message';
 import Popup from '~/components/popup/Popup';
 import { useAppSelector } from '~/redux/store';
 
 const Layout: React.FC = (): JSX.Element => {
   const isOpen = useAppSelector((state) => state.popup.isOpen);
+  const isOpenMessage = useAppSelector((state) => state.popup.isMessageOpen);
 
   return (
     <>
       <Wrapper>
         <Header />
         {isOpen && <Popup />}
+        {isOpenMessage && <Message />}
         <Outlet />
       </Wrapper>
     </>
