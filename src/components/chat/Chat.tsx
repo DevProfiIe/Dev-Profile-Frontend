@@ -41,8 +41,12 @@ const Rooms: React.FC<RoomsProps> = ({
 }: RoomsProps) => {
   const dispatch = useAppDispatch();
 
-  const showChatBoxHandler = () => {
-    dispatch(open());
+  // const showChatBoxHandler = () => {
+  //   dispatch(open());
+  // };
+
+  const closeChatBoxHandler = () => {
+    dispatch(close({}));
   };
 
   const pageHandler = (obj: GetChatRoomData) => {
@@ -68,7 +72,7 @@ const Rooms: React.FC<RoomsProps> = ({
             cursor: pointer;
           `}
           size={30}
-          onClick={showChatBoxHandler}
+          onClick={closeChatBoxHandler}
         />
       </ChatBoxContentsHeader>
       <ChatBoxContentsMain height='38rem'>
@@ -116,7 +120,7 @@ const Chat = () => {
 
     if (keyword === userInfo.login) {
       setNowPage(-1);
-      refetch();
+      // refetch();
     } else {
       makeChatRoom({ userName: keyword })
         .then((res: any) => {
@@ -129,13 +133,13 @@ const Chat = () => {
   };
 
   const closeChatBoxHandler = () => {
-    dispatch(close());
+    dispatch(close({}));
   };
 
   const [makeChatRoom] = useMakeChatRoomMutation();
   const [sendMessage] = useSendMessageMutation();
 
-  const { data, refetch } = useGetChatMessagesQuery(
+  const { data } = useGetChatMessagesQuery(
     {
       chatroomId: roomId,
     },
@@ -195,92 +199,94 @@ const Chat = () => {
         <ChatDots size={25} />
       </ChatBoxButton>
 
-      {isShow && nowPage < 0 ? (
-        <Rooms
-          nowPage={nowPage}
-          setNowPage={setNowPage}
-          setRoomId={setRoomId}
-          setKeyword={setKeyword}
-        />
-      ) : isShow && nowPage > 0 ? (
-        <ChatBoxContents>
-          <ChatBoxContentsHeader>
-            <ArrowLeft
-              css={css`
-                position: absolute;
-                left: 1rem;
-                cursor: pointer;
-              `}
-              size={30}
-              onClick={pageHandler}
-            />
-            <div>{keyword}님과의 대화</div>
-            <Close
-              css={css`
-                position: absolute;
-                right: 1rem;
-                cursor: pointer;
-              `}
-              size={30}
-              onClick={closeChatBoxHandler}
-            />
-          </ChatBoxContentsHeader>
-          <ChatBoxContentsMain height='32rem'>
-            {chatHistory.map((item) => {
-              if (item.sender.id === userInfo.id) {
-                return (
-                  <ChatContentsRight key={item.id}>
-                    <ChatBox>{item.message}</ChatBox>
-                    <ChatProfile>
-                      <p></p>
-                    </ChatProfile>
-                  </ChatContentsRight>
-                );
-              } else {
-                return (
-                  <ChatContentsLeft key={item.id}>
-                    <ChatProfile>
-                      <p></p>
-                    </ChatProfile>
-                    <ChatBox>{item.message}</ChatBox>
-                  </ChatContentsLeft>
-                );
-              }
-            })}
-          </ChatBoxContentsMain>
-          <ChatBoxContentsInput>
-            <textarea
-              css={css`
-                width: 85%;
-                height: auto;
-                border-radius: 5px;
-                background-color: white;
-                border: 1px solid #eee;
-                padding: 0.5rem;
-                line-height: 120%;
-              `}
-              onChange={(e) => {
-                messageChangeHandler(e);
-              }}
-              value={message}
-            />
-            <div
-              css={css`
-                width: 3rem;
-                height: 3rem;
-                border-radius: 999px;
-                background-color: #ffffff;
-                border: 1px solid #eee;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-              `}
-            >
-              <Send onClick={sendChatMessage} size={25} />
-            </div>
-          </ChatBoxContentsInput>
-        </ChatBoxContents>
+      {isShow ? (
+        nowPage < 0 ? (
+          <Rooms
+            nowPage={nowPage}
+            setNowPage={setNowPage}
+            setRoomId={setRoomId}
+            setKeyword={setKeyword}
+          />
+        ) : (
+          <ChatBoxContents>
+            <ChatBoxContentsHeader>
+              <ArrowLeft
+                css={css`
+                  position: absolute;
+                  left: 1rem;
+                  cursor: pointer;
+                `}
+                size={30}
+                onClick={pageHandler}
+              />
+              <div>{keyword}님과의 대화</div>
+              <Close
+                css={css`
+                  position: absolute;
+                  right: 1rem;
+                  cursor: pointer;
+                `}
+                size={30}
+                onClick={closeChatBoxHandler}
+              />
+            </ChatBoxContentsHeader>
+            <ChatBoxContentsMain height='32rem'>
+              {chatHistory.map((item) => {
+                if (item.sender.id === userInfo.id) {
+                  return (
+                    <ChatContentsRight key={item.id}>
+                      <ChatBox>{item.message}</ChatBox>
+                      <ChatProfile>
+                        <p></p>
+                      </ChatProfile>
+                    </ChatContentsRight>
+                  );
+                } else {
+                  return (
+                    <ChatContentsLeft key={item.id}>
+                      <ChatProfile>
+                        <p></p>
+                      </ChatProfile>
+                      <ChatBox>{item.message}</ChatBox>
+                    </ChatContentsLeft>
+                  );
+                }
+              })}
+            </ChatBoxContentsMain>
+            <ChatBoxContentsInput>
+              <textarea
+                css={css`
+                  width: 85%;
+                  height: auto;
+                  border-radius: 5px;
+                  background-color: white;
+                  border: 1px solid #eee;
+                  padding: 0.5rem;
+                  line-height: 120%;
+                `}
+                onChange={(e) => {
+                  messageChangeHandler(e);
+                }}
+                value={message}
+              />
+              <div
+                css={css`
+                  width: 3rem;
+                  height: 3rem;
+                  border-radius: 999px;
+                  background-color: #ffffff;
+                  border: 1px solid #eee;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  cursor: pointer;
+                `}
+              >
+                <Send onClick={sendChatMessage} size={25} />
+              </div>
+            </ChatBoxContentsInput>
+          </ChatBoxContents>
+        )
       ) : null}
     </Fragment>
   );

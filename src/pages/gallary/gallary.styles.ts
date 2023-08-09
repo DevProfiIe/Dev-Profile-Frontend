@@ -101,6 +101,7 @@ export const StackTag = styled.div<{ color?: string; isSelected?: boolean }>`
   border: ${({ isSelected }) =>
     isSelected ? `2px solid ${color.myBlue}` : `2px solid rgba(1, 5, 27, 0.07);`};
   transition: 0.2s;
+  font-size: 1.5rem;
 `;
 
 export const GallaryContentsWrapper = styled.div`
@@ -257,8 +258,9 @@ export const GallaryBtn = styled.div<{ bgColor: string }>`
   width: 90px;
   padding: 0.5rem 0;
   background-color: ${({ bgColor }) => bgColor};
-  font-size: 0.75rem;
+  font-size: 1.1rem;
   color: white;
+  cursor: pointer;
   ${BoxShadow}
 `;
 
@@ -277,4 +279,20 @@ export const GallaryFilterDropMenu = styled.div<{ width: string; height: string 
   top: 120%;
   z-index: 3;
   ${boxShadow}
+`;
+
+export const ScrollBtn = styled.button`
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: #189bfa;
+  border-radius: 999px;
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 200;
+  ${boxShadow};
+  ${DisplayFlexRow}
+  justify-content: center;
+  align-items: center;
+  color: white;
 `;

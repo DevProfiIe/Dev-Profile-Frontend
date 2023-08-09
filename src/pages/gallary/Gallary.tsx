@@ -17,11 +17,12 @@ import {
   GallaryTag,
   GallaryWrapper,
   HeightBox,
+  ScrollBtn,
   StackTag,
 } from './gallary.styles';
 import { css } from '@emotion/react';
-import { useGetBoardQuery, useGetBoardSortDataQuery } from '~/redux/api';
-import { ArrowIosDownward } from 'emotion-icons/evaicons-solid';
+import { useGetBoardQuery, useGetBoardSortDataQuery, usePostBoardItemsMutation } from '~/redux/api';
+import { ArrowIosDownward, ArrowIosUpward } from 'emotion-icons/evaicons-solid';
 import { Close } from 'emotion-icons/evil';
 import {
   GetBoardDataDetails,
@@ -39,6 +40,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '~/redux/store';
 import { change } from '~/redux/features/searchSlice';
 import { getCookie } from '~/utils/cookie';
+import Message from '~/components/message/Message';
 
 const sortList = [
   {
@@ -235,10 +237,10 @@ const Gallary = () => {
   const [isShowTagBox, setIsShowTagBox] = useState<boolean>(false);
   const [isShowSortBox, setIsShowSortBox] = useState<boolean>(false);
   const [isShowShareBox, setIsShowShareBox] = useState<boolean>(false);
-  const [_sendBoardItems, _setSendBoardItems] = useState<PostBoardQueryData>({
-    sendUserName: '',
-    receiveUserName: '',
-    boardUserNames: [],
+  const [sendBoardItems, setSendBoardItems] = useState<PostBoardQueryData>({
+    sendUserLogin: '',
+    receiveUserLogin: '',
+    boardUserLogin: [],
   });
   const [selectedSkills, setSelectedSkills] = useState<SkillFilterDetails[]>([]);
   const [tmpSkills, setTmpSkills] = useState<SkillFilterDetails>({
@@ -268,6 +270,8 @@ const Gallary = () => {
     ...getBoardParams,
     page: nowPage,
   });
+
+  const [postBoardItems] = usePostBoardItemsMutation();
 
   const totalNum = currentBoardData.data?.data.total ?? 0;
 
@@ -531,7 +535,33 @@ const Gallary = () => {
    *
    */
   const clickShareHandler = () => {
-    setIsShowShareBox((state) => !state);
+    if (selectedGallaryItems.length > 0) {
+      const selectedCardIds = selectedGallaryItems.map((item) => item.login);
+
+      postBoardItems({
+        sendUserLogin: '',
+        receiveUserLogin: sendBoardItems.receiveUserLogin,
+        boardUserLogin: selectedCardIds,
+      })
+        .then((res: any) => {
+          if (res.result) {
+            setIsShowShareBox((state) => !state);
+          }
+        })
+        .catch((err) => {
+          return <Message msg={err} />;
+        });
+    }
+  };
+
+  /**
+   *
+   */
+  const scrollTopHandler = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   /**
@@ -613,599 +643,595 @@ const Gallary = () => {
   }, [inView, currentBoardData.isLoading]);
 
   return (
-    <GallaryWrapper>
-      <HeightBox height='1.5rem' />
-      <GallaryFilterWrapper>
-        <div
-          css={css`
-            display: flex;
-            align-items: center;
-            font-size: 1.5rem;
-          `}
-        >
-          <div
-            css={css`
-              border-right: 3px solid #eee;
-              padding-right: 2rem;
-              position: relative;
-            `}
-          >
-            <GallaryFilterContent gap='0 1.2rem'>
-              <p>{sortList.find((item) => item.sort === selectedSort)?.name}</p>
-              <GallaryFilterBtnWrapper
-                css={css`
-                  transform: ${isShowSortBox ? 'rotate(180deg)' : 'rotate(0)'};
-                `}
-                onClick={() => {
-                  showDropMenuHandler('sort');
-                }}
-              >
-                <ArrowIosDownward size={20}></ArrowIosDownward>
-              </GallaryFilterBtnWrapper>
-            </GallaryFilterContent>
-            {isShowSortBox && (
-              <GallaryFilterDropMenu width='10rem' height='5rem'>
-                <div
-                  css={css`
-                    display: flex;
-                    flex-flow: column nowrap;
-                    gap: 1rem 0;
-                    font-size: 1rem;
-                    color: #aaa;
-                  `}
-                >
-                  {sortList.map((item) => (
-                    <button
-                      css={css`
-                        color: ${selectedSort === item.sort ? 'black' : ''};
-                      `}
-                      key={item.id}
-                      onClick={() => {
-                        clickSortHandler(item.sort);
-                      }}
-                    >
-                      {item.name}
-                    </button>
-                  ))}
-                </div>
-              </GallaryFilterDropMenu>
-            )}
-          </div>
-          <div
-            css={css`
-              padding-left: 2rem;
-              position: relative;
-              display: flex;
-              align-items: center;
-              gap: 0 1rem;
-            `}
-          >
-            <GallaryFilterContent gap='0 1.2rem'>
-              <div
-                css={css`
-                  display: flex;
-                  flex-flow: row nowrap;
-                  gap: 0 0.5rem;
-                `}
-              >
-                {selectedKeywords.length > 0 ? (
-                  selectedKeywords.map((item, i) => (
-                    <div
-                      key={item.num}
-                      css={css`
-                        display: flex;
-                        flex-flow: row nowrap;
-                        align-items: center;
-                        gap: 0 0.5rem;
-                      `}
-                    >
-                      <p
-                        css={css`
-                          color: #189bfa;
-                        `}
-                      >
-                        #{item.keyword}
-                      </p>
-                      <Close
-                        onClick={() => {
-                          deleteKeywordHandler(item.num);
-                        }}
-                        size={15}
-                      />
-                      {i === selectedKeywords.length - 1 ? '' : ','}
-                    </div>
-                  ))
-                ) : (
-                  <p>전체</p>
-                )}
-              </div>
-              <GallaryFilterBtnWrapper
-                css={css`
-                  transform: ${isShowTagBox ? 'rotate(180deg)' : 'rotate(0deg)'};
-                `}
-                onClick={() => {
-                  showDropMenuHandler('tag');
-                }}
-              >
-                <ArrowIosDownward size={20}></ArrowIosDownward>
-              </GallaryFilterBtnWrapper>
-            </GallaryFilterContent>
-            {isShowTagBox && (
-              <GallaryFilterDropMenu width='45rem' height='10rem'>
-                <div
-                  css={css`
-                    display: flex;
-                    flex-flow: row wrap;
-                    align-content: flex-start;
-                    width: 100%;
-                    gap: 0.5rem;
-                    margin-bottom: 1rem;
-                    font-size: 0.875rem;
-                  `}
-                >
-                  {keyword.map((item) => (
-                    <StackTag
-                      onClick={() => {
-                        clickKeywordHandler(item);
-                      }}
-                      key={item.num}
-                      isSelected={findTag(item)}
-                    >
-                      #{item.keyword}
-                    </StackTag>
-                  ))}
-                </div>
-                <div
-                  css={css`
-                    display: flex;
-                    flex-flow: row wrap;
-                    align-items: center;
-                    width: 100%;
-                    height: 3rem;
-                    position: relative;
-                  `}
-                ></div>
-                <div
-                  css={css`
-                    height: 1rem;
-                    width: 100%;
-                    display: flex;
-                    justify-content: flex-end;
-                    gap: 0 1rem;
-                    font-size: 0.875rem;
-                    border-top: 1px solid #ececec;
-                    padding: 1rem 0;
-                  `}
-                >
-                  <button
-                    onClick={() => {
-                      modifyKeywords();
-                    }}
-                  >
-                    적용하기
-                  </button>
-                </div>
-              </GallaryFilterDropMenu>
-            )}
-          </div>
-        </div>
-        <div
-          css={css`
-            display: flex;
-            gap: 0 1rem;
-          `}
-        >
-          {/* <div>after items</div> */}
+    <>
+      <GallaryWrapper>
+        <HeightBox height='1.5rem' />
+        <GallaryFilterWrapper>
           <div
             css={css`
               display: flex;
-              flex-flow: row nowrap;
-              gap: 0 0.7rem;
               align-items: center;
-              position: relative;
+              font-size: 1.5rem;
             `}
           >
-            <GallaryFilterBox
-              onClick={() => {
-                showDropMenuHandler('stack');
-              }}
+            <div
+              css={css`
+                border-right: 3px solid #eee;
+                padding-right: 2rem;
+                position: relative;
+              `}
             >
-              <GallaryFilterContent gap='0'>
-                <p>기술 스택</p>
+              <GallaryFilterContent gap='0 1.2rem'>
+                <p>{sortList.find((item) => item.sort === selectedSort)?.name}</p>
+                <GallaryFilterBtnWrapper
+                  css={css`
+                    transform: ${isShowSortBox ? 'rotate(180deg)' : 'rotate(0)'};
+                  `}
+                  onClick={() => {
+                    showDropMenuHandler('sort');
+                  }}
+                >
+                  <ArrowIosDownward size={20}></ArrowIosDownward>
+                </GallaryFilterBtnWrapper>
               </GallaryFilterContent>
-            </GallaryFilterBox>
-            {isShowStackBox && (
-              <GallaryFilterDropMenu width='30rem' height='10rem'>
-                <div
-                  css={css`
-                    display: flex;
-                    flex-flow: row wrap;
-                    align-content: flex-start;
-                    width: 100%;
-                    gap: 0.5rem;
-                    margin-bottom: 1rem;
-                  `}
-                >
-                  {stacks.map((item) => (
-                    <StackTag
-                      onClick={() => {
-                        clickSkillHandler(item);
-                      }}
-                      isSelected={tmpSkills.name === item.name}
-                      key={item.name}
-                    >
-                      {item.name}
-                    </StackTag>
-                  ))}
-                </div>
-                <div
-                  css={css`
-                    display: flex;
-                    align-items: center;
-                    width: 100%;
-                    height: 3rem;
-                    position: relative;
-                    border-top: 1px solid #ececec;
-                  `}
-                >
-                  <button
-                    css={css`
-                      width: 100%;
-                      height: 10px;
-                      border-radius: 999px;
-                      background-color: #ececec;
-                    `}
-                    ref={termRef}
-                    onClick={termClickHandler}
-                  ></button>
-                  <button
-                    css={css`
-                      width: ${positionX}%;
-                      height: 10px;
-                      border-radius: 999px;
-                      background-color: #189bfa;
-                      position: absolute;
-                    `}
-                    onClick={termClickHandler}
-                  >
-                    <p
-                      css={css`
-                        width: 25px;
-                        height: 25px;
-                        background-color: white;
-                        position: absolute;
-                        right: 0;
-                        top: 50%;
-                        transform: translateY(-50%);
-                        border-radius: 999px;
-                        pointer: cursor;
-                        border: 5px solid #189bfa;
-                      `}
-                    ></p>
-                  </button>
-                </div>
-                <div
-                  css={css`
-                    height: 1rem;
-                    width: 100%;
-                    display: flex;
-                    justify-content: space-between;
-                    font-size: 0.875rem;
-                    border-top: 1px solid #ececec;
-                    padding: 1rem 0;
-                  `}
-                >
-                  <p>
-                    {tmpSkills.name} :{' '}
-                    {tmpSkills.duration > 0 ? `${tmpSkills.duration}개월 이상` : '전체'}
-                  </p>
+              {isShowSortBox && (
+                <GallaryFilterDropMenu width='10rem' height='5rem'>
                   <div
                     css={css`
                       display: flex;
-                      gap: 0 0.5rem;
+                      flex-flow: column nowrap;
+                      gap: 1rem 0;
+                      font-size: 1rem;
+                      color: #aaa;
                     `}
                   >
-                    <button
-                      onClick={() => {
-                        setIsShowStackBox(false);
-                      }}
-                    >
-                      {' '}
-                      취소
-                    </button>
-                    <button onClick={addSkillHandler}>적용하기</button>
+                    {sortList.map((item) => (
+                      <button
+                        css={css`
+                          color: ${selectedSort === item.sort ? 'black' : ''};
+                        `}
+                        key={item.id}
+                        onClick={() => {
+                          clickSortHandler(item.sort);
+                        }}
+                      >
+                        {item.name}
+                      </button>
+                    ))}
                   </div>
-                </div>
-              </GallaryFilterDropMenu>
-            )}
-            {selectedSkills.map((item, _i) => (
-              <StackTag key={item.name} color='#189bfa'>
+                </GallaryFilterDropMenu>
+              )}
+            </div>
+            <div
+              css={css`
+                padding-left: 2rem;
+                position: relative;
+                display: flex;
+                align-items: center;
+                gap: 0 1rem;
+              `}
+            >
+              <GallaryFilterContent gap='0 1.2rem'>
                 <div
                   css={css`
                     display: flex;
                     flex-flow: row nowrap;
-                    align-items: center;
                     gap: 0 0.5rem;
                   `}
                 >
-                  <p>
-                    {item.name} : {item.duration > 0 ? `${item.duration}개월 이상` : '전체'}
-                  </p>
-                  <Close
-                    onClick={() => {
-                      deleteSkillHandler(item);
-                    }}
-                    size={15}
-                  />
+                  {selectedKeywords.length > 0 ? (
+                    selectedKeywords.map((item, i) => (
+                      <div
+                        key={item.num}
+                        css={css`
+                          display: flex;
+                          flex-flow: row nowrap;
+                          align-items: center;
+                          gap: 0 0.5rem;
+                        `}
+                      >
+                        <p
+                          css={css`
+                            color: #189bfa;
+                          `}
+                        >
+                          #{item.keyword}
+                        </p>
+                        <Close
+                          onClick={() => {
+                            deleteKeywordHandler(item.num);
+                          }}
+                          size={15}
+                        />
+                        {i === selectedKeywords.length - 1 ? '' : ','}
+                      </div>
+                    ))
+                  ) : (
+                    <p>전체</p>
+                  )}
                 </div>
-              </StackTag>
-            ))}
+                <GallaryFilterBtnWrapper
+                  css={css`
+                    transform: ${isShowTagBox ? 'rotate(180deg)' : 'rotate(0deg)'};
+                  `}
+                  onClick={() => {
+                    showDropMenuHandler('tag');
+                  }}
+                >
+                  <ArrowIosDownward size={20}></ArrowIosDownward>
+                </GallaryFilterBtnWrapper>
+              </GallaryFilterContent>
+              {isShowTagBox && (
+                <GallaryFilterDropMenu width='45rem' height='10rem'>
+                  <div
+                    css={css`
+                      display: flex;
+                      flex-flow: row wrap;
+                      align-content: flex-start;
+                      width: 100%;
+                      gap: 0.5rem;
+                      margin-bottom: 1rem;
+                      font-size: 0.875rem;
+                    `}
+                  >
+                    {keyword.map((item) => (
+                      <StackTag
+                        onClick={() => {
+                          clickKeywordHandler(item);
+                        }}
+                        key={item.num}
+                        isSelected={findTag(item)}
+                      >
+                        #{item.keyword}
+                      </StackTag>
+                    ))}
+                  </div>
+                  <div
+                    css={css`
+                      display: flex;
+                      flex-flow: row wrap;
+                      align-items: center;
+                      width: 100%;
+                      height: 3rem;
+                      position: relative;
+                    `}
+                  ></div>
+                  <div
+                    css={css`
+                      height: 1rem;
+                      width: 100%;
+                      display: flex;
+                      justify-content: flex-end;
+                      gap: 0 1rem;
+                      font-size: 0.875rem;
+                      border-top: 1px solid #ececec;
+                      padding: 1rem 0;
+                    `}
+                  >
+                    <button
+                      onClick={() => {
+                        modifyKeywords();
+                      }}
+                    >
+                      적용하기
+                    </button>
+                  </div>
+                </GallaryFilterDropMenu>
+              )}
+            </div>
           </div>
-
-          {/* <div>after items</div> */}
-        </div>
-        <div
-          css={css`
-            width: 100%;
-            height: 2rem;
-            display: flex;
-            flex-flow: row nowrap;
-            justify-content: space-between;
-            align-items: center;
-          `}
-        >
-          <p>
-            <span
-              css={css`
-                font-size: 1.25rem;
-                font-weight: 700;
-                color: #189bfa;
-              `}
-            >
-              {totalNum}
-            </span>{' '}
-            명이 존재합니다.
-          </p>
-          {token && (
+          <div
+            css={css`
+              display: flex;
+              gap: 0 1rem;
+            `}
+          >
+            {/* <div>after items</div> */}
             <div
               css={css`
+                display: flex;
+                flex-flow: row nowrap;
+                gap: 0 0.7rem;
+                align-items: center;
                 position: relative;
               `}
             >
-              <div
-                css={css`
-                  display: flex;
-                  align-items: center;
-                  gap: 0 0.5rem;
-                  padding: 0.6rem 1.5rem;
-                  border: 1px solid #ececec;
-                  border-radius: 5px;
-                  z-index: 2;
-                `}
-                onClick={clickShareHandler}
-                onKeyDown={() => {}}
-                role='button'
-                tabIndex={0}
+              <GallaryFilterBox
+                onClick={() => {
+                  showDropMenuHandler('stack');
+                }}
               >
-                <p>공유하기</p>
-                <MailSend size={25} />
-              </div>
-              {isShowShareBox && (
-                <div
-                  css={css`
-                    display: flex;
-                    flex-flow: column nowrap;
-                    align-items: center;
-                    gap: 0.5rem 0;
-                    height: auto;
-                    width: 270px;
-                    position: absolute;
-                    top: 150%;
-                    left: 0;
-                    border-radius: 0.5rem;
-                    background-color: white;
-                    border: 1px solid #ececec;
-                    padding: 1rem;
-                    z-index: 2;
-                  `}
-                >
-                  <p
+                <GallaryFilterContent gap='0'>
+                  <p>기술 스택</p>
+                </GallaryFilterContent>
+              </GallaryFilterBox>
+              {isShowStackBox && (
+                <GallaryFilterDropMenu width='30rem' height='10rem'>
+                  <div
                     css={css`
-                      line-height: 160%;
+                      display: flex;
+                      flex-flow: row wrap;
+                      align-content: flex-start;
+                      width: 100%;
+                      gap: 0.5rem;
+                      margin-bottom: 1rem;
                     `}
                   >
-                    <span
+                    {stacks.map((item) => (
+                      <StackTag
+                        onClick={() => {
+                          clickSkillHandler(item);
+                        }}
+                        isSelected={tmpSkills.name === item.name}
+                        key={item.name}
+                      >
+                        {item.name}
+                      </StackTag>
+                    ))}
+                  </div>
+                  <div
+                    css={css`
+                      display: flex;
+                      align-items: center;
+                      width: 100%;
+                      height: 3rem;
+                      position: relative;
+                      border-top: 1px solid #ececec;
+                    `}
+                  >
+                    <button
                       css={css`
-                        font-size: 1.2rem;
-                        font-weight: 700;
-                        color: #189bfa;
+                        width: 100%;
+                        height: 10px;
+                        border-radius: 999px;
+                        background-color: #ececec;
+                      `}
+                      ref={termRef}
+                      onClick={termClickHandler}
+                    ></button>
+                    <button
+                      css={css`
+                        width: ${positionX}%;
+                        height: 10px;
+                        border-radius: 999px;
+                        background-color: #189bfa;
+                        position: absolute;
+                      `}
+                      onClick={termClickHandler}
+                    >
+                      <p
+                        css={css`
+                          width: 25px;
+                          height: 25px;
+                          background-color: white;
+                          position: absolute;
+                          right: 0;
+                          top: 50%;
+                          transform: translateY(-50%);
+                          border-radius: 999px;
+                          pointer: cursor;
+                          border: 5px solid #189bfa;
+                        `}
+                      ></p>
+                    </button>
+                  </div>
+                  <div
+                    css={css`
+                      height: 1rem;
+                      width: 100%;
+                      display: flex;
+                      justify-content: space-between;
+                      font-size: 0.875rem;
+                      border-top: 1px solid #ececec;
+                      padding: 1rem 0;
+                    `}
+                  >
+                    <p>
+                      {tmpSkills.name} :{' '}
+                      {tmpSkills.duration > 0 ? `${tmpSkills.duration}개월 이상` : '전체'}
+                    </p>
+                    <div
+                      css={css`
+                        display: flex;
+                        gap: 0 0.5rem;
                       `}
                     >
-                      {selectedGallaryItems.length > 0
-                        ? selectedGallaryItems.length + '명의 '
-                        : '전체 '}
-                    </span>
-                    분석 데이터를 전달합니다.
-                  </p>
+                      <button
+                        onClick={() => {
+                          setIsShowStackBox(false);
+                        }}
+                      >
+                        {' '}
+                        취소
+                      </button>
+                      <button onClick={addSkillHandler}>적용하기</button>
+                    </div>
+                  </div>
+                </GallaryFilterDropMenu>
+              )}
+              {selectedSkills.map((item, _i) => (
+                <StackTag key={item.name} color='#189bfa'>
                   <div
                     css={css`
                       display: flex;
                       flex-flow: row nowrap;
-                      gap: 0.8rem;
+                      align-items: center;
+                      gap: 0 0.5rem;
                     `}
                   >
-                    <input
-                      css={css`
-                        width: 70%;
-                        padding: 0.7rem;
-                        border: 1px solid #ececec;
-                        border-radius: 4px;
-                      `}
-                      type='text'
-                      placeholder='Enter ID...'
+                    <p>
+                      {item.name} : {item.duration > 0 ? `${item.duration}개월 이상` : '전체'}
+                    </p>
+                    <Close
+                      onClick={() => {
+                        deleteSkillHandler(item);
+                      }}
+                      size={15}
                     />
+                  </div>
+                </StackTag>
+              ))}
+            </div>
+
+            {/* <div>after items</div> */}
+          </div>
+          <div
+            css={css`
+              width: 100%;
+              height: 2rem;
+              display: flex;
+              flex-flow: row nowrap;
+              justify-content: space-between;
+              align-items: center;
+            `}
+          >
+            <p>
+              <span
+                css={css`
+                  font-size: 1.25rem;
+                  font-weight: 700;
+                  color: #189bfa;
+                `}
+              >
+                {totalNum}
+              </span>{' '}
+              명이 존재합니다.
+            </p>
+            {token && (
+              <div
+                css={css`
+                  position: relative;
+                `}
+              >
+                <button
+                  css={css`
+                    display: flex;
+                    align-items: center;
+                    gap: 0 0.5rem;
+                    padding: 0.6rem 1.5rem;
+                    border: 1px solid #ececec;
+                    border-radius: 5px;
+                    z-index: 2;
+                  `}
+                  onClick={clickShareHandler}
+                >
+                  <p>공유하기</p>
+                  <MailSend size={25} />
+                </button>
+                {isShowShareBox && (
+                  <div
+                    css={css`
+                      display: flex;
+                      flex-flow: column nowrap;
+                      align-items: center;
+                      gap: 0.5rem 0;
+                      height: auto;
+                      width: 270px;
+                      position: absolute;
+                      top: 150%;
+                      left: 0;
+                      border-radius: 0.5rem;
+                      background-color: white;
+                      border: 1px solid #ececec;
+                      padding: 1rem;
+                      z-index: 2;
+                    `}
+                  >
+                    <p
+                      css={css`
+                        line-height: 160%;
+                      `}
+                    >
+                      <span
+                        css={css`
+                          font-size: 1.2rem;
+                          font-weight: 700;
+                          color: #189bfa;
+                          margin-right: 0.5rem;
+                        `}
+                      >
+                        {selectedGallaryItems.length > 0
+                          ? selectedGallaryItems.length + '명의 '
+                          : '전체 '}
+                      </span>
+                      분석 데이터를 전달합니다.
+                    </p>
                     <div
                       css={css`
                         display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        width: 40px;
-                        height: 40px;
-                        border-radius: 999px;
-                        background-color: #189bfa;
-                        color: white;
+                        flex-flow: row nowrap;
+                        gap: 0.8rem;
                       `}
-                      onClick={clickShareHandler}
-                      onKeyDown={() => {}}
-                      role='button'
-                      tabIndex={0}
                     >
-                      <Send size={25}>보내기</Send>
+                      <input
+                        css={css`
+                          width: 70%;
+                          padding: 0.7rem;
+                          border: 1px solid #ececec;
+                          border-radius: 4px;
+                        `}
+                        type='text'
+                        placeholder='Enter ID...'
+                        onChange={(e) => {
+                          setSendBoardItems((prevState) => {
+                            return {
+                              ...prevState,
+                              receiveUserLogin: e.target.value,
+                            };
+                          });
+                        }}
+                      />
+                      <button
+                        css={css`
+                          display: flex;
+                          justify-content: center;
+                          align-items: center;
+                          width: 40px;
+                          height: 40px;
+                          border-radius: 999px;
+                          background-color: #189bfa;
+                          color: white;
+                        `}
+                        onClick={clickShareHandler}
+                      >
+                        <Send size={25}>보내기</Send>
+                      </button>
                     </div>
                   </div>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      </GallaryFilterWrapper>
-      <HeightBox height='3rem' />
-      <GallaryContentsWrapper>
-        {boardItems.map((item, i) => (
-          <GallaryItem
-            key={i}
-            ref={i === boardItems.length - 1 ? ref : null}
-            onClick={() => {
-              selectItemHandler(item);
-            }}
-            selected={findSelectedItem(item)}
-          >
-            <GallaryHeader>
-              {item.language.map((lang) => (
-                <img
-                  key={lang}
-                  css={css`
-                    height: 35px;
-                  `}
-                  src={iconList.find((icon) => icon.name === lang)?.url}
-                  alt={lang}
-                />
-              ))}
-            </GallaryHeader>
-            <GallaryContent>
-              <GallaryItemImg imgUrl={item.avataUrl}></GallaryItemImg>
-              <h2
-                css={css`
-                  width: 100%;
-                  font-size: 1.75rem;
-                  font-weight: 700;
-                  padding: 0.5rem 0;
-                  text-align: right;
-                  line-height: 1.3;
-                `}
-              >
-                {item.userName}
-              </h2>
-              <p
-                css={css`
-                  width: 100%;
-                  font-size: 1rem;
-                  text-align: right;
-                  margin-bottom: 2rem;
-                `}
-              >
-                {parseField(item.field)}
-              </p>
-              <GallaryItemText>
-                {item.styles?.map((style) => (
-                  <GallaryTag key={style}>#{style}</GallaryTag>
+                )}
+              </div>
+            )}
+          </div>
+        </GallaryFilterWrapper>
+        <HeightBox height='3rem' />
+        <GallaryContentsWrapper>
+          {boardItems.map((item, i) => (
+            <GallaryItem
+              key={i}
+              ref={i === boardItems.length - 1 ? ref : null}
+              onClick={() => {
+                if (token) {
+                  selectItemHandler(item);
+                }
+              }}
+              selected={findSelectedItem(item)}
+            >
+              <GallaryHeader>
+                {item.language.map((lang) => (
+                  <img
+                    key={lang}
+                    css={css`
+                      height: 35px;
+                    `}
+                    src={iconList.find((icon) => icon.name === lang)?.url}
+                    alt={lang}
+                  />
                 ))}
-              </GallaryItemText>
-              <GallaryDetails>
-                <div>
-                  <p
-                    css={css`
-                      margin-bottom: 0.5rem;
-                      font-size: 0.875rem;
-                    `}
-                  >
-                    레포지토리
-                  </p>
-                  <p
-                    css={css`
-                      font-size: 1.125rem;
-                      font-weight: 700;
-                    `}
-                  >
-                    {item.repoCount}
-                  </p>
-                </div>
-                <div>
-                  <p
-                    css={css`
-                      margin-bottom: 0.5rem;
-                      font-size: 0.875rem;
-                    `}
-                  >
-                    커밋
-                  </p>
-                  <p
-                    css={css`
-                      font-size: 1.125rem;
-                      font-weight: 700;
-                    `}
-                  >
-                    {item.commitCount}
-                  </p>
-                </div>
-                <div>
-                  <p
-                    css={css`
-                      margin-bottom: 0.5rem;
-                      font-size: 0.875rem;
-                    `}
-                  >
-                    기간
-                  </p>
-                  <p
-                    css={css`
-                      font-size: 1.125rem;
-                      font-weight: 700;
-                    `}
-                  >
-                    {item.commitDays} 일
-                  </p>
-                </div>
-              </GallaryDetails>
-              <GallaryBtnWrapper>
-                <GallaryBtn
+              </GallaryHeader>
+              <GallaryContent>
+                <GallaryItemImg imgUrl={item.avataUrl}></GallaryItemImg>
+                <h2
                   css={css`
-                    border-top-left-radius: 4px;
-                    border-bottom-left-radius: 4px;
+                    width: 100%;
+                    font-size: 1.75rem;
+                    font-weight: 700;
+                    padding: 0.5rem 0;
+                    text-align: right;
+                    line-height: 1.3;
                   `}
-                  bgColor='#6366f1'
-                  onClick={() => {
-                    navigateResumeHandler(item);
-                  }}
                 >
-                  분석보기
-                </GallaryBtn>
-                <GallaryBtn
+                  {item.userName}
+                </h2>
+                <p
                   css={css`
-                    border-top-right-radius: 4px;
-                    border-bottom-right-radius: 4px;
+                    width: 100%;
+                    font-size: 1rem;
+                    text-align: right;
+                    margin-bottom: 2rem;
                   `}
-                  bgColor='#DB4455'
                 >
-                  PDF 출력
-                </GallaryBtn>
-              </GallaryBtnWrapper>
-            </GallaryContent>
-          </GallaryItem>
-        ))}
-        {currentBoardData.isFetching && <Loader />}
-      </GallaryContentsWrapper>
-      {/* <GallaryContactBox
+                  {parseField(item.field)}
+                </p>
+                <GallaryItemText>
+                  {item.styles?.map((style) => (
+                    <GallaryTag key={style}>#{style}</GallaryTag>
+                  ))}
+                </GallaryItemText>
+                <GallaryDetails>
+                  <div>
+                    <p
+                      css={css`
+                        margin-bottom: 0.5rem;
+                        font-size: 0.875rem;
+                      `}
+                    >
+                      레포지토리
+                    </p>
+                    <p
+                      css={css`
+                        font-size: 1.125rem;
+                        font-weight: 700;
+                      `}
+                    >
+                      {item.repoCount}
+                    </p>
+                  </div>
+                  <div>
+                    <p
+                      css={css`
+                        margin-bottom: 0.5rem;
+                        font-size: 0.875rem;
+                      `}
+                    >
+                      커밋
+                    </p>
+                    <p
+                      css={css`
+                        font-size: 1.125rem;
+                        font-weight: 700;
+                      `}
+                    >
+                      {item.commitCount}
+                    </p>
+                  </div>
+                  <div>
+                    <p
+                      css={css`
+                        margin-bottom: 0.5rem;
+                        font-size: 0.875rem;
+                      `}
+                    >
+                      기간
+                    </p>
+                    <p
+                      css={css`
+                        font-size: 1.125rem;
+                        font-weight: 700;
+                      `}
+                    >
+                      {item.commitDays} 일
+                    </p>
+                  </div>
+                </GallaryDetails>
+                <GallaryBtnWrapper>
+                  <GallaryBtn
+                    css={css`
+                      border-radius: 4px;
+                    `}
+                    bgColor='#6366f1'
+                    onClick={() => {
+                      navigateResumeHandler(item);
+                    }}
+                  >
+                    분석보기
+                  </GallaryBtn>
+                </GallaryBtnWrapper>
+              </GallaryContent>
+            </GallaryItem>
+          ))}
+          {currentBoardData.isFetching && <Loader />}
+        </GallaryContentsWrapper>
+        {/* <GallaryContactBox
         isShow={isShowContactbox}
         onDrop={(e) => {
           dragDropHandler(e);
@@ -1226,7 +1252,11 @@ const Gallary = () => {
           ))}
         </GallaryDropBox>
       </GallaryContactBox> */}
-    </GallaryWrapper>
+      </GallaryWrapper>
+      <ScrollBtn onClick={scrollTopHandler}>
+        <ArrowIosUpward size={25} />
+      </ScrollBtn>
+    </>
   );
 };
 

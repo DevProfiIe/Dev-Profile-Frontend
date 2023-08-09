@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
   DefaultApi,
   GetBoardData,
+  GetBoardDataDetails,
   GetBoardDataParams,
   GetBoardSortData,
   GetChatRoomData,
@@ -12,6 +13,8 @@ import {
   GetChatRoomParams,
   GetCommitDetailsData,
   GetCommitDetailsParams,
+  GetMyPageUserItems,
+  GetMyPageUserItemsParams,
   KeywordSearchOutput,
   KeywordSearchOutputParams,
   PostBoardQueryData,
@@ -172,6 +175,38 @@ export const mainApi = createApi({
         };
       },
     }),
+    getMyPageUserItems: builder.query<DefaultApi<GetMyPageUserItems>, GetMyPageUserItemsParams>({
+      query(data) {
+        return {
+          url: 'myPage',
+          method: 'GET',
+          params: data,
+        };
+      },
+    }),
+    getMyPageUserSpecific: builder.query<DefaultApi<GetBoardDataDetails[]>, { id: string }>({
+      query(data) {
+        return {
+          url: 'myPage/specific',
+          method: 'GET',
+          params: data,
+        };
+      },
+    }),
+    postMyPageUserSpecific: builder.mutation<
+      DefaultApi<any>,
+      { id: string; checkUserNames: string[] }
+    >({
+      query(data) {
+        console.log('is');
+
+        return {
+          url: 'myPage/submit',
+          method: 'POST',
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
@@ -187,4 +222,7 @@ export const {
   useGetBoardQuery,
   useGetBoardSortDataQuery,
   usePostBoardItemsMutation,
+  useGetMyPageUserItemsQuery,
+  useGetMyPageUserSpecificQuery,
+  usePostMyPageUserSpecificMutation,
 } = mainApi;

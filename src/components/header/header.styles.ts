@@ -53,6 +53,7 @@ export const HeaderUserInfoWrapper = styled.div`
   flex-flow: row nowrap;
   align-items: center;
   gap: 0 0.5rem;
+  cursor: pointer;
 `;
 
 export const HeaderUserImg = styled.div<{ source?: string }>`

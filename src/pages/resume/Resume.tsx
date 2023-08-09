@@ -50,7 +50,7 @@ const Resume: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const [keyword, setKeyword] = useState<string>('');
 
-  const { isError, isLoading, data, error } = useGetUserGithubInfoQuery(
+  const { isError, isLoading, isSuccess, data, error } = useGetUserGithubInfoQuery(
     {
       userName: keyword,
     },
@@ -107,6 +107,16 @@ const Resume: React.FC = (): JSX.Element => {
   }, []);
 
   useEffect(() => {
+    return () => {
+      clearInterval(animeInterval);
+    };
+  }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  } else if (isError) {
+    return <Message msg={JSON.stringify(error)} />;
+  } else if (isSuccess) {
     setTimeout(() => {
       if (textArea && textArea.current) {
         animeInterval = setInterval(function () {
@@ -122,16 +132,6 @@ const Resume: React.FC = (): JSX.Element => {
         }, 100);
       }
     }, 3000);
-
-    return () => {
-      clearInterval(animeInterval);
-    };
-  }, []);
-
-  if (isLoading) {
-    return <Loader />;
-  } else if (isError) {
-    return <Message msg={JSON.stringify(error)} />;
   }
 
   return (

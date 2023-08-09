@@ -214,7 +214,29 @@ export interface GetBoardSortDataKeywordDetail {
 }
 
 export interface PostBoardQueryData {
-  sendUserName: string;
-  receiveUserName: string;
-  boardUserNames: string[];
+  sendUserLogin: string;
+  receiveUserLogin: string;
+  boardUserLogin: string[];
+}
+
+export interface GetMyPageUserItems {
+  send: MyPageUserItemDetail[];
+  receive: MyPageUserItemDetail[];
+}
+
+export interface GetMyPageUserItemsParams {
+  userName: string;
+}
+
+export interface MyPageUserItemDetail {
+  id: string;
+  userName: string;
+  filter: string[];
+  people: number;
+  state: string;
+  sendDate: string;
+}
+
+export interface GetMyPageUserSpecipicParams {
+  id: string;
 }

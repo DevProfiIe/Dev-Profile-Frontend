@@ -23,15 +23,12 @@ import { color } from '~/styles/theme/primary';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '~/redux/store';
 import { UserGithubInfo } from '~/redux/api/types';
-import { getCookie } from '~/utils/cookie';
-import Message from '~/components/message/Message';
 import logo from '~/assets/images/github.png';
 import { change } from '~/redux/features/searchSlice';
 
 const MAIN_TEXT = 'EV-PROFILE is a service for culling suitable new developers.'.split('');
 
 const Home: React.FC = (): JSX.Element => {
-  const token = getCookie('token');
   const navigate = useNavigate();
   const [distance, setDistance] = useState<number | undefined>(10);
   const textArea = useRef<HTMLDivElement>(null);
@@ -42,20 +39,10 @@ const Home: React.FC = (): JSX.Element => {
   let textIndex = 0;
 
   const analyzeHandler = () => {
-    // localStorage.setItem('keyword', JSON.stringify('dbscks97'));
-    // navigate('/resume/dbscks97');
-
-    if (!token) {
-      return <Message msg='로그인이 필요합니다.' />;
-    }
-
     if (userInfo && userInfo.analyzed) {
       dispatch(change(userInfo.login));
       navigate(`resume/${userInfo.login}`);
-      return;
     }
-
-    return <Message msg='분석데이터가 존재하지 않습니다.' />;
   };
 
   useEffect(() => {

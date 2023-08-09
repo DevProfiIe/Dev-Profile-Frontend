@@ -17,13 +17,15 @@ const chatSlice = createSlice({
       state.isShow = true;
     },
 
-    close: (state) => {
+    close: (state, action) => {
       state.isShow = false;
+
+      console.log(action);
 
       const stompClient = getSocket();
 
-      stompClient.disconnect((frame: any) => {
-        console.log('Disconnected: ' + frame);
+      stompClient.deactivate({
+        force: false,
       });
     },
   },
