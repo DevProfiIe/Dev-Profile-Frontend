@@ -51,6 +51,7 @@ const Popup = () => {
     fileTree: {
       name: '',
       children: [],
+      id: '',
     },
   };
 
