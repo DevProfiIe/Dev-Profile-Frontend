@@ -1,4 +1,4 @@
-self.addEventListener('install', (e: ExtendableE) => {
+self.addEventListener('install', (e) => {
   console.log('[Service Worker], installed');
 });
 
