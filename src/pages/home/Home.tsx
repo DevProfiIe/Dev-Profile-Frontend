@@ -36,7 +36,7 @@ const Home: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const textArr = MAIN_TEXT;
   const [userInfo, setUserInfo] = useState<UserGithubInfo | null>(null);
-  let animeIntervalResume: number;
+  let animeIntervalResume: any;
   let textIndex = 0;
 
   /**
