@@ -3,7 +3,8 @@ import { SearchAlt } from 'emotion-icons/boxicons-regular';
 import { SearchBox, SearchOutput, SearchWrapper } from './search.styles';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Message from '../message/Message';
+import { showMessages } from '~/redux/features/popupSlice';
+import { useAppDispatch } from '~/redux/store';
 
 type SearchProps = {
   outputBox: boolean;
@@ -14,6 +15,7 @@ const Search: React.FC<SearchProps> = ({ outputBox, redirectTo }: SearchProps): 
   const [keyword, setKeyword] = useState<string | null>(null);
   const navigate = useNavigate();
   const [changeFlag, setChangeFlag] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
   /**
    *
@@ -40,7 +42,13 @@ const Search: React.FC<SearchProps> = ({ outputBox, redirectTo }: SearchProps): 
    */
   const onSearchHandler = () => {
     if (keyword === null) {
-      return <Message msg={'입력해주세요.'} />;
+      dispatch(
+        showMessages({
+          msg: '키워드를 입력해주세요',
+          content: 'DevProfile Message',
+          type: 'confirm',
+        }),
+      );
     }
 
     return redirectTo
