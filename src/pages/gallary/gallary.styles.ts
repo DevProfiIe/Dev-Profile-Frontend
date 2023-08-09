@@ -102,6 +102,7 @@ export const StackTag = styled.div<{ color?: string; isSelected?: boolean }>`
     isSelected ? `2px solid ${color.myBlue}` : `2px solid rgba(1, 5, 27, 0.07);`};
   transition: 0.2s;
   font-size: 1.5rem;
+  position: relative;
 `;
 
 export const GallaryContentsWrapper = styled.div`

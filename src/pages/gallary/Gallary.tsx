@@ -43,6 +43,7 @@ import { change } from '~/redux/features/searchSlice';
 import { getCookie } from '~/utils/cookie';
 import { iconList } from '~/utils/icon';
 import { showMessages } from '~/redux/features/popupSlice';
+import { color } from '~/styles/theme/primary';
 
 const sortList = [
   {
@@ -124,6 +125,7 @@ const Gallary = () => {
   const keyword = boardSortData.data?.data.keyword ?? [];
 
   const [selectedGallaryItems, setSelectedGallaryItems] = useState<GetBoardDataDetails[]>([]);
+  const [hoveredItem, setHoveredItem] = useState<GetBoardSortDataKeywordDetail | null>(null);
 
   /**
    * 필터 버튼 클릭 핸들러 함수
@@ -632,8 +634,47 @@ const Gallary = () => {
                         }}
                         key={item.num}
                         isSelected={findTag(item)}
+                        onMouseEnter={() => {
+                          setHoveredItem(item);
+                        }}
+                        onMouseLeave={() => {
+                          setHoveredItem(null);
+                        }}
                       >
                         #{item.keyword}
+                        <div
+                          css={css`
+                            visibility: ${hoveredItem?.num === item.num ? 'visible' : 'hidden'};
+                            position: absolute;
+                            width: 500px;
+                            height: auto;
+                            background-color: ${color.myBiolet};
+                            top: 150%;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            z-index: 10;
+                            border-radius: 1rem;
+                            padding: 1rem 1.2rem;
+                            font-size: 1.2rem;
+                            line-height: 134%;
+                            border: 2px solid #ececec;
+                            color: white;
+
+                            &:: before {
+                              content: '';
+                              display: block;
+                              position: absolute;
+                              text-align: center;
+                              right: 50%;
+                              top: -8px;
+                              border-bottom: 8px solid ${color.myBiolet};
+                              border-right: 8px solid transparent;
+                              border-left: 8px solid transparent;
+                            }
+                          `}
+                        >
+                          "{item.keywordDescription}"
+                        </div>
                       </StackTag>
                     ))}
                   </div>
