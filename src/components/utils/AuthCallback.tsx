@@ -1,6 +1,6 @@
 /* Libraries & Hooks */
 import queryString from 'query-string';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useAuthUserQuery } from '~/redux/api';
 import { getCookie, setCookie } from '~/utils/cookie';
 
@@ -10,6 +10,7 @@ import Message from '../message/Message';
 
 const AuthCallback: React.FC = () => {
   const token = getCookie('token');
+  const navigate = useNavigate();
   const location = useLocation();
 
   /**
@@ -47,6 +48,10 @@ const AuthCallback: React.FC = () => {
   };
 
   // if (isLoading) return;
+  if (token) {
+    navigate('/');
+  }
+
   if (isSuccess) {
     setUserData();
   }

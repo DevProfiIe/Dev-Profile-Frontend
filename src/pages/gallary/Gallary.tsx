@@ -535,23 +535,28 @@ const Gallary = () => {
    *
    */
   const clickShareHandler = () => {
-    if (selectedGallaryItems.length > 0) {
-      const selectedCardIds = selectedGallaryItems.map((item) => item.login);
+    setIsShowShareBox((state) => !state);
+  };
 
-      postBoardItems({
-        sendUserLogin: '',
-        receiveUserLogin: sendBoardItems.receiveUserLogin,
-        boardUserLogin: selectedCardIds,
+  /**
+   *
+   */
+  const shareBoardItemHandler = () => {
+    const selectedCardIds = selectedGallaryItems.map((item) => item.login);
+
+    postBoardItems({
+      sendUserLogin: '',
+      receiveUserLogin: sendBoardItems.receiveUserLogin,
+      boardUserLogin: selectedCardIds,
+    })
+      .then((res: any) => {
+        if (res.result) {
+          setIsShowShareBox((state) => !state);
+        }
       })
-        .then((res: any) => {
-          if (res.result) {
-            setIsShowShareBox((state) => !state);
-          }
-        })
-        .catch((err) => {
-          return <Message msg={err} />;
-        });
-    }
+      .catch((err) => {
+        return <Message msg={err} />;
+      });
   };
 
   /**
@@ -1092,7 +1097,7 @@ const Gallary = () => {
                           background-color: #189bfa;
                           color: white;
                         `}
-                        onClick={clickShareHandler}
+                        onClick={shareBoardItemHandler}
                       >
                         <Send size={25}>보내기</Send>
                       </button>
