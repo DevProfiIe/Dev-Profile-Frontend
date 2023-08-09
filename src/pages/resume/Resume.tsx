@@ -50,7 +50,7 @@ const Resume: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const [keyword, setKeyword] = useState<string>('');
 
-  const { isError, isLoading, isSuccess, data, error } = useGetUserGithubInfoQuery(
+  const { isError, isLoading, data, error } = useGetUserGithubInfoQuery(
     {
       userName: keyword,
     },
