@@ -2,7 +2,7 @@
 
 /* Libraries & Hooks */
 import { css } from '@emotion/react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { getCookie, removeCookie } from '~/utils/cookie';
 import {
   HeaderDropMenuWrapper,
@@ -21,6 +21,7 @@ const Header: React.FC = (): JSX.Element => {
   const token = getCookie('token');
   const { scrollY } = useScroll();
   const location = useLocation();
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState<UserGithubInfo | null>(null);
   const [isShow, setIsShow] = useState<boolean>(false);
 
@@ -98,14 +99,16 @@ const Header: React.FC = (): JSX.Element => {
             </HeaderUserInfoWrapper>
             {isShow && (
               <HeaderDropMenuWrapper>
-                <Link
+                <button
                   css={css`
                     border-bottom: 1px solid #ececec;
                   `}
-                  to='/mypage'
+                  onClick={() => {
+                    navigate('/mypage');
+                  }}
                 >
                   My Page
-                </Link>
+                </button>
                 <button onClick={handleLogout}>Logout</button>
               </HeaderDropMenuWrapper>
             )}
