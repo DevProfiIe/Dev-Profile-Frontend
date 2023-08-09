@@ -542,7 +542,8 @@ const Gallary = () => {
    *
    */
   const shareBoardItemHandler = () => {
-    const selectedCardIds = selectedGallaryItems.map((item) => item.login);
+    const selectedCardIds =
+      selectedGallaryItems.map((item) => item.login) ?? boardItems.map((item) => item.login);
 
     postBoardItems({
       sendUserLogin: '',
