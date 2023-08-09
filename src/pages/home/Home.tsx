@@ -24,7 +24,6 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '~/redux/store';
 import { UserGithubInfo } from '~/redux/api/types';
 import logo from '~/assets/images/github.png';
-import { change } from '~/redux/features/searchSlice';
 import { showMessages } from '~/redux/features/popupSlice';
 
 const MAIN_TEXT = 'EV-PROFILE is a service for culling suitable new developers.'.split('');
