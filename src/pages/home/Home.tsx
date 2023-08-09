@@ -44,8 +44,11 @@ const Home: React.FC = (): JSX.Element => {
    */
   const analyzeHandler = () => {
     if (userInfo && userInfo.analyzed) {
-      dispatch(change(userInfo.login));
-      navigate(`resume/${userInfo.login}`);
+      navigate(`resume/${userInfo.login}`, {
+        state: {
+          keyword: userInfo.login,
+        },
+      });
     } else {
       dispatch(
         showMessages({

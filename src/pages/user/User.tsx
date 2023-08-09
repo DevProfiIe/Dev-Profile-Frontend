@@ -38,9 +38,15 @@ const User = () => {
   const [nowTab, setNowTab] = useState<boolean>(false);
   const [selectedItems, setSelectedItems] = useState<MyPageUserItemDetail | null>(null);
   const [selectedCards, setSelectedCards] = useState<GetBoardDataDetails[]>([]);
-  const myPageUserItems = useGetMyPageUserItemsQuery({
-    userName: userInfo?.login ?? '',
-  });
+
+  const myPageUserItems = useGetMyPageUserItemsQuery(
+    {
+      userName: userInfo?.login ?? '',
+    },
+    {
+      skip: userInfo?.login === '' ? true : false,
+    },
+  );
 
   const myPageUserCards = useGetMyPageUserSpecificQuery(
     {

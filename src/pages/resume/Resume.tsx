@@ -35,6 +35,7 @@ import { UserGithubData } from '~/redux/api/types';
 import { useAppDispatch } from '~/redux/store';
 import { commitSearch } from '~/redux/features/searchSlice';
 import { showMessages } from '~/redux/features/popupSlice';
+import { useLocation } from 'react-router-dom';
 
 /* etx */
 
@@ -48,16 +49,12 @@ const Resume: React.FC = (): JSX.Element => {
   let animeInterval: any;
   let textIndex = 0;
   const dispatch = useAppDispatch();
+  const location = useLocation();
   const [keyword, setKeyword] = useState<string>('');
 
-  const { isError, isLoading, data, error } = useGetUserGithubInfoQuery(
-    {
-      userName: keyword,
-    },
-    {
-      skip: keyword === '',
-    },
-  );
+  const { isError, isLoading, data, error } = useGetUserGithubInfoQuery({
+    userName: keyword,
+  });
 
   if (isError) {
     dispatch(
@@ -109,11 +106,9 @@ const Resume: React.FC = (): JSX.Element => {
   };
 
   useEffect(() => {
-    const userKeyword = localStorage.getItem('keyword');
+    const parseParams = location.pathname.split('/');
 
-    if (userKeyword) {
-      setKeyword(JSON.parse(userKeyword));
-    }
+    setKeyword(parseParams[parseParams.length - 1]);
   }, []);
 
   useEffect(() => {
