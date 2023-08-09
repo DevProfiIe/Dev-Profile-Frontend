@@ -45,7 +45,7 @@ const Resume: React.FC = (): JSX.Element => {
   const { scrollY } = useScroll();
   const textArea = useRef<HTMLDivElement>(null);
   const textArr = MAIN_TEXT;
-  let animeInterval: number;
+  let animeInterval;
   let textIndex = 0;
   const dispatch = useAppDispatch();
   const [keyword, setKeyword] = useState<string>('');

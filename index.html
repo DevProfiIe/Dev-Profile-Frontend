@@ -9,7 +9,7 @@
     <link rel="alternative icon" href="icons/favicon.ico" type="ico" sizes="32*32" />
     <link rel="apple-touch-icon" href="icons/apple-touch-icon-152x152.png" sizes="152x152" />
 
-    <link rel="manifest" href="manifest.json" />
+    <!-- <link rel="manifest" href="manifest.json" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dev-Profile</title>
   </head>
@@ -18,16 +18,11 @@
     <script type="module" src="/src/main.tsx"></script>
     <script>
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker
-          .register('sw.js')
-          .then((registration) => {
-            console.log('Service worker registration succeeded:', registration);
-          })
-          .catch((err) => {
-            console.log('Service worker registration failed: ', err);
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js', { scope: '/' }).then((res) => {
+            console.log('Service Worker is Success');
           });
-      } else {
-        console.log('Service workers are not supported.');
+        });
       }
     </script>
   </body>
