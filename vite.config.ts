@@ -14,10 +14,11 @@ export default defineConfig({
     }),
     tsconfigPaths(),
     VitePWA({
+      registerType: 'autoUpdate',
       devOptions: {
         enabled: true,
       },
-      injectRegister: 'auto',
+      injectRegister: 'inline',
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
       },
