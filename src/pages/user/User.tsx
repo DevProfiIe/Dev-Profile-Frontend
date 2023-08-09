@@ -229,7 +229,7 @@ const User = () => {
                               color: #189bfa;
                             `}
                           >
-                            {item.filter ? item.filter.length : 0}
+                            {item.filter ? item.filter.length : ''}
                           </span>
                           개의 키워드로 필터링된{' '}
                           <span
@@ -290,7 +290,7 @@ const User = () => {
                               color: #189bfa;
                             `}
                           >
-                            {item.filter ? item.filter.length : 0}
+                            {item.filter ? item.filter.length : ''}
                           </span>
                           개의 키워드로 필터링된 <br />
                           <span
