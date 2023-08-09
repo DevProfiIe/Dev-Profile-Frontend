@@ -405,7 +405,7 @@ const Gallary = () => {
             showMessages({
               msg: '전송이 완료되었습니다.',
               content: 'DevProfile Message',
-              type: 'confirm',
+              type: 'alert',
             }),
           );
         }
