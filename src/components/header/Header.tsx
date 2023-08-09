@@ -105,6 +105,7 @@ const Header: React.FC = (): JSX.Element => {
                   `}
                   onClick={() => {
                     navigate('/mypage');
+                    setIsShow(false);
                   }}
                 >
                   My Page

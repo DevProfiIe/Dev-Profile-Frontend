@@ -31,6 +31,7 @@ import {
   GetBoardSortDataSkiisDetail,
   PostBoardQueryData,
   SkillFilterDetails,
+  UserGithubInfo,
 } from '~/redux/api/types';
 import Loader from '~/components/loader/Loader';
 import { useInView } from 'react-intersection-observer';
@@ -543,16 +544,22 @@ const Gallary = () => {
    */
   const shareBoardItemHandler = () => {
     const selectedCardIds =
-      selectedGallaryItems.map((item) => item.login) ?? boardItems.map((item) => item.login);
+      selectedGallaryItems.length === 0
+        ? boardItems.map((item) => item.login)
+        : selectedGallaryItems.map((item) => item.login);
+
+    const userInfo = JSON.parse(localStorage.getItem('userInfo') ?? '') as UserGithubInfo;
 
     postBoardItems({
-      sendUserLogin: '',
+      sendUserLogin: userInfo.login,
       receiveUserLogin: sendBoardItems.receiveUserLogin,
       boardUserLogin: selectedCardIds,
     })
       .then((res: any) => {
-        if (res.result) {
+        if (res) {
           setIsShowShareBox((state) => !state);
+
+          return <Message msg='전송이 완료되었습니다.' />;
         }
       })
       .catch((err) => {
@@ -1003,7 +1010,7 @@ const Gallary = () => {
               </span>{' '}
               명이 존재합니다.
             </p>
-            {token && (
+            {
               <div
                 css={css`
                   position: relative;
@@ -1106,7 +1113,7 @@ const Gallary = () => {
                   </div>
                 )}
               </div>
-            )}
+            }
           </div>
         </GallaryFilterWrapper>
         <HeightBox height='3rem' />

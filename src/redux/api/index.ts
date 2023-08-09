@@ -192,14 +192,13 @@ export const mainApi = createApi({
           params: data,
         };
       },
+      keepUnusedDataFor: 0,
     }),
     postMyPageUserSpecific: builder.mutation<
       DefaultApi<any>,
       { id: string; checkUserNames: string[] }
     >({
       query(data) {
-        console.log('is');
-
         return {
           url: 'myPage/submit',
           method: 'POST',

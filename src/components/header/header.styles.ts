@@ -71,7 +71,7 @@ export const HeaderDropMenuWrapper = styled.div`
   height: 5rem;
   background-color: ${color.aquaMarine};
   position: absolute;
-  top: 100%;
+  top: 120%;
   border-radius: 0.5rem;
   display: flex;
   flex-flow: column nowrap;

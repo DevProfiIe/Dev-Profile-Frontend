@@ -27,12 +27,12 @@ const App: React.FC = (): JSX.Element => {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path='mypage' element={<User />} />
+          <Route path='gallary' element={<Gallary />} />
 
           {/* Private Route */}
           <Route element={<PrivateRoute />}>
             <Route path='resume/:keyword' element={<Resume />} />
-            <Route path='gallary' element={<Gallary />} />
-            <Route path='mypage' element={<User />} />
           </Route>
         </Route>
 

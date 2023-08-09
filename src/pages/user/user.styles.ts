@@ -74,8 +74,8 @@ export const UserMainWrapper = styled.div`
 
 export const UserResumeWrapper = styled.div`
   ${DisplayFlexRowWrap}
-  justify-content: space-between;
-  gap: 7rem 0;
+  justify-content: flex-start;
+  gap: 7rem 3rem;
   width: 100%;
   padding: 2.5rem 0.5rem;
   min-height: 50rem;

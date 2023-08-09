@@ -47,9 +47,11 @@ const User = () => {
       id: selectedItems?.id ?? '',
     },
     {
-      skip: !selectedItems,
+      skip: !selectedItems ? true : false,
     },
   );
+
+  const userCards = (myPageUserCards.data?.data as GetBoardDataDetails[]) ?? [];
 
   const userMyPageItemData = (myPageUserItems.data?.data as GetMyPageUserItems) ?? {};
 
@@ -73,8 +75,15 @@ const User = () => {
         id: selectedItems?.id,
         checkUserNames: selectedCardIds,
       }).then((res: any) => {
-        if (res.result) {
+        if (res) {
+          setSelectedCards([]);
+          setIsShowConfirmBox(false);
+          setSelectedItems({
+            ...selectedItems,
+            state: 'end',
+          });
           myPageUserCards.refetch();
+          myPageUserItems.refetch();
         }
       });
     } else {
@@ -94,6 +103,7 @@ const User = () => {
    */
   const clickListHandler = (item: MyPageUserItemDetail) => {
     setSelectedItems(item);
+    setSelectedCards([]);
   };
 
   /**
@@ -219,7 +229,7 @@ const User = () => {
                               color: #189bfa;
                             `}
                           >
-                            {item.filter.length}
+                            {item.filter?.length}
                           </span>
                           개의 키워드로 필터링된{' '}
                           <span
@@ -230,7 +240,7 @@ const User = () => {
                           >
                             {item.people}
                           </span>
-                          명의 개발자{' '}
+                          명의 개발자 {item.state === 'onGoing' ? '(진행중)' : '(확정)'}
                         </p>
                         <div
                           css={css`
@@ -280,9 +290,9 @@ const User = () => {
                               color: #189bfa;
                             `}
                           >
-                            {item.filter.length}
+                            {item.filter?.length}
                           </span>
-                          개의 키워드로 필터링된{' '}
+                          개의 키워드로 필터링된 <br />
                           <span
                             css={css`
                               font-size: 1.5rem;
@@ -371,6 +381,7 @@ const User = () => {
             </div>
             <div
               css={css`
+                opacity: ${!nowTab ? (selectedItems?.state === 'onGoing' ? 1 : 0) : 0};
                 width: 20%;
                 display: flex;
                 justify-content: flex-end;
@@ -436,12 +447,18 @@ const User = () => {
             </div>
           </div>
           <UserResumeWrapper>
-            {myPageUserCards.data ? (
-              myPageUserCards.data?.data.map((item) => (
+            {userCards.length > 0 ? (
+              userCards.map((item) => (
                 <Card
-                  onClick={() => {
-                    selectCardHandler(item);
-                  }}
+                  onClick={
+                    !nowTab && selectedItems?.state === 'onGoing'
+                      ? () => {
+                          if (!nowTab && selectedItems?.state === 'onGoing') {
+                            selectCardHandler(item);
+                          }
+                        }
+                      : null
+                  }
                   key={item.login}
                   data={item}
                   isSelected={findSelectedCard(item)}

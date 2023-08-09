@@ -29,7 +29,7 @@ const BoxShadow = css`
 
 export const CardItem = styled.div<{ selected?: boolean }>`
   width: 30%;
-  height: 25rem;
+  height: 26rem;
   border: 1px solid rgba(1, 5, 27, 0.07);
   background: #fff;
   border-radius: 0.5rem;
