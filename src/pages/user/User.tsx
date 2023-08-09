@@ -229,7 +229,7 @@ const User = () => {
                               color: #189bfa;
                             `}
                           >
-                            {item.filter?.length}
+                            {item.filter ? item.filter.length : 0}
                           </span>
                           개의 키워드로 필터링된{' '}
                           <span
@@ -290,7 +290,7 @@ const User = () => {
                               color: #189bfa;
                             `}
                           >
-                            {item.filter?.length}
+                            {item.filter ? item.filter.length : 0}
                           </span>
                           개의 키워드로 필터링된 <br />
                           <span
@@ -301,7 +301,7 @@ const User = () => {
                           >
                             {item.people}
                           </span>
-                          명의 개발자{' '}
+                          명의 개발자 {item.state === 'onGoing' ? '(진행중)' : '(확정)'}
                         </p>
                         <div
                           css={css`
@@ -374,7 +374,7 @@ const User = () => {
                   gap: 0.5rem 0.2rem;
                 `}
               >
-                {selectedItems?.filter.map((item) => (
+                {selectedItems?.filter?.map((item) => (
                   <UserFilterTag key={item}>#{item}</UserFilterTag>
                 ))}
               </div>
