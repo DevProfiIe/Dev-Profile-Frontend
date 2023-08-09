@@ -98,13 +98,14 @@ const Header: React.FC = (): JSX.Element => {
             </HeaderUserInfoWrapper>
             {isShow && (
               <HeaderDropMenuWrapper>
-                <button
+                <Link
                   css={css`
                     border-bottom: 1px solid #ececec;
                   `}
+                  to='/mypage'
                 >
                   My Page
-                </button>
+                </Link>
                 <button onClick={handleLogout}>Logout</button>
               </HeaderDropMenuWrapper>
             )}
