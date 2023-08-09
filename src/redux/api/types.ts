@@ -212,6 +212,7 @@ export interface GetBoardSortDataSkiisDetail {
 export interface GetBoardSortDataKeywordDetail {
   num: number;
   keyword: string;
+  keywordDescription: string;
 }
 
 export interface PostBoardQueryData {

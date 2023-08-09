@@ -143,9 +143,9 @@ const Resume: React.FC = (): JSX.Element => {
   } else if (isError) {
     dispatch(
       showMessages({
-        msg: '전송이 완료되었습니다.',
-        content: 'DevProfile Message',
-        type: 'confirm',
+        msg: error,
+        content: 'DevProfile Api error',
+        type: 'error',
       }),
     );
   }
