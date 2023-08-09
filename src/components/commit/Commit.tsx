@@ -7,14 +7,17 @@ import { open, showMessages } from '~/redux/features/popupSlice';
 import { useGetSearchOutputQuery } from '~/redux/api';
 import Loader from '../loader/Loader';
 import useDebounce from '~/hooks/useDebounce';
-import { UserGithubInfo } from '~/redux/api/types';
 import { commitSearch } from '~/redux/features/searchSlice';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Commit: React.FC = () => {
   const searchKeyword = useAppSelector((state) => state.search.commitKeyword);
   const debouncedTerm = useDebounce(searchKeyword, 500);
   const dispatch = useAppDispatch();
-  const userInfo: UserGithubInfo = JSON.parse(localStorage.getItem('userInfo') ?? '');
+
+  const location = useLocation();
+  const [keyword, setKeyword] = useState<string>('');
 
   /**
    * 검색 input focus 핸들러
@@ -34,7 +37,7 @@ const Commit: React.FC = () => {
   const { data, isLoading, isSuccess, isError, error } = useGetSearchOutputQuery(
     {
       query: searchKeyword,
-      userName: userInfo?.login,
+      userName: keyword,
     },
     {
       skip: debouncedTerm ? false : true,
@@ -42,6 +45,12 @@ const Commit: React.FC = () => {
   );
 
   const results = data?.data ?? [];
+
+  useEffect(() => {
+    const parseParams = location.pathname.split('/');
+
+    setKeyword(parseParams[parseParams.length - 1]);
+  }, []);
 
   if (isError) {
     dispatch(
