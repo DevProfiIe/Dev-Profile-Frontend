@@ -41,7 +41,7 @@ const messaging = getMessaging(app);
 
 const App: React.FC = (): JSX.Element => {
   const [token, setToken] = useState<string>('');
-  const [userInfo, setUserInfo] = useState<UserGithubInfo>({});
+  const [userInfo, setUserInfo] = useState<UserGithubInfo | null>(null);
   const [subscribeFunc, { isSuccess }] = usePostSubscribeSerberMutation();
 
   const requestPermission = async () => {
@@ -64,7 +64,7 @@ const App: React.FC = (): JSX.Element => {
     if (token) {
       subscribeFunc({
         token: token,
-        username: userInfo.login,
+        username: userInfo?.login ?? '',
       });
 
       if (isSuccess) {
