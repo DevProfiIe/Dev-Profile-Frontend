@@ -395,7 +395,7 @@ const Gallary = () => {
 
     const selectedKeywodsFilter = selectedKeywords.map((item) => item.num);
     const selectedSkillsFilter = selectedSkills.map((item) => {
-      return item.name + item.duration + ' 개월';
+      return item.name + ' ' + item.duration + ' 개월';
     });
 
     const userInfo = JSON.parse(localStorage.getItem('userInfo') ?? '') as UserGithubInfo;
