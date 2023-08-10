@@ -10,21 +10,23 @@ self.addEventListener('activate', function (e) {
 });
 
 self.addEventListener('push', function (e) {
-  console.log('push: ', e.data.json());
-  if (!e.data.json()) return;
+  console.log(e);
 
-  const resultData = e.data.json().notification;
+  // console.log('push: ', e.data.json());
+  // if (!e.data.json()) return;
 
-  console.log('resultData : ', resultData);
+  // const resultData = e.data.json().notification;
 
-  const notificationTitle = resultData.data.title;
-  const notificationOptions = {
-    body: resultData.data.body,
-    icon: '',
-  };
-  console.log('push: ', { resultData, notificationTitle, notificationOptions });
+  // console.log('resultData : ', resultData);
 
-  self.registration.showNotification(notificationTitle, notificationOptions);
+  // const notificationTitle = resultData.data.title;
+  // const notificationOptions = {
+  //   body: resultData.data.body,
+  //   icon: '',
+  // };
+  // console.log('push: ', { resultData, notificationTitle, notificationOptions });
+
+  // self.registration.showNotification(notificationTitle, notificationOptions);
 });
 
 self.addEventListener('notificationclick', function (event) {
