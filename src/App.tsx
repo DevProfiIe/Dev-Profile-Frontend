@@ -4,7 +4,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { Global } from '@emotion/react';
 import { initializeApp } from 'firebase/app';
-import { getMessaging, getToken } from 'firebase/messaging';
+import { getMessaging, getToken, onMessage } from 'firebase/messaging';
 
 /* Pages */
 import Home from '~/pages/home/Home';
@@ -23,7 +23,6 @@ import resetStyle from '~/styles/reset';
 import { useEffect } from 'react';
 import { usePostSubscribeSerberMutation } from './redux/api';
 import { getCookie } from './utils/cookie';
-import { UserGithubInfo } from './redux/api/types';
 
 const firebaseConfig = {
   apiKey: `${import.meta.env.VITE_FIREBASE_API_KEY}`,
@@ -40,49 +39,45 @@ const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
 
 const App: React.FC = (): JSX.Element => {
-  const token = getCookie('token');
+  // const token = getCookie('token');
   const [subscribeFunc, { isSuccess }] = usePostSubscribeSerberMutation();
 
-  useEffect(() => {
-    async function requestPermission() {
-      const userInfo: UserGithubInfo = JSON.parse(localStorage.getItem('userinfo') ?? '');
+  async function requestPermission() {
+    console.log('권한 요청 중...');
 
-      console.log('권한 요청 중...');
-
-      const permission = await Notification.requestPermission();
-      if (permission === 'denied') {
-        console.log('알림 권한 허용 안됨');
-        return;
-      }
-
-      console.log('알림 권한이 허용됨');
-
-      const token = await getToken(messaging, {
-        vapidKey: `${import.meta.env.VITE_VAPID_KEY}`,
-      });
-
-      if (token) {
-        subscribeFunc({
-          token: token,
-          username: userInfo.login,
-        });
-
-        if (isSuccess) {
-          console.log('구독 성공');
-        }
-      } else {
-        console.log('Can not get Token');
-      }
-
-      // onMessage(messaging, (payload) => {
-      //   console.log(payload.notification?.title);
-      //   console.log(payload.notification?.body);
-      // });
+    const permission = await Notification.requestPermission();
+    if (permission === 'denied') {
+      console.log('알림 권한 허용 안됨');
+      return;
     }
+
+    console.log('알림 권한이 허용됨');
+
+    const token = await getToken(messaging, {
+      vapidKey: `${import.meta.env.VITE_VAPID_KEY}`,
+    });
 
     if (token) {
-      requestPermission();
+      subscribeFunc({
+        token: token,
+        username: 'dbscks97',
+      });
+
+      if (isSuccess) {
+        console.log('구독 성공');
+      }
+    } else {
+      console.log('Can not get Token');
     }
+
+    onMessage(messaging, (payload) => {
+      console.log(payload.notification?.title);
+      console.log(payload.notification?.body);
+    });
+  }
+
+  useEffect(() => {
+    requestPermission();
   }, []);
 
   return (
