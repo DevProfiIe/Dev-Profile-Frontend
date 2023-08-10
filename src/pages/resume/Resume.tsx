@@ -431,7 +431,7 @@ const Resume: React.FC = (): JSX.Element => {
                       margin-bottom: 1rem;
                     `}
                   >
-                    {userData.userInfo.userTitle}
+                    {userData.userInfo?.userTitle}
                   </h2>
                   <div
                     css={css`
