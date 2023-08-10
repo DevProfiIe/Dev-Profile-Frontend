@@ -41,7 +41,17 @@ const messaging = getMessaging(app);
 
 const App: React.FC = (): JSX.Element => {
   const token = getCookie('token');
-  const [userInfo, setUserInfo] = useState<UserGithubInfo | null>(null);
+  const [userInfo, setUserInfo] = useState<UserGithubInfo>({
+    avatar_url: '',
+    email: '',
+    gitHubToken: '',
+    id: -1,
+    jwtRefreshToken: '',
+    login: '',
+    name: '',
+    analyzed: false,
+    node_id: '',
+  });
   const [subscribeFunc, { isSuccess }] = usePostSubscribeSerberMutation();
 
   async function requestPermission() {
@@ -62,7 +72,7 @@ const App: React.FC = (): JSX.Element => {
     if (token) {
       subscribeFunc({
         token: token,
-        username: userInfo.login,
+        username: userInfo?.login,
       });
 
       if (isSuccess) {
