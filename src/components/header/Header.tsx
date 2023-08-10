@@ -30,8 +30,9 @@ const Header: React.FC = (): JSX.Element => {
    */
   const handleLogout = () => {
     removeCookie('token');
+    setToken('');
     localStorage.removeItem('userInfo');
-    window.location.reload();
+    navigate('/');
   };
 
   /**
