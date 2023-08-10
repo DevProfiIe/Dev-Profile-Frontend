@@ -98,6 +98,8 @@ const App: React.FC = (): JSX.Element => {
         });
       }
 
+      console.log('exist token');
+
       requestPermission();
     }
   }, []);
