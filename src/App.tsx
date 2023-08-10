@@ -92,14 +92,13 @@ const App: React.FC = (): JSX.Element => {
     if (token) {
       const storageData = localStorage.getItem('userInfo');
 
+      console.log(storageData);
+
       if (storageData) {
         setUserInfo({
           ...JSON.parse(storageData),
         });
       }
-
-      console.log('exist token');
-
       requestPermission();
     }
   }, []);
