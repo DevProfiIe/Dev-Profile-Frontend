@@ -18,7 +18,7 @@ import { useEffect, useState } from 'react';
 import logo from '~/assets/images/github.png';
 
 const Header: React.FC = (): JSX.Element => {
-  const [token, setToken] = useState<string | null>('');
+  const [token, setToken] = useState<string>('');
   const { scrollY } = useScroll();
   const location = useLocation();
   const navigate = useNavigate();

@@ -40,18 +40,8 @@ const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
 
 const App: React.FC = (): JSX.Element => {
-  const token = getCookie('token');
-  const [userInfo, setUserInfo] = useState<UserGithubInfo>({
-    avatar_url: '',
-    email: '',
-    gitHubToken: '',
-    id: -1,
-    jwtRefreshToken: '',
-    login: '',
-    name: '',
-    analyzed: false,
-    node_id: '',
-  });
+  const [token, setToken] = useState<string>('');
+  const [userInfo, setUserInfo] = useState<UserGithubInfo>({});
   const [subscribeFunc, { isSuccess }] = usePostSubscribeSerberMutation();
 
   const requestPermission = async () => {
@@ -69,10 +59,12 @@ const App: React.FC = (): JSX.Element => {
       vapidKey: `${import.meta.env.VITE_VAPID_KEY}`,
     });
 
+    console.log('now token! : ', token);
+
     if (token) {
       subscribeFunc({
         token: token,
-        username: userInfo?.login,
+        username: userInfo.login,
       });
 
       if (isSuccess) {
@@ -87,6 +79,10 @@ const App: React.FC = (): JSX.Element => {
       console.log(payload.notification?.body);
     });
   };
+
+  useEffect(() => {
+    setToken(getCookie(token));
+  }, []);
 
   useEffect(() => {
     if (token) {
