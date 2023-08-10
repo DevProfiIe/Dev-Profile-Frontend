@@ -4,6 +4,8 @@
 import { css } from '@emotion/react';
 import background from '~/assets/images/background2.png';
 import { useEffect, useRef, useState } from 'react';
+import { initializeApp } from 'firebase/app';
+import { getMessaging, getToken, onMessage } from 'firebase/messaging';
 
 /* Components */
 
@@ -25,10 +27,27 @@ import { useAppDispatch } from '~/redux/store';
 import { UserGithubInfo } from '~/redux/api/types';
 import logo from '~/assets/images/github.png';
 import { showMessages } from '~/redux/features/popupSlice';
+import { getCookie } from '~/utils/cookie';
+import { usePostSubscribeSerberMutation } from '~/redux/api';
+
+const firebaseConfig = {
+  apiKey: `${import.meta.env.VITE_FIREBASE_API_KEY}`,
+  authDomain: 'dev-profile-251ff.firebaseapp.com',
+  projectId: 'dev-profile-251ff',
+  storageBucket: 'dev-profile-251ff.appspot.com',
+  messagingSenderId: '719328905080',
+  appId: '1:719328905080:web:bd2b2d550036d99ceb6a8d',
+  measurementId: 'G-P22S2F7S83',
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const messaging = getMessaging(app);
 
 const MAIN_TEXT = 'EV-PROFILE is a service for culling suitable new developers.'.split('');
 
 const Home: React.FC = (): JSX.Element => {
+  const token = getCookie('token');
   const navigate = useNavigate();
   const [distance, setDistance] = useState<number | undefined>(10);
   const textArea = useRef<HTMLDivElement>(null);
@@ -37,6 +56,48 @@ const Home: React.FC = (): JSX.Element => {
   const [userInfo, setUserInfo] = useState<UserGithubInfo | null>(null);
   let animeIntervalResume: any;
   let textIndex = 0;
+
+  const [subscribeFunc, { isSuccess }] = usePostSubscribeSerberMutation();
+
+  /**
+   *
+   * @returns
+   */
+  const requestPermission = async () => {
+    console.log('권한 요청 중...');
+
+    const permission = await Notification.requestPermission();
+    if (permission === 'denied') {
+      console.log('알림 권한 허용 안됨');
+      return;
+    }
+
+    console.log('알림 권한이 허용됨');
+
+    const token = await getToken(messaging, {
+      vapidKey: `${import.meta.env.VITE_VAPID_KEY}`,
+    });
+
+    console.log('now token! : ', token);
+
+    if (token) {
+      subscribeFunc({
+        token: token,
+        username: userInfo?.login ?? '',
+      });
+
+      if (isSuccess) {
+        console.log('구독 성공');
+      }
+    } else {
+      console.log('Can not get Token');
+    }
+
+    onMessage(messaging, (payload) => {
+      console.log(payload.notification?.title);
+      console.log(payload.notification?.body);
+    });
+  };
 
   /**
    * 분석하기 버튼 클릭 핸들러 함수
@@ -65,6 +126,7 @@ const Home: React.FC = (): JSX.Element => {
     if (userInfo) {
       const userData = JSON.parse(userInfo) as UserGithubInfo;
       setUserInfo(userData);
+      requestPermission();
     }
   }, []);
 
