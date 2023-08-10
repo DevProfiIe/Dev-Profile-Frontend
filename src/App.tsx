@@ -22,7 +22,7 @@ import AuthCallback from '~/components/utils/AuthCallback';
 import resetStyle from '~/styles/reset';
 import { useEffect } from 'react';
 import { usePostSubscribeSerberMutation } from './redux/api';
-import { getCookie } from './utils/cookie';
+// import { getCookie } from './utils/cookie';
 
 const firebaseConfig = {
   apiKey: `${import.meta.env.VITE_FIREBASE_API_KEY}`,
