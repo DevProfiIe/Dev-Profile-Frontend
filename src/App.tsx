@@ -20,7 +20,7 @@ import AuthCallback from '~/components/utils/AuthCallback';
 
 /* Styles */
 import resetStyle from '~/styles/reset';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { usePostSubscribeSerberMutation } from './redux/api';
 import { getCookie } from './utils/cookie';
 import { UserGithubInfo } from './redux/api/types';
@@ -41,11 +41,10 @@ const messaging = getMessaging(app);
 
 const App: React.FC = (): JSX.Element => {
   const token = getCookie('token');
+  const [userInfo, setUserInfo] = useState<UserGithubInfo | null>(null);
   const [subscribeFunc, { isSuccess }] = usePostSubscribeSerberMutation();
 
   async function requestPermission() {
-    const userInfo: UserGithubInfo = JSON.parse(localStorage.getItem('userInfo') ?? '');
-
     console.log('권한 요청 중...');
 
     const permission = await Notification.requestPermission();
@@ -80,11 +79,15 @@ const App: React.FC = (): JSX.Element => {
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      if (token) {
-        requestPermission();
+    if (token) {
+      const storageData = localStorage.getItem('userInfo');
+
+      if (storageData) {
+        setUserInfo(JSON.parse(storageData));
       }
-    }, 3000);
+
+      requestPermission();
+    }
   }, []);
 
   return (
