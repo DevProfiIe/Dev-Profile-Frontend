@@ -646,19 +646,26 @@ const Gallary = () => {
                           css={css`
                             visibility: ${hoveredItem?.num === item.num ? 'visible' : 'hidden'};
                             position: absolute;
-                            width: 500px;
+                            width: 550px;
                             height: auto;
-                            background-color: ${color.myBiolet};
+                            background: radial-gradient(
+                                73.24% 242.56% at 32.22% -52.96%,
+                                rgba(14, 51, 255, 0) 56.38%,
+                                rgba(14, 51, 255, 0.05) 75.52%,
+                                rgba(68, 171, 255, 0.05) 85.8%,
+                                rgba(122, 255, 180, 0.05) 94.99%
+                              ),
+                              rgba(15, 19, 41, 1);
                             top: 150%;
                             left: 50%;
                             transform: translateX(-50%);
                             z-index: 10;
                             border-radius: 1rem;
                             padding: 1rem 1.2rem;
-                            font-size: 1.2rem;
                             line-height: 134%;
                             border: 2px solid #ececec;
                             color: white;
+                            font-size: 1.3rem;
 
                             &:: before {
                               content: '';
