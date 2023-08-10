@@ -33,6 +33,7 @@ const Header: React.FC = (): JSX.Element => {
     setToken('');
     localStorage.removeItem('userInfo');
     navigate('/');
+    window.location.reload();
   };
 
   /**
@@ -43,7 +44,10 @@ const Header: React.FC = (): JSX.Element => {
   };
 
   useEffect(() => {
-    setToken(getCookie('token'));
+    setToken(getCookie(token));
+  }, []);
+
+  useEffect(() => {
     const storageData = localStorage.getItem('userInfo');
 
     if (storageData) {
