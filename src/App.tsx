@@ -20,6 +20,7 @@ import AuthCallback from '~/components/utils/AuthCallback';
 
 /* Styles */
 import resetStyle from '~/styles/reset';
+import { useEffect } from 'react';
 import { usePostSubscribeSerberMutation } from './redux/api';
 import { getCookie } from './utils/cookie';
 import { UserGithubInfo } from './redux/api/types';
@@ -78,9 +79,13 @@ const App: React.FC = (): JSX.Element => {
     });
   }
 
-  if (token) {
-    requestPermission();
-  }
+  useEffect(() => {
+    setTimeout(() => {
+      if (token) {
+        requestPermission();
+      }
+    }, 3000);
+  }, []);
 
   return (
     <>
