@@ -166,21 +166,21 @@ const User = () => {
                   position: relative;
                   background-color: ${!nowTab ? '#ececec' : ''};
 
-                  &:: after {
-                    content: '1';
-                    display: block;
-                    position: absolute;
-                    width: 17px;
-                    height: 17px;
-                    text-align: center;
-                    line-height: 17px;
-                    border-radius: 999px;
-                    background-color: red;
-                    font-size: 0.725rem;
-                    right: 20%;
-                    top: 20%;
-                    color: white;
-                  }
+                  // &:: after {
+                  //   content: '1';
+                  //   display: block;
+                  //   position: absolute;
+                  //   width: 17px;
+                  //   height: 17px;
+                  //   text-align: center;
+                  //   line-height: 17px;
+                  //   border-radius: 999px;
+                  //   background-color: red;
+                  //   font-size: 0.725rem;
+                  //   right: 20%;
+                  //   top: 20%;
+                  //   color: white;
+                  // }
                 `}
                 onClick={() => {
                   changeTabHandler(false);
@@ -193,21 +193,21 @@ const User = () => {
                   position: relative;
                   background-color: ${nowTab ? '#ececec' : ''};
 
-                  &:: after {
-                    content: '8';
-                    display: block;
-                    position: absolute;
-                    width: 17px;
-                    height: 17px;
-                    text-align: center;
-                    line-height: 17px;
-                    border-radius: 999px;
-                    background-color: red;
-                    font-size: 0.725rem;
-                    right: 20%;
-                    top: 20%;
-                    color: white;
-                  }
+                  // &:: after {
+                  //   content: '8';
+                  //   display: block;
+                  //   position: absolute;
+                  //   width: 17px;
+                  //   height: 17px;
+                  //   text-align: center;
+                  //   line-height: 17px;
+                  //   border-radius: 999px;
+                  //   background-color: red;
+                  //   font-size: 0.725rem;
+                  //   right: 20%;
+                  //   top: 20%;
+                  //   color: white;
+                  // }
                 `}
                 onClick={() => {
                   changeTabHandler(true);
