@@ -17,12 +17,10 @@ self.addEventListener('push', function (e) {
 
   console.log('resultData : ', resultData);
 
-  const notificationTitle = resultData.title;
+  const notificationTitle = resultData.data.title;
   const notificationOptions = {
-    body: resultData.body,
-    icon: resultData.image,
-    tag: resultData.tag,
-    ...resultData,
+    body: resultData.data.body,
+    icon: '',
   };
   console.log('push: ', { resultData, notificationTitle, notificationOptions });
 
