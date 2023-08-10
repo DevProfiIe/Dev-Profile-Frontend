@@ -121,12 +121,14 @@ const Home: React.FC = (): JSX.Element => {
   };
 
   useEffect(() => {
-    const userInfo = localStorage.getItem('userInfo') ?? null;
+    if (token) {
+      const userInfo = localStorage.getItem('userInfo') ?? null;
 
-    if (userInfo) {
-      const userData = JSON.parse(userInfo) as UserGithubInfo;
-      setUserInfo(userData);
-      requestPermission();
+      if (userInfo) {
+        const userData = JSON.parse(userInfo) as UserGithubInfo;
+        setUserInfo(userData);
+        requestPermission();
+      }
     }
   }, []);
 
