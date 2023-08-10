@@ -54,7 +54,7 @@ const App: React.FC = (): JSX.Element => {
   });
   const [subscribeFunc, { isSuccess }] = usePostSubscribeSerberMutation();
 
-  async function requestPermission() {
+  const requestPermission = async () => {
     console.log('권한 요청 중...');
 
     const permission = await Notification.requestPermission();
@@ -86,14 +86,16 @@ const App: React.FC = (): JSX.Element => {
       console.log(payload.notification?.title);
       console.log(payload.notification?.body);
     });
-  }
+  };
 
   useEffect(() => {
     if (token) {
       const storageData = localStorage.getItem('userInfo');
 
       if (storageData) {
-        setUserInfo(JSON.parse(storageData));
+        setUserInfo({
+          ...JSON.parse(storageData),
+        });
       }
 
       requestPermission();
