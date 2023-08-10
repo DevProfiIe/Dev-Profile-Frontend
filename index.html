@@ -17,18 +17,18 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script type="application/javascript">
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker
-          .register('sw.ts')
-          .then((registration) => {
-            console.log('Service worker registration succeeded:', registration);
-          })
-          .catch((err) => {
-            console.log('Service worker registration failed: ', err);
-          });
-      } else {
-        console.log('Service workers are not supported.');
-      }
+      // if ('serviceWorker' in navigator) {
+      //   navigator.serviceWorker
+      //     .register('sw.ts')
+      //     .then((registration) => {
+      //       console.log('Service worker registration succeeded:', registration);
+      //     })
+      //     .catch((err) => {
+      //       console.log('Service worker registration failed: ', err);
+      //     });
+      // } else {
+      //   console.log('Service workers are not supported.');
+      // }
     </script>
   </body>
 </html>

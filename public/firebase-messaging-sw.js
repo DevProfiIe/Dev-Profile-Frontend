@@ -14,6 +14,9 @@ self.addEventListener('push', function (e) {
   if (!e.data.json()) return;
 
   const resultData = e.data.json().notification;
+
+  console.log('resultData : ', resultData);
+
   const notificationTitle = resultData.title;
   const notificationOptions = {
     body: resultData.body,
