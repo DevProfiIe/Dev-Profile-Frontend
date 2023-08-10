@@ -31,7 +31,6 @@ const Header: React.FC = (): JSX.Element => {
   const handleLogout = () => {
     removeCookie('token');
     localStorage.removeItem('userInfo');
-    navigate('/');
     window.location.reload();
   };
 

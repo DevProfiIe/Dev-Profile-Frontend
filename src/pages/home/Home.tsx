@@ -63,7 +63,7 @@ const Home: React.FC = (): JSX.Element => {
    *
    * @returns
    */
-  const requestPermission = async () => {
+  const requestPermission = async (login: string) => {
     console.log('권한 요청 중...');
 
     const permission = await Notification.requestPermission();
@@ -80,12 +80,10 @@ const Home: React.FC = (): JSX.Element => {
 
     // console.log('now token! : ', token);
 
-    console.log(userInfo);
-
     if (token) {
       subscribeFunc({
         token: token,
-        username: userInfo?.login ?? '',
+        username: login,
       });
 
       if (isSuccess) {
@@ -129,7 +127,7 @@ const Home: React.FC = (): JSX.Element => {
       if (userInfo) {
         const userData = JSON.parse(userInfo) as UserGithubInfo;
         setUserInfo(userData);
-        requestPermission();
+        requestPermission(userData.login);
       }
     }
   }, []);
