@@ -85,6 +85,8 @@ const Gallary = () => {
     sendUserLogin: '',
     receiveUserLogin: '',
     boardUserLogin: [],
+    filterKeyword: [],
+    filterSkill: [],
   });
   const [selectedSkills, setSelectedSkills] = useState<SkillFilterDetails[]>([]);
   const [tmpSkills, setTmpSkills] = useState<SkillFilterDetails>({
@@ -391,12 +393,19 @@ const Gallary = () => {
         ? boardItems.map((item) => item.login)
         : selectedGallaryItems.map((item) => item.login);
 
+    const selectedKeywodsFilter = selectedKeywords.map((item) => item.num);
+    const selectedSkillsFilter = selectedSkills.map((item) => {
+      return item.name + item.duration + ' 개월';
+    });
+
     const userInfo = JSON.parse(localStorage.getItem('userInfo') ?? '') as UserGithubInfo;
 
     postBoardItems({
       sendUserLogin: userInfo.login,
       receiveUserLogin: sendBoardItems.receiveUserLogin,
       boardUserLogin: selectedCardIds,
+      filterKeyword: selectedKeywodsFilter,
+      filterSkill: selectedSkillsFilter,
     })
       .then((res: any) => {
         if (res) {

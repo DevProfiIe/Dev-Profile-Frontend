@@ -235,9 +235,9 @@ const User = () => {
                               color: #189bfa;
                             `}
                           >
-                            {item.filter ? item.filter.length : ''}
+                            {item.filter ? item.filter.length + '개의 ' : '전체 '}
                           </span>
-                          개의 키워드로 필터링된{' '}
+                          키워드로 필터링된{' '}
                           <span
                             css={css`
                               font-size: 1.5rem;
@@ -296,9 +296,9 @@ const User = () => {
                               color: #189bfa;
                             `}
                           >
-                            {item.filter ? item.filter.length : ''}
+                            {item.filter ? item.filter.length + '개의 ' : '전체 '}
                           </span>
-                          개의 키워드로 필터링된 <br />
+                          키워드로 필터링된 <br />
                           <span
                             css={css`
                               font-size: 1.5rem;

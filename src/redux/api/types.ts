@@ -219,6 +219,8 @@ export interface PostBoardQueryData {
   sendUserLogin: string;
   receiveUserLogin: string;
   boardUserLogin: string[];
+  filterKeyword: number[];
+  filterSkill: string[];
 }
 
 export interface GetMyPageUserItems {
