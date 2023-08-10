@@ -13,7 +13,7 @@ self.addEventListener('push', function (e) {
   const receiveData = e.data.json();
   if (!e.data.json()) return;
 
-  self.registration.showNotification('Dev-Profile', { body: receiveData.body });
+  self.registration.showNotification('Dev-Profile', { body: receiveData.data.body });
 });
 
 self.addEventListener('notificationclick', function (event) {
