@@ -24,6 +24,7 @@
     "add": "^2.0.6",
     "emotion-icons": "^3.27.0",
     "emotion-reset": "^3.0.1",
+    "firebase": "^10.1.0",
     "query-string": "^8.1.0",
     "re-resizable": "^6.9.9",
     "react": "^18.1.0",
@@ -53,7 +54,6 @@
     "prettier": "^2.6.2",
     "typescript": "^4.6.3",
     "vite": "^2.9.9",
-    "vite-plugin-pwa": "^0.16.4",
     "vite-tsconfig-paths": "^3.5.0"
   }
 }
