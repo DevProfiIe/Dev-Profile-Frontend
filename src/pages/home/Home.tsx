@@ -78,7 +78,9 @@ const Home: React.FC = (): JSX.Element => {
       vapidKey: `${import.meta.env.VITE_VAPID_KEY}`,
     });
 
-    console.log('now token! : ', token);
+    // console.log('now token! : ', token);
+
+    console.log(userInfo);
 
     if (token) {
       subscribeFunc({
