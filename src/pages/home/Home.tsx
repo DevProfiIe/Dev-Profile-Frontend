@@ -74,20 +74,21 @@ const Home: React.FC = (): JSX.Element => {
 
     console.log('알림 권한이 허용됨');
 
-    const token = await getToken(messaging, {
+    const webPushToken = await getToken(messaging, {
       vapidKey: `${import.meta.env.VITE_VAPID_KEY}`,
     });
 
     // console.log('now token! : ', token);
 
-    if (token) {
+    if (webPushToken) {
       subscribeFunc({
-        token: token,
+        token: webPushToken,
         username: login,
       });
 
       if (isSuccess) {
         console.log('구독 성공');
+        localStorage.setItem('webPushToken', webPushToken);
       }
     } else {
       console.log('Can not get Token');
@@ -122,12 +123,16 @@ const Home: React.FC = (): JSX.Element => {
 
   useEffect(() => {
     if (token) {
-      const userInfo = localStorage.getItem('userInfo') ?? null;
+      const userInfo = localStorage.getItem('userInfo');
+      const userWebPushToken = localStorage.getItem('webPushToken');
 
       if (userInfo) {
         const userData = JSON.parse(userInfo) as UserGithubInfo;
         setUserInfo(userData);
-        requestPermission(userData.login);
+
+        if (!userWebPushToken) {
+          requestPermission(userData.login);
+        }
       }
     }
   }, []);
