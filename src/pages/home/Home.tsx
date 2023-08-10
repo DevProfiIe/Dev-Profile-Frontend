@@ -84,12 +84,12 @@ const Home: React.FC = (): JSX.Element => {
       subscribeFunc({
         token: webPushToken,
         username: login,
-      });
+      }).then((res) => {
+        console.log(res);
 
-      if (isSuccess) {
         console.log('구독 성공');
         localStorage.setItem('webPushToken', webPushToken);
-      }
+      });
     } else {
       console.log('Can not get Token');
     }
