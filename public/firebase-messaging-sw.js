@@ -26,7 +26,7 @@ self.addEventListener('push', function (e) {
   // };
   // console.log('push: ', { resultData, notificationTitle, notificationOptions });
 
-  // self.registration.showNotification(notificationTitle, notificationOptions);
+  self.registration.showNotification('title', { body: '알람이다.' });
 });
 
 self.addEventListener('notificationclick', function (event) {
