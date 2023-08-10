@@ -12,12 +12,10 @@ self.addEventListener('activate', function (e) {
 self.addEventListener('push', function (e) {
   console.log(e);
 
-  // console.log('push: ', e.data.json());
-  // if (!e.data.json()) return;
+  console.log('push: ', e.data.json());
+  if (!e.data.json()) return;
 
   // const resultData = e.data.json().notification;
-
-  // console.log('resultData : ', resultData);
 
   // const notificationTitle = resultData.data.title;
   // const notificationOptions = {

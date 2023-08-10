@@ -85,8 +85,6 @@ const Home: React.FC = (): JSX.Element => {
         token: webPushToken,
         username: login,
       }).then((res) => {
-        console.log(res);
-
         console.log('구독 성공');
         localStorage.setItem('webPushToken', webPushToken);
       });
