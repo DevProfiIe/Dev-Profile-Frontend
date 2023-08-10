@@ -10,21 +10,10 @@ self.addEventListener('activate', function (e) {
 });
 
 self.addEventListener('push', function (e) {
-  console.log(e);
-
-  console.log('push: ', e.data.json());
+  const receiveData = e.data.json();
   if (!e.data.json()) return;
 
-  // const resultData = e.data.json().notification;
-
-  // const notificationTitle = resultData.data.title;
-  // const notificationOptions = {
-  //   body: resultData.data.body,
-  //   icon: '',
-  // };
-  // console.log('push: ', { resultData, notificationTitle, notificationOptions });
-
-  self.registration.showNotification('Dev-Profile', { body: '알림' });
+  self.registration.showNotification('Dev-Profile', { body: receiveData.body });
 });
 
 self.addEventListener('notificationclick', function (event) {
