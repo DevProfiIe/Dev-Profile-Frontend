@@ -15,6 +15,8 @@ import {
   SignInMark,
   SignInWrapper,
 } from './sginIn.styles';
+import { showMessages } from '~/redux/features/popupSlice';
+import { useAppDispatch } from '~/redux/store';
 
 const CLIENT_ID = 'a990f185d45f796f1b7e';
 const REDIRECT_URL = 'https://devprofile.store/auth/callback';
@@ -23,10 +25,17 @@ const GITHUB_URL = `https://github.com/login/oauth/authorize?client_id=${CLIENT_
 const SignIn: React.FC = (): JSX.Element => {
   const token = getCookie('token');
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (token) {
-      alert('이미 로그인 상태입니다.');
+      dispatch(
+        showMessages({
+          msg: '이미 로그인 상태입니다.',
+          content: 'DevProfile Login Error',
+          type: 'alert',
+        }),
+      );
       navigate('/');
     }
   }, []);

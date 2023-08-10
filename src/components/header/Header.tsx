@@ -18,7 +18,7 @@ import { useEffect, useState } from 'react';
 import logo from '~/assets/images/github.png';
 
 const Header: React.FC = (): JSX.Element => {
-  const [token, setToken] = useState<string>('');
+  const token = getCookie('token');
   const { scrollY } = useScroll();
   const location = useLocation();
   const navigate = useNavigate();
@@ -30,7 +30,6 @@ const Header: React.FC = (): JSX.Element => {
    */
   const handleLogout = () => {
     removeCookie('token');
-    setToken('');
     localStorage.removeItem('userInfo');
     navigate('/');
     window.location.reload();
@@ -42,10 +41,6 @@ const Header: React.FC = (): JSX.Element => {
   const handleDropMenu = () => {
     setIsShow((state) => !state);
   };
-
-  useEffect(() => {
-    setToken(getCookie(token));
-  }, []);
 
   useEffect(() => {
     const storageData = localStorage.getItem('userInfo');

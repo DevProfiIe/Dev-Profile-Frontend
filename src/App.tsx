@@ -40,7 +40,7 @@ const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
 
 const App: React.FC = (): JSX.Element => {
-  const [token, setToken] = useState<string>('');
+  const token = getCookie('token');
   const [userInfo, setUserInfo] = useState<UserGithubInfo | null>(null);
   const [subscribeFunc, { isSuccess }] = usePostSubscribeSerberMutation();
 
@@ -81,23 +81,18 @@ const App: React.FC = (): JSX.Element => {
   };
 
   useEffect(() => {
-    setToken(getCookie(token));
-  }, []);
-
-  useEffect(() => {
     if (token) {
       const storageData = localStorage.getItem('userInfo');
-
-      console.log(storageData);
 
       if (storageData) {
         setUserInfo({
           ...JSON.parse(storageData),
         });
       }
+
       requestPermission();
     }
-  }, []);
+  }, [token]);
 
   return (
     <>

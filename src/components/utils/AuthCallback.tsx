@@ -1,6 +1,6 @@
 /* Libraries & Hooks */
 import queryString from 'query-string';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useAuthUserQuery } from '~/redux/api';
 import { getCookie, setCookie } from '~/utils/cookie';
 
@@ -66,12 +66,10 @@ const AuthCallback: React.FC = () => {
 
   if (isSuccess) {
     setUserData();
-    navigate('/');
-    window.location.reload;
   }
   // if (isError) return <Message msg={JSON.stringify(error)} />;
 
-  return <>{isLoading && <Loader />}</>;
+  return <>{isLoading ? <Loader /> : isSuccess ? <Navigate to='/' /> : <Loader />}</>;
 };
 
 export default AuthCallback;
