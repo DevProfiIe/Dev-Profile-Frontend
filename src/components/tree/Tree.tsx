@@ -52,8 +52,8 @@ const Tree: React.FC<TreeProps> = ({ fileTree, commitData }: TreeProps) => {
         return;
       }
 
-      for (let i = 0; i < node.children.length; i++) {
-        getNode(node.children[i], newNode, depth + 1);
+      for (const n of node.children) {
+        getNode(n, newNode, depth + 1);
       }
 
       parent.children.push(newNode);

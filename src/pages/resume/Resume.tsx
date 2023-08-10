@@ -565,7 +565,7 @@ const Resume: React.FC = (): JSX.Element => {
                     position: absolute;
                     transition: 0.2s;
                     color: hsla(146, 100%, 74%, 1);
-                    font-size: 95px;
+                    font-size: 87px;
                     font-weight: 500;
                     letter-spacing: -0.03em;
                     font-variant: tabular-nums;
@@ -615,7 +615,7 @@ const Resume: React.FC = (): JSX.Element => {
                       font-weight: 600;
                     `}
                   >
-                    ✓ {item.keyword}
+                    ❔ {item.keyword}
                   </p>
                   <HeightBox height='2rem' />
                   <p

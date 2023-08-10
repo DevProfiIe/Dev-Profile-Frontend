@@ -206,6 +206,15 @@ export const mainApi = createApi({
         };
       },
     }),
+    postSubscribeSerber: builder.mutation<DefaultApi<any>, { token: string; username: string }>({
+      query(data) {
+        return {
+          url: 'subscribe',
+          method: 'POST',
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
@@ -224,4 +233,5 @@ export const {
   useGetMyPageUserItemsQuery,
   useGetMyPageUserSpecificQuery,
   usePostMyPageUserSpecificMutation,
+  usePostSubscribeSerberMutation,
 } = mainApi;
