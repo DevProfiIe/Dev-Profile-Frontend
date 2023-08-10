@@ -84,7 +84,7 @@ const Home: React.FC = (): JSX.Element => {
       subscribeFunc({
         token: webPushToken,
         username: login,
-      }).then((res) => {
+      }).then(() => {
         console.log('구독 성공');
         localStorage.setItem('webPushToken', webPushToken);
       });
