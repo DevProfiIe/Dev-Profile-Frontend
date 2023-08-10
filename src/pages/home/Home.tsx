@@ -57,7 +57,7 @@ const Home: React.FC = (): JSX.Element => {
   let animeIntervalResume: any;
   let textIndex = 0;
 
-  const [subscribeFunc, { isSuccess }] = usePostSubscribeSerberMutation();
+  const [subscribeFunc] = usePostSubscribeSerberMutation();
 
   /**
    *
