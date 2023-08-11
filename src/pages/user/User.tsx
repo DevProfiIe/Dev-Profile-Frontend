@@ -352,7 +352,7 @@ const User = () => {
                               css={css`
                                 display: inline-block;
                                 width: 55px;
-                                background-color: #ec5353
+                                background-color: #ec5353;
                                 color: white;
                                 font-size: 0.925rem;
                                 text-align: center;
