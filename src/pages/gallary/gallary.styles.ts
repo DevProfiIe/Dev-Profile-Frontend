@@ -203,6 +203,8 @@ export const GallaryItemImg = styled.div<{ imgUrl?: string }>`
   background-image: url(${({ imgUrl }) => (imgUrl ? imgUrl : backgroundImage)});
   background-size: contain;
   background-position: center center;
+  background-repeat: no-repeat;
+  background-color: white;
   z-index: 1;
 `;
 
