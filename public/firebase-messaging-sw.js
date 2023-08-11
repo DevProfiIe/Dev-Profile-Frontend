@@ -13,7 +13,9 @@ self.addEventListener('push', function (e) {
   const receiveData = e.data.json();
   if (!e.data.json()) return;
 
-  self.registration.showNotification('Dev-Profile', { body: receiveData.data.body });
+  setTimeout(() => {
+    self.registration.showNotification('Dev-Profile', { body: receiveData.data.body });
+  }, 10000);
 });
 
 self.addEventListener('notificationclick', function (event) {
