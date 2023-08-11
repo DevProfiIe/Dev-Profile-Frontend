@@ -251,8 +251,12 @@ const User = () => {
                             <span
                               css={css`
                                 display: inline-block;
-                                width: 80px;
-                                padding: 0.5rem 0;
+                                width: 55px;
+                                background-color: #189bfa;
+                                color: white;
+                                font-size: 0.925rem;
+                                text-align: center;
+                                border-radius: 4px;
                               `}
                             >
                               진행중
@@ -261,8 +265,12 @@ const User = () => {
                             <span
                               css={css`
                                 display: inline-block;
-                                width: 80px;
-                                padding: 0.5rem 0;
+                                width: 55px;
+                                background-color: #ec5353;
+                                color: white;
+                                font-size: 0.925rem;
+                                text-align: center;
+                                border-radius: 4px;
                               `}
                             >
                               확정
@@ -334,10 +342,12 @@ const User = () => {
                             <span
                               css={css`
                                 display: inline-block;
-                                width: 80px;
-                                padding: 0.5rem 0;
+                                width: 55px;
                                 background-color: #189bfa;
                                 color: white;
+                                font-size: 0.925rem;
+                                text-align: center;
+                                border-radius: 4px;
                               `}
                             >
                               진행중
@@ -346,10 +356,12 @@ const User = () => {
                             <span
                               css={css`
                                 display: inline-block;
-                                width: 80px;
-                                padding: 0.5rem 0;
+                                width: 55px;
                                 background-color: #ec5353
                                 color: white;
+                                font-size: 0.925rem;
+                                text-align: center;
+                                border-radius: 4px;
                               `}
                             >
                               확정
