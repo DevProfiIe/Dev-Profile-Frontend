@@ -147,11 +147,7 @@ const Resume: React.FC = (): JSX.Element => {
 
   return (
     <>
-      <ResumeWrapper
-        onClick={() => {
-          dispatch(commitSearch({ commitKeyword: '' }));
-        }}
-      >
+      <ResumeWrapper>
         <ResumeSection>
           <HeightBox height='3rem' />
           <h1
@@ -299,7 +295,11 @@ const Resume: React.FC = (): JSX.Element => {
         <ResumeSection background={true} height='100vh'>
           <HeightBox height='5rem' />
           <ResumeChartBox>
-            <ResumeLeftContents>
+            <ResumeLeftContents
+              onClick={() => {
+                dispatch(commitSearch({ commitKeyword: '' }));
+              }}
+            >
               <div
                 css={css`
                   width: 100%;
