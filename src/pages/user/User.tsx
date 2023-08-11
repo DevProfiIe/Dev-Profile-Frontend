@@ -225,13 +225,13 @@ const User = () => {
                       <UserReceiveItemText>
                         <p
                           css={css`
-                            font-size: 1.2rem;
+                            font-size: 1rem;
                             line-height: 134%;
                           `}
                         >
                           <span
                             css={css`
-                              font-size: 1.5rem;
+                              font-size: 1.3rem;
                               color: #189bfa;
                             `}
                           >
@@ -240,7 +240,7 @@ const User = () => {
                           키워드로 필터링된{' '}
                           <span
                             css={css`
-                              font-size: 1.5rem;
+                              font-size: 1.3rem;
                               color: #189bfa;
                             `}
                           >
@@ -315,14 +315,14 @@ const User = () => {
                       <UserReceiveItemText>
                         <p
                           css={css`
-                            font-size: 1.2rem;
+                            font-size: 1rem;
                             line-height: 134%;
                             text-align: left;
                           `}
                         >
                           <span
                             css={css`
-                              font-size: 1.5rem;
+                              font-size: 1.3rem;
                               color: #189bfa;
                             `}
                           >
@@ -331,7 +331,7 @@ const User = () => {
                           키워드로 필터링된 <br />
                           <span
                             css={css`
-                              font-size: 1.5rem;
+                              font-size: 1.3rem;
                               color: #189bfa;
                             `}
                           >

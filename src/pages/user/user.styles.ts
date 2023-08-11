@@ -145,7 +145,7 @@ export const UserReceiveItemWrapper = styled.div`
 export const UserReceiveItem = styled.div<{ isSelected: boolean }>`
   ${DisplayFlexRow}
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   height: 10rem;
   border-bottom: 1px solid #eee;
