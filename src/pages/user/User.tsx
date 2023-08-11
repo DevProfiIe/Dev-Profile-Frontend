@@ -323,7 +323,7 @@ const User = () => {
                           >
                             {item.filter?.length > 0 ? item.filter.length + '개 ' : '전체 '}
                           </span>
-                          키워드로 필터링 된
+                          키워드로 필터링 된 <br />
                           <span
                             css={css`
                               font-size: 1.3rem;
