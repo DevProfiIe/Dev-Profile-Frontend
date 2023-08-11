@@ -158,7 +158,7 @@ const User = () => {
         <UserSideView>
           <UserInfoBox>
             <UserInfoImg bgUrl={userInfo?.avatar_url ?? ''} />
-            <UserInfoName>{userInfo?.name}</UserInfoName>
+            <UserInfoName>{userInfo?.login}</UserInfoName>
             <UserInfoContent>
               <button
                 css={css`
@@ -235,9 +235,9 @@ const User = () => {
                               color: #189bfa;
                             `}
                           >
-                            {item.filter?.length > 0 ? item.filter.length + '개의 ' : '전체 '}
+                            {item.filter?.length > 0 ? item.filter.length + '개 ' : '전체 '}
                           </span>
-                          키워드로 필터링된{' '}
+                          키워드로 필터링 된 <br />
                           <span
                             css={css`
                               font-size: 1.3rem;
@@ -326,9 +326,9 @@ const User = () => {
                               color: #189bfa;
                             `}
                           >
-                            {item.filter?.length > 0 ? item.filter.length + '개의 ' : '전체 '}
+                            {item.filter?.length > 0 ? item.filter.length + '개 ' : '전체 '}
                           </span>
-                          키워드로 필터링된 <br />
+                          키워드로 필터링 된
                           <span
                             css={css`
                               font-size: 1.3rem;
