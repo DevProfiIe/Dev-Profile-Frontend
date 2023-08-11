@@ -682,6 +682,7 @@ const Gallary = () => {
                               position: absolute;
                               text-align: center;
                               right: 50%;
+                              transform: translateX(-50%);
                               top: -8px;
                               border-bottom: 8px solid ${color.myBiolet};
                               border-right: 8px solid transparent;
@@ -880,8 +881,6 @@ const Gallary = () => {
                 </StackTag>
               ))}
             </div>
-
-            {/* <div>after items</div> */}
           </div>
           <div
             css={css`
@@ -1037,7 +1036,7 @@ const Gallary = () => {
                 ))}
               </GallaryHeader>
               <GallaryContent>
-                <GallaryItemImg imgUrl={item.avataUrl}></GallaryItemImg>
+                <GallaryItemImg imgUrl={item.avatarUrl}></GallaryItemImg>
                 <h2
                   css={css`
                     width: 100%;

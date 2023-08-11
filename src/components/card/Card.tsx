@@ -21,7 +21,7 @@ interface CardPropsType {
 }
 
 const Card: React.FC<CardPropsType> = ({ data, isSelected, onClick }: CardPropsType) => {
-  const { language, avataUrl, userName, field, styles, commitCount, commitDays, repoCount } = data;
+  const { language, avatarUrl, userName, field, styles, commitCount, commitDays, repoCount } = data;
   const navigate = useNavigate();
 
   /**
@@ -58,7 +58,7 @@ const Card: React.FC<CardPropsType> = ({ data, isSelected, onClick }: CardPropsT
         ))}
       </CardHeader>
       <CardContent>
-        <CardItemImg imgUrl={avataUrl}></CardItemImg>
+        <CardItemImg imgUrl={avatarUrl}></CardItemImg>
         <h2
           css={css`
             width: 100%;

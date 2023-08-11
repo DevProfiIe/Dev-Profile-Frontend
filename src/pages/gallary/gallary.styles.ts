@@ -192,7 +192,7 @@ export const GallaryContent = styled.div`
   position: relative;
 `;
 
-export const GallaryItemImg = styled.div<{ imgUrl: string }>`
+export const GallaryItemImg = styled.div<{ imgUrl?: string }>`
   width: 7.5rem;
   height: 7.5rem;
   position: absolute;

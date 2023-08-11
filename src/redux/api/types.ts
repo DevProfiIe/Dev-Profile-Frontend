@@ -171,7 +171,7 @@ export interface GetBoardDataDetails {
   userName: string;
   language: string[];
   framework: string[];
-  avataUrl: string;
+  avatarUrl: string;
   field: string;
   styles: string[];
   commitCount: number;
