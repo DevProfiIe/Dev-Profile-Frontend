@@ -15,7 +15,7 @@ self.addEventListener('push', function (e) {
 
   setTimeout(() => {
     self.registration.showNotification('Dev-Profile', { body: receiveData.data.body });
-  }, 10000);
+  }, 17000);
 });
 
 self.addEventListener('notificationclick', function (event) {
