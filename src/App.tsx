@@ -18,15 +18,8 @@ import AuthCallback from '~/components/utils/AuthCallback';
 
 /* Styles */
 import resetStyle from '~/styles/reset';
-import { useEffect } from 'react';
 
 const App: React.FC = (): JSX.Element => {
-  useEffect(() => {
-    return () => {
-      localStorage.clear();
-    };
-  });
-
   return (
     <>
       <Global styles={resetStyle} />

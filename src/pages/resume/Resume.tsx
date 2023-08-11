@@ -147,7 +147,11 @@ const Resume: React.FC = (): JSX.Element => {
 
   return (
     <>
-      <ResumeWrapper>
+      <ResumeWrapper
+        onClick={() => {
+          dispatch(commitSearch({ commitKeyword: '' }));
+        }}
+      >
         <ResumeSection>
           <HeightBox height='3rem' />
           <h1
