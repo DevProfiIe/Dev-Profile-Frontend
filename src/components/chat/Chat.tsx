@@ -121,12 +121,12 @@ const Chat = () => {
   const [nowPage, setNowPage] = useState<number>(1);
   const [roomId, setRoomId] = useState<number>(-1);
   const [message, setMessage] = useState<string>('');
-  const userInfo: UserGithubInfo = JSON.parse(localStorage.getItem('userInfo') ?? '');
+  const [userInfo, setUserInfo] = useState<UserGithubInfo | null>(null);
 
   const showChatBoxHandler = () => {
     dispatch(open());
 
-    if (keyword === userInfo.login) {
+    if (keyword === userInfo?.login) {
       setNowPage(-1);
       // refetch();
     } else {
@@ -192,8 +192,8 @@ const Chat = () => {
     const info: SendChatMessageInfo = {
       chatRoomId: roomId,
       sender: {
-        id: userInfo.id,
-        login: userInfo.login,
+        id: userInfo?.id ?? -1,
+        login: userInfo?.login ?? '',
       },
       message: message,
     };
@@ -208,6 +208,15 @@ const Chat = () => {
     if (userKeyword) {
       const parsedKeyword = JSON.parse(userKeyword);
       setKeyword(parsedKeyword);
+    }
+  }, []);
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem('userInfo');
+
+    if (userInfo) {
+      const userData = JSON.parse(userInfo) as UserGithubInfo;
+      setUserInfo(userData);
     }
   }, []);
 
@@ -250,7 +259,7 @@ const Chat = () => {
             </ChatBoxContentsHeader>
             <ChatBoxContentsMain height='32rem'>
               {chatHistory.map((item) => {
-                if (item.sender.id === userInfo.id) {
+                if (item.sender.id === userInfo?.id) {
                   return (
                     <ChatContentsRight key={item.id}>
                       <ChatBox>{item.message}</ChatBox>

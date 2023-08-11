@@ -39,7 +39,7 @@ import { useLocation } from 'react-router-dom';
 
 /* etx */
 
-const MAIN_TEXT = '이터의 속삭임: 코드로 이야기하는 개발자 Park Yun Chan 입니다.'.split('');
+const MAIN_TEXT = '의와 코드의 조화: 개발자 Park Yun Chan 의 이야기.'.split('');
 
 const Resume: React.FC = (): JSX.Element => {
   const [distance, setDistance] = useState<number | undefined>(10);
@@ -177,7 +177,7 @@ const Resume: React.FC = (): JSX.Element => {
                   letter-spacing: -0.01em;
                 `}
               >
-                데이터의 속삭임: 코드로 이야기하는 개발자 {userData.userInfo?.name} 입니다.
+                창의와 코드의 조화: 개발자 {userData.userInfo?.name} 의 이야기.
               </div>
               <div
                 css={css`
@@ -191,7 +191,7 @@ const Resume: React.FC = (): JSX.Element => {
                   letter-spacing: -0.01em;
                 `}
               >
-                <div ref={textArea}>데</div>
+                <div ref={textArea}>창</div>
                 <div
                   css={css`
                     position: relative;
