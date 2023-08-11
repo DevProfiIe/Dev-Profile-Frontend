@@ -62,7 +62,7 @@ const Card: React.FC<CardPropsType> = ({ data, isSelected, onClick }: CardPropsT
         <h2
           css={css`
             width: 100%;
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             font-weight: 700;
             padding: 0.5rem 0;
             text-align: right;
