@@ -20,7 +20,7 @@ import { useAppDispatch } from '~/redux/store';
 
 const CLIENT_ID = 'a990f185d45f796f1b7e';
 const REDIRECT_URL = 'https://devprofile.store/auth/callback';
-const GITHUB_URL = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URL}`;
+const GITHUB_URL = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URL}&scope=user:email,read:org`;
 
 const SignIn: React.FC = (): JSX.Element => {
   const token = getCookie('token');
