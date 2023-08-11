@@ -246,7 +246,28 @@ const User = () => {
                           >
                             {item.people}
                           </span>
-                          명의 개발자 {item.state === 'onGoing' ? '(진행중)' : '(확정)'}
+                          명의 개발자{' '}
+                          {item.state === 'onGoing' ? (
+                            <span
+                              css={css`
+                                display: inline-block;
+                                width: 80px;
+                                padding: 0.5rem 0;
+                              `}
+                            >
+                              진행중
+                            </span>
+                          ) : (
+                            <span
+                              css={css`
+                                display: inline-block;
+                                width: 80px;
+                                padding: 0.5rem 0;
+                              `}
+                            >
+                              확정
+                            </span>
+                          )}
                         </p>
                         <div
                           css={css`
@@ -308,7 +329,32 @@ const User = () => {
                           >
                             {item.people}
                           </span>
-                          명의 개발자 {item.state === 'onGoing' ? '(진행중)' : '(확정)'}
+                          명의 개발자{' '}
+                          {item.state === 'onGoing' ? (
+                            <span
+                              css={css`
+                                display: inline-block;
+                                width: 80px;
+                                padding: 0.5rem 0;
+                                background-color: #189bfa;
+                                color: white;
+                              `}
+                            >
+                              진행중
+                            </span>
+                          ) : (
+                            <span
+                              css={css`
+                                display: inline-block;
+                                width: 80px;
+                                padding: 0.5rem 0;
+                                background-color: #ec5353
+                                color: white;
+                              `}
+                            >
+                              확정
+                            </span>
+                          )}
                         </p>
                         <div
                           css={css`
