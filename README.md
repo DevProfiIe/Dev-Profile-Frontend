@@ -24,6 +24,8 @@
 
 ![Group 19](https://github.com/DevProfiIe/Dev-Profile-Frontend/assets/128656530/bd20d731-de58-4b6b-a5fc-a8820eb7b88e)
 
+![스크린샷 2023-08-25 오후 6 48 1 (1)](https://github.com/DevProfiIe/Dev-Profile-Frontend/assets/128656530/75a7f914-ed20-4620-936f-f8d49832248d)
+
 * 커밋과 관련된 파일 목록 UI를 구성하는 것에 있어서 다양한 선택지가 존재했지만, 파일 구조를 효과적으로 보여줄 수 있는 트리 자료 구조를 선택.
 * 트리 자료 구조로 되어있는 로우 데이터를 재귀적으로 탐색하며, 트리 UI에 적합한 데이터 구조로 가공.
 * 가공된 데이터를 Tree 컴포넌트 및 Node 컴포넌트에 바인딩 하여 재귀적으로 렌더링 시킴.
