@@ -42,8 +42,9 @@
 # 실행 방법
 
 * 의존성 패키지 설치
-    ``` yarn install ```
+  
+   ```yarn install```
   
 * 로컬에서 실행
-   ``` yarn start```
 
+   ```yarn start```
