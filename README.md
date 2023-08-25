@@ -1,9 +1,9 @@
 # 서비스 소개
----
+
 ![서비스 설명](https://github.com/DevProfiIe/Dev-Profile-Frontend/assets/128656530/a0ce229a-18ef-4daf-b55c-0acff24b8f42)
 
 # 아키텍쳐
----
+
 ![아키텍처](https://github.com/DevProfiIe/Dev-Profile-Frontend/assets/128656530/c027a98c-fe7b-4b7f-93db-fee827d564a5)
 
 - React.js + vite를 사용하여 프론트엔드 아키텍처 구축하였음.
@@ -11,7 +11,7 @@
 - Redux-Toolkit을 사용하여 전역 상태를 관리함으로써 Props Drilling 을 개선함.
 
 # 기술적 챌린지
----
+
 <img width="749" alt="챌린지1" src="https://github.com/DevProfiIe/Dev-Profile-Frontend/assets/128656530/f5968eda-4de7-45d9-91c2-059f578ed616">
 
 - 뒤로가기 또는 페이지 이동 시 불필요한 API 호출이 반복적으로 발생.
@@ -31,7 +31,7 @@
 
 
 # 실행 방법
----
+
 
 
 
