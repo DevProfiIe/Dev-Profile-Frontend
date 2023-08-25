@@ -6,9 +6,9 @@
 
 ![아키텍처](https://github.com/DevProfiIe/Dev-Profile-Frontend/assets/128656530/c027a98c-fe7b-4b7f-93db-fee827d564a5)
 
-- React.js + vite를 사용하여 프론트엔드 아키텍처 구축하였음.
-- 정적 타입의 수퍼셋 TypeScript를 사용하여 코드 유지 보수성 및 확장성 향상시킴.
-- Redux-Toolkit을 사용하여 전역 상태를 관리함으로써 Props Drilling 을 개선함.
+* React.js + vite를 사용하여 프론트엔드 아키텍처 구축하였음.
+* 정적 타입의 수퍼셋 TypeScript를 사용하여 코드 유지 보수성 및 확장성 향상시킴.
+* Redux-Toolkit을 사용하여 전역 상태를 관리함으로써 Props Drilling 을 개선함.
 
 # 기술적 챌린지
 
@@ -33,7 +33,7 @@
 ![Group 20](https://github.com/DevProfiIe/Dev-Profile-Frontend/assets/128656530/62930a66-6014-4b6e-830b-9aafab2095a8)
     
 * 라이브러리를 사용하지 않고, 스크롤 이벤트와 타이머 함수를 이용하여 인터렉티브한 페이지 구현.
-* 목적에 적합한 디자인을 채택하여 더 나은 UI/UX를 제공함.
+* 애플리케이션의 목적에 적합한 디자인을 채택하여 더 나은 UI/UX를 제공함.
 
 # 시연 동영상
 
