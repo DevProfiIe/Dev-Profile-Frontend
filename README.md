@@ -6,8 +6,8 @@
 
 ![아키텍처](https://github.com/DevProfiIe/Dev-Profile-Frontend/assets/128656530/c027a98c-fe7b-4b7f-93db-fee827d564a5)
 
-* React.js + vite를 사용하여 프론트엔드 아키텍처 구축하였음.
-* 정적 타입의 수퍼셋 TypeScript를 사용하여 코드 유지 보수성 및 확장성 향상시킴.
+* React.js + vite + eslint + prettier를 사용하여 프론트엔드 초기 설계하였음.
+* 정적 타입의 JavaScript 수퍼셋 TypeScript를 사용하여 코드 유지 보수성 및 확장성 향상시킴.
 * Redux-Toolkit을 사용하여 전역 상태를 관리함으로써 Props Drilling 을 개선함.
 
 # 기술적 챌린지
