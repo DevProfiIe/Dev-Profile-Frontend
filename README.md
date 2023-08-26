@@ -49,4 +49,4 @@
   
 * 로컬에서 실행
 
-   ```yarn start```
+   ```yarn run dev```
