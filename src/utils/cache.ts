@@ -1,18 +1,22 @@
+import axios from 'axios';
+
 class CacheModule {
+  public localStorage: any;
+
   constructor() {
     this.localStorage = window.localStorage; // 브라우저 환경에서 사용
   }
 
-  setCache(key, data) {
+  setCache(key: string, data: string) {
     this.localStorage.setItem(key, JSON.stringify(data));
   }
 
-  getCache(key) {
+  getCache(key: string) {
     const cachedData = this.localStorage.getItem(key);
     return cachedData ? JSON.parse(cachedData) : null;
   }
 
-  async fetchWithCache(url, cacheKey, useCache = true) {
+  async fetchWithCache(url: string, cacheKey: string, useCache = true) {
     if (useCache) {
       const cachedData = this.getCache(cacheKey);
       if (cachedData) {
