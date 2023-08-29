@@ -477,7 +477,7 @@ const Gallary = () => {
    */
   const navigateResumeHandler = (user: GetBoardDataDetails) => {
     dispatch(change(user.login));
-    navigate(`/resume/${user.login}`);
+    navigate(`/resume/dbscks97`);
   };
 
   useEffect(() => {
